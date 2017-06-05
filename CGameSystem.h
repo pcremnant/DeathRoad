@@ -16,6 +16,8 @@ public:
 	CGameSystem()
 	{
 		m_imgBg.Load(TEXT("resource/intro/bg_00.bmp"));
+		m_nSizeBgX = m_imgBg.GetWidth();
+		m_nSizeBgY = m_imgBg.GetHeight();
 	}
 
 	// 키보드 명령 받는 함수

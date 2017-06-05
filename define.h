@@ -11,7 +11,7 @@ using namespace std;
 
 //
 
-#define CLIENT_WIDTH 800
+#define CLIENT_WIDTH 1200
 #define CLIENT_HEIGHT 600
 
 #define WIN_TITLE TEXT("Death Road")

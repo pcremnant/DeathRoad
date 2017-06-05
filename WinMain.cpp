@@ -1,4 +1,7 @@
 #include"define.h"
+#include"CGameSystem.h"
+
+CGameSystem gameSys;
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = WIN_TITLE;
@@ -95,6 +98,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		EndPaint(hWnd, &ps);
 	}
 	break;
+	case WM_KEYDOWN:
+		gameSys.GetKey(wParam);
+		break;
 	case WM_TIMER:
 		switch (wParam) {
 		case WT_UPDATE:
@@ -111,5 +117,5 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 
 void WMPaint(HDC hdc)
 {
-
+	gameSys.DrawGame(hdc);
 }

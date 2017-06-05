@@ -13,33 +13,9 @@ class CGameSystem {
 
 public:
 
-	CGameSystem()
-	{
-		m_imgBg.Load(TEXT("resource/intro/bg_00.bmp"));
-		m_nSizeBgX = m_imgBg.GetWidth();
-		m_nSizeBgY = m_imgBg.GetHeight();
-	}
-
+	CGameSystem();
 	// 키보드 명령 받는 함수
-	void GetKey(const WPARAM& wParam) {
-		// m_pInGame이 nullptr이 아닐 때 m_pInGame의 함수를 실행
-		if (m_pInGame)
-			m_pInGame->GetKey(wParam);
-		else {
-			switch (wParam) {
-			case VK_ESCAPE:
-				PostQuitMessage(0);
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
+	void GetKey(const WPARAM& wParam);
 	// 드로우 함수
-	void DrawGame(HDC hdc)
-	{
-		if (m_pInGame)
-			m_pInGame->DrawInGame(hdc);
-	}
+	void DrawGame(HDC hdc);
 };

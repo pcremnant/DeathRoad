@@ -142,15 +142,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CBattle.h" />
     <ClInclude Include="CGameSystem.h" />
     <ClInclude Include="CInGame.h" />
-    <ClInclude Include="COB.h" />
+    <ClInclude Include="CObject.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBattle.cpp" />
     <ClCompile Include="CGameSystem.cpp" />
     <ClCompile Include="CInGame.cpp" />
-    <ClCompile Include="COB.cpp" />
+    <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

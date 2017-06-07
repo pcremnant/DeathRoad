@@ -16,6 +16,21 @@
     <Filter Include="소스 파일\System">
       <UniqueIdentifier>{922f9d4b-36a4-4850-bd81-1ac922808a37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\System\Scene">
+      <UniqueIdentifier>{c153977d-4e45-43b6-8e0a-cd1aa267b22e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\System\Scene\InGame">
+      <UniqueIdentifier>{afd471f1-1984-4ffc-b2f8-108178962cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\System\Scene\Battle">
+      <UniqueIdentifier>{2a7e4100-7425-40c6-a03c-bb733761cfd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SoundManager">
+      <UniqueIdentifier>{d337514a-f9c6-4a6b-8996-8befc0e47de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects">
+      <UniqueIdentifier>{fd811ec3-a463-4854-8da8-f46b4d489e51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -25,10 +40,16 @@
       <Filter>소스 파일\System</Filter>
     </ClInclude>
     <ClInclude Include="CInGame.h">
-      <Filter>소스 파일\System</Filter>
+      <Filter>소스 파일\System\Scene\InGame</Filter>
     </ClInclude>
-    <ClInclude Include="COB.h">
-      <Filter>소스 파일\System</Filter>
+    <ClInclude Include="CBattle.h">
+      <Filter>소스 파일\System\Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.h">
+      <Filter>소스 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -39,10 +60,16 @@
       <Filter>소스 파일\System</Filter>
     </ClCompile>
     <ClCompile Include="CInGame.cpp">
-      <Filter>소스 파일\System</Filter>
+      <Filter>소스 파일\System\Scene\InGame</Filter>
     </ClCompile>
-    <ClCompile Include="COB.cpp">
-      <Filter>소스 파일\System</Filter>
+    <ClCompile Include="CBattle.cpp">
+      <Filter>소스 파일\System\Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cpp">
+      <Filter>소스 파일\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

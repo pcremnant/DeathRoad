@@ -1,4 +1,5 @@
-#include"COB.h"
+#include"CObject.h"
+
 void CMainCharacter::MF_Init() {
 	Mv_obj.left = CHARACTERLEFT;
 	Mv_obj.right = Mv_obj.left + 20;

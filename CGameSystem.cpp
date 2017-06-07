@@ -3,7 +3,7 @@
 CGameSystem::CGameSystem()
 {
 	// 인트로 화면 이미지 불러오기
-	m_imgBg.Load(TEXT("resource/image/intro/bg_00.bmp"));
+	m_imgBg.Load(TEXT("resource/image/intro/bg_00.PNG"));
 	m_nSizeBgX = m_imgBg.GetWidth();
 	m_nSizeBgY = m_imgBg.GetHeight();
 }

@@ -27,6 +27,9 @@
     <ClInclude Include="CInGame.h">
       <Filter>소스 파일\System</Filter>
     </ClInclude>
+    <ClInclude Include="COB.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -36,6 +39,9 @@
       <Filter>소스 파일\System</Filter>
     </ClCompile>
     <ClCompile Include="CInGame.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="COB.cpp">
       <Filter>소스 파일\System</Filter>
     </ClCompile>
   </ItemGroup>

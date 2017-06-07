@@ -66,10 +66,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	UpdateWindow(hWnd);
 
 
-	while (GetMessage(&Message, 0, 0, 0)) {
+
+	while (true)
+	{
+		if (PeekMessage(&Message, NULL, 0, 0, PM_REMOVE))
+		{
+			if (Message.message == WM_QUIT) break;
+			TranslateMessage(&Message);
+			DispatchMessage(&Message);
+		}
+	}
+
+	/*while (GetMessage(&Message, 0, 0, 0)) {
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);
-	}
+	}*/
 	return Message.wParam;
 }
 

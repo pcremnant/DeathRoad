@@ -6,14 +6,13 @@
 class CBattle {
 	CImage m_imgBGBack;
 	CImage m_imgBGFront;
-	CEnemyManager m_enemyManager;
 	// 적군이 생성되는 시간을 재는 변수
 
 	UINT m_nTimer;
 
 	// 적 오브젝트들
 	// 매니저로 관리할 것
-	CObject* m_pEnemy;
+	CEnemyManager m_enemyManager;
 
 	// 플레이어 오브젝트들
 	CItem* m_pCastle;
@@ -54,8 +53,7 @@ public:
 	};
 	~CBattle()
 	{
-		if (m_pEnemy)
-			delete m_pEnemy;
+
 	}
 
 	void DrawPhase(HDC hdc) 
@@ -78,7 +76,6 @@ public:
 		static int nType = 0;
 		switch (wParam) {
 		case VK_SPACE:
-			m_pEnemy->SetFrameType(nType++ % 3);
 			break;
 		default:
 			break;

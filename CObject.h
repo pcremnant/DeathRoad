@@ -13,10 +13,6 @@
 #define TYPE_DEAD 2
 
 struct Sprite {
-	// 이미지
-	CImage m_imgWalk;
-	CImage m_imgAttack;
-	CImage m_imgDead;
 
 	// 이미지 초기화	(걷기동작 주소, 공격동작 주소, 죽는동작 주소, 걷기동작 최대프레임, 공격동작 최대프레임, 죽는동작 최대프레임)
 	void GetImage(LPCTSTR walk, LPCTSTR attack, LPCTSTR dead, const int& walkFrame, const int& attackFrame, const int& deadFrame)
@@ -69,6 +65,11 @@ struct Sprite {
 	}
 
 private:
+	// 이미지
+	CImage m_imgWalk;
+	CImage m_imgAttack;
+	CImage m_imgDead;
+
 	// 최대 프레임
 	int m_nWalkFrame;
 	int m_nAttackFrame;
@@ -103,16 +104,17 @@ protected:
 	RECT m_rcPosition{ 0,0,0,0 };		// 실제 이미지가 나오는 사각형
 
 	bool m_bAttackCharge;				// 공격을 준비하고 있는가
-
+	bool m_bDead;						// 오브젝트가 죽었는가
 public:
 
-	virtual void Init() {};								// 초기화 해주는 함수
-	virtual void DrawObject(HDC hdc) {};				// 드로우 함수
-	virtual void Move() {};								// Update시 움직이는 함수
-	virtual void GetUpgrade() {};						// 배틀페이즈 시작시 (혹은 오브젝트 생성시) 업그레이드 정보를 정해준다.
-	virtual void SetPosition() {};						// m_vtCoord에 따라 바운딩 박스(이미지 위치 및 크기)를 정해주는 함수
-	virtual void SetFrameType(const int& nType) {};		// 특정 상황에서 동작을 바꿔준다.(걷다가 사거리 안으로 들어오면 공격 모션으로 바꿔줌)
-
+	virtual void Init() {};										// 초기화 해주는 함수
+	virtual void DrawObject(HDC hdc) {};						// 드로우 함수
+	virtual void Move() {};										// Update시 움직이는 함수
+	virtual void GetUpgrade() {};								// 배틀페이즈 시작시 (혹은 오브젝트 생성시) 업그레이드 정보를 정해준다.
+	virtual void SetPosition() {};								// m_vtCoord에 따라 바운딩 박스(이미지 위치 및 크기)를 정해주는 함수
+	virtual void SetFrameType(const int& nType) {};				// 특정 상황에서 동작을 바꿔준다.(걷다가 사거리 안으로 들어오면 공격 모션으로 바꿔줌)
+	const float ReturnZ() const { return m_vtCoord.GetZ(); }	// 충돌판정을 위해 z값을 리턴
+	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄
 private:
 
 };

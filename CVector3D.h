@@ -5,7 +5,7 @@ class CVector3D {
 	float x, y, z;
 public:
 	CVector3D() : x(0), y(0), z(0) {}
-	CVector3D(const float& fx, const float& fy, const float& fz) : x(fx), y(fy), z(fz) {}
+	CVector3D(const float& fx, const float& fy, const float& fz = 0) : x(fx), y(fy), z(fz) {}
 
 	// CVector가 갖고 있는 값 리턴
 	float GetX() const { return x; }
@@ -16,7 +16,7 @@ public:
 	void SetX(const float fx) { x = fx; }
 	void SetY(const float fy) { y = fy; }
 	void SetZ(const float fz) { z = fz; }
-	void SetPosition(const float& fx, const float& fy, const float& fz)
+	void SetPosition(const float& fx, const float& fy, const float& fz = 1)
 	{
 		x = fx;
 		y = fy;

@@ -3,7 +3,7 @@
 
 class CEnemyInfant : public CObject {
 	int m_nSpeed;
-
+	int m_nDeadTimer;
 public:
 	void Init() override;
 	void SetPosition() override;

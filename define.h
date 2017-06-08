@@ -23,3 +23,5 @@ using namespace std;
 #define START_Y 0
 
 #define MOVE_Z 0.1
+#define LINE_START 
+#define LINE_END 

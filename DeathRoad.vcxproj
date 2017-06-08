@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="CBattle.h" />
     <ClInclude Include="CEnemyInfant.h" />
+    <ClInclude Include="CEnemyList.h" />
     <ClInclude Include="CEnemyManager.h" />
     <ClInclude Include="CGameSystem.h" />
     <ClInclude Include="CInGame.h" />

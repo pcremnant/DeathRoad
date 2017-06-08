@@ -66,6 +66,9 @@
     <ClInclude Include="CEnemyManager.h">
       <Filter>소스 파일\Objects\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CEnemyList.h">
+      <Filter>소스 파일\Objects\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">

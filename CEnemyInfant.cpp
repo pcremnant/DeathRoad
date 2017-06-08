@@ -11,12 +11,14 @@ void CEnemyInfant::Init()
 	m_nFrameType = TYPE_WALK;
 	m_nDeadTimer = 0;
 	m_bDead = false;
+	m_nAttackRange = 30;
+	m_bInRange = false;
 
 	// 실제로 할 때는 랜덤으로 값을 바꿔줄 것
 	int nTmp = rand() % 5;
 	float fTmp = static_cast<float>(nTmp) / 10.f + 1;
 
-	m_vtCoord = { static_cast<float>(rand()%40),300 + static_cast<float>((5- nTmp) * 30),fTmp };
+	m_vtCoord = { static_cast<float>(rand()%40),250 + static_cast<float>((5- nTmp) * 40),fTmp };
 
 	m_nSpeed = 4;
 	// 124 114
@@ -27,10 +29,10 @@ void CEnemyInfant::Init()
 
 void CEnemyInfant::SetPosition()
 {
-	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - m_vtCoord.GetZ());
-	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - m_vtCoord.GetZ());
-	m_rcPosition.top = m_vtCoord.GetY() - m_nHeight*(2.2f - m_vtCoord.GetZ());
-	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - m_vtCoord.GetZ());
+	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
+	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
+	m_rcPosition.top = m_vtCoord.GetY() - m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
+	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
 }
 
 void CEnemyInfant::DrawObject(HDC hdc)
@@ -43,7 +45,7 @@ void CEnemyInfant::Move()
 
 	if (m_rcPosition.right >= CLIENT_WIDTH)
 		m_vtCoord.SetX(0);
-	else if (m_vtCoord.GetX()>=900 && m_nFrameType == TYPE_WALK) {
+	else if (m_bInRange && m_nFrameType == TYPE_WALK) {
 		// 사거리 안일 때
 		SetFrameType(TYPE_ATTACK);
 	}

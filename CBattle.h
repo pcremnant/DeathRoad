@@ -1,6 +1,6 @@
 #pragma once
 #include"define.h"
-
+#include"CCastle.h"
 #include"CEnemyManager.h"
 
 class CBattle {
@@ -13,10 +13,10 @@ class CBattle {
 
 	// 적 오브젝트들
 	// 매니저로 관리할 것
-	CObject* m_enemy;
+	CObject* m_pEnemy;
 
 	// 플레이어 오브젝트들
-
+	CItem* m_pCastle;
 
 
 public:
@@ -24,10 +24,10 @@ public:
 	{
 		m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
 		m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
-		m_enemy = new CEnemyInfant;
-		m_enemy->Init();
 		m_enemyManager.Init(nStage);
 
+		m_pCastle = new CCastle;
+		m_pCastle->Init();
 
 		if (m_imgBGFront.GetBPP() == 32)
 		{
@@ -54,8 +54,8 @@ public:
 	};
 	~CBattle()
 	{
-		if (m_enemy)
-			delete m_enemy;
+		if (m_pEnemy)
+			delete m_pEnemy;
 	}
 
 	void DrawPhase(HDC hdc) 
@@ -63,12 +63,14 @@ public:
 		m_imgBGBack.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, SRCCOPY);
 		m_enemyManager.DrawEnemy(hdc);
 		//m_imgBGFront.TransparentBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, RGB(255, 255, 255));
+		m_pCastle->DrawItem(hdc);
 		m_imgBGFront.Draw(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT);
 		//m_enemy->DrawObject(hdc);
 	}
 	void UpdatePhase() 
 	{
 		m_enemyManager.Update();
+		m_enemyManager.SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth()/2);
 		//m_enemy->Move();
 	}
 	void GetKey(const WPARAM& wParam)
@@ -76,7 +78,7 @@ public:
 		static int nType = 0;
 		switch (wParam) {
 		case VK_SPACE:
-			m_enemy->SetFrameType(nType++ % 3);
+			m_pEnemy->SetFrameType(nType++ % 3);
 			break;
 		default:
 			break;

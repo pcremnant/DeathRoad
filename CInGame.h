@@ -7,6 +7,8 @@
 #define PHASE_MANAGE 1
 
 class CInGame {
+	bool m_bSet{ false };
+
 
 	// 페이즈 2개를 번갈아 사용한다.
 	CBattle* m_pBattlePhase;
@@ -18,11 +20,13 @@ class CInGame {
 	UINT m_nStage;
 	// 플레이어의 상태 (업그레이드 상태)
 	// ...
-
+	//CItem* m_pCastle;
 	// 배틀페이즈에서 쓰이는 변수
 	
 
 public:
+	CInGame() {}
+	~CInGame();
 	// 초기화 해주는 함수
 	void Init();
 

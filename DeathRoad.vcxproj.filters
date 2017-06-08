@@ -31,11 +31,20 @@
     <Filter Include="소스 파일\Objects">
       <UniqueIdentifier>{fd811ec3-a463-4854-8da8-f46b4d489e51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Objects\EnemyInfant">
+    <Filter Include="소스 파일\Objects\Enemy">
+      <UniqueIdentifier>{134bc0c4-df0f-4b23-8398-ef7e099bd299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant">
       <UniqueIdentifier>{e05353fb-35ad-41c4-a861-82d11c46d3ec}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Objects\Manager">
       <UniqueIdentifier>{30867e2a-21b4-44d1-a642-b29d8f98fd7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Items">
+      <UniqueIdentifier>{d427a39f-a8e1-4dc8-bff7-df1d77257a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Items\Castle">
+      <UniqueIdentifier>{56f13752-2575-4878-942b-743b93e707ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,13 +70,19 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CEnemyInfant.h">
-      <Filter>소스 파일\Objects\EnemyInfant</Filter>
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant</Filter>
     </ClInclude>
     <ClInclude Include="CEnemyManager.h">
       <Filter>소스 파일\Objects\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CEnemyList.h">
       <Filter>소스 파일\Objects\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>소스 파일\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="CCastle.h">
+      <Filter>소스 파일\Items\Castle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,7 +105,10 @@
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
     <ClCompile Include="CEnemyInfant.cpp">
-      <Filter>소스 파일\Objects\EnemyInfant</Filter>
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant</Filter>
+    </ClCompile>
+    <ClCompile Include="CCastle.cpp">
+      <Filter>소스 파일\Items\Castle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

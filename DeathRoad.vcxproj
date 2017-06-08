@@ -143,11 +143,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CBattle.h" />
+    <ClInclude Include="CCastle.h" />
     <ClInclude Include="CEnemyInfant.h" />
     <ClInclude Include="CEnemyList.h" />
     <ClInclude Include="CEnemyManager.h" />
     <ClInclude Include="CGameSystem.h" />
     <ClInclude Include="CInGame.h" />
+    <ClInclude Include="CItem.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CVector3D.h" />
     <ClInclude Include="define.h" />
@@ -155,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBattle.cpp" />
+    <ClCompile Include="CCastle.cpp" />
     <ClCompile Include="CEnemyInfant.cpp" />
     <ClCompile Include="CGameSystem.cpp" />
     <ClCompile Include="CInGame.cpp" />

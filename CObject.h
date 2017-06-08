@@ -12,6 +12,11 @@
 #define TYPE_ATTACK 1
 #define TYPE_DEAD 2
 
+// 움직일 때 애니메이션이 발생하는 오브젝트를 위한 클래스
+// 3가지 동작을 저장할 수 있고 GetImage를 통해 초기화
+// Draw할때 hdc, 타입, 현재 프레임, 그릴 위치를 넘겨주면 자동으로 그려준다.
+// MaxFrame을 통해 해당 동작의 최대 프레임을 리턴할 수 있다.
+
 struct Sprite {
 
 	// 이미지 초기화	(걷기동작 주소, 공격동작 주소, 죽는동작 주소, 걷기동작 최대프레임, 공격동작 최대프레임, 죽는동작 최대프레임)
@@ -88,6 +93,7 @@ private:
 
 };
 
+// 움직일 때 애니메이션이 발생하는 오브젝트 클래스
 class CObject {
 protected:
 	// 이미지 정보
@@ -103,7 +109,10 @@ protected:
 
 	RECT m_rcPosition{ 0,0,0,0 };		// 실제 이미지가 나오는 사각형
 
-	bool m_bAttackCharge;				// 공격을 준비하고 있는가
+	bool m_bInRange;					// 공격 사거리 안에 있는가
+	bool m_bAttackCharge;				// 공격을 준비하고 있는가 (활 시위를 당기고 있는 때)
+	int m_nAttackRange;					// 공격 사거리
+
 	bool m_bDead;						// 오브젝트가 죽었는가
 public:
 
@@ -115,90 +124,12 @@ public:
 	virtual void SetFrameType(const int& nType) {};				// 특정 상황에서 동작을 바꿔준다.(걷다가 사거리 안으로 들어오면 공격 모션으로 바꿔줌)
 	const float ReturnZ() const { return m_vtCoord.GetZ(); }	// 충돌판정을 위해 z값을 리턴
 	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄
+	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
+	{
+		if (vtPosition.GetX() - nWidth <= m_vtCoord.GetX() + m_nAttackRange)
+			m_bInRange = true;
+		else m_bInRange = false;
+	}
 private:
 
 };
-
-/*
-typedef struct Plus {
-	int WallUpgrade;
-	int PlayerUpgrade;
-	int Stage;
-}pls;
-
-pls STAGE;
-
-class CObject {
-protected:
-	RECT m_rcPosition;
-	int m_nSpeed;
-	BOOL m_bAttackCharge;
-
-public:
-	virtual void MF_Move() {};
-	virtual void MF_DrawObj(HDC hdc) {};
-	virtual void MF_Attack() {};
-	virtual void MF_Init() {};
-};
-
-class CMainCharacter :public CObject {
-	bool Ready;
-	int Mv_mx;
-	int Mv_my;
-	int Z;
-	int damage;
-	int direction;
-public:
-	void MF_Move()override;
-	void MF_DrawObj(HDC hdc)override;
-	void MF_Attack()override;
-	void MF_Init()override;
-};
-
-class CCHARACTER :public CObject {
-protected:
-	int MV_Hp;
-	int MV_range;
-	int MV_damage;
-	bool MV_Stop;
-public:
-	virtual void MF_Death() {};
-};
-
-class CEnemyArcher :public CCHARACTER {
-	int Z;
-public:
-
-	void MF_Death()override;
-	void MF_Move()override;
-	void MF_DrawObj(HDC hdc)override;
-	void MF_Attack()override;
-	void MF_Init()override;
-
-};
-
-class CEnemyWarrior :public CCHARACTER {
-	int Z;
-	int MV_Shield;
-public:
-	void MF_Death()override;
-	void MF_Move()override;
-	void MF_DrawObj(HDC hdc)override;
-	void MF_Attack()override;
-	void MF_Init()override;
-};
-
-class CWall :public CCHARACTER {
-public:
-	void MF_Death()override {};
-	void MF_Init()override {};
-	void MF_DrawObj(HDC hdc)override {};
-
-};
-
-class CArrow :public CObject {
-	int Z;
-public:
-	void MF_Move()override {};
-	void MF_DrawObj(HDC hdc)override {};
-};*/

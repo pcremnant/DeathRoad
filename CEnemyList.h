@@ -144,4 +144,13 @@ public:
 			}
 		}
 	}
+
+	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
+	{
+		CEnemyNode* p = m_pHead->m_pNext;
+		while (p != m_pTail) {
+			p->m_pEnemy->SetTarget(vtPosition, nWidth);
+			p = p->m_pNext;
+		}
+	}
 };

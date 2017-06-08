@@ -25,7 +25,7 @@ public:
 	}
 
 	void Init(const UINT& nStage)
-	{
+	{ 
 		m_nStage = nStage;
 		m_nSpawnTimer = 0;
 		CObject* newObj = new CEnemyInfant;
@@ -52,4 +52,8 @@ public:
 		}
 	}
 
+	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
+	{
+		m_enemyList.SetTarget(vtPosition, nWidth);
+	}
 };

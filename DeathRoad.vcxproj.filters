@@ -31,6 +31,12 @@
     <Filter Include="소스 파일\Objects">
       <UniqueIdentifier>{fd811ec3-a463-4854-8da8-f46b4d489e51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects\EnemyInfant">
+      <UniqueIdentifier>{e05353fb-35ad-41c4-a861-82d11c46d3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Manager">
+      <UniqueIdentifier>{30867e2a-21b4-44d1-a642-b29d8f98fd7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -51,6 +57,15 @@
     <ClInclude Include="CObject.h">
       <Filter>소스 파일\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="CVector3D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyInfant.h">
+      <Filter>소스 파일\Objects\EnemyInfant</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyManager.h">
+      <Filter>소스 파일\Objects\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -70,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="CObject.cpp">
       <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemyInfant.cpp">
+      <Filter>소스 파일\Objects\EnemyInfant</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

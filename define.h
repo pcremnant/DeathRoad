@@ -21,3 +21,5 @@ using namespace std;
 
 #define START_X 0
 #define START_Y 0
+
+#define MOVE_Z 0.1

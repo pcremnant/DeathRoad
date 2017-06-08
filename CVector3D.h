@@ -1,4 +1,5 @@
 #pragma once
+#include"define.h"
 
 class CVector3D {
 	float x, y, z;
@@ -20,6 +21,23 @@ public:
 		x = fx;
 		y = fy;
 		z = fz;
+	}
+
+	// 사각형과 오브젝트 충돌체크
+	bool ColisionBox(const int& szWidth, const int& szHeight, const RECT& rcOther)
+	{
+		RECT rcTmp = { x - szWidth,y - szHeight,x + szWidth,y + szHeight };
+		// 사각형 충돌 체크
+		if (PtInRect(&rcTmp, POINT{ rcOther.left,rcOther.top }))
+			return true;
+		else if (PtInRect(&rcTmp, POINT{ rcOther.right,rcOther.top }))
+			return true;
+		else if (PtInRect(&rcTmp, POINT{ rcOther.left,rcOther.bottom }))
+			return true;
+		else if (PtInRect(&rcTmp, POINT{ rcOther.right,rcOther.bottom }))
+			return true;
+		else
+			return false;
 	}
 
 	// 이동 함수 -> 인자를 2개만 넣으면 z에는 자동으로 0이 들어간다.

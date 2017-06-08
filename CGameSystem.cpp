@@ -16,6 +16,12 @@ void CGameSystem::GetKey(const WPARAM & wParam) {
 		m_pInGame->GetKey(wParam);
 	else {
 		switch (wParam) {
+		case VK_SPACE:
+			if (!m_pInGame) {
+				m_pInGame = new CInGame;
+				m_pInGame->Init();
+			}
+			break;
 		case VK_ESCAPE:
 			PostQuitMessage(0);
 			break;
@@ -34,4 +40,10 @@ void CGameSystem::DrawGame(HDC hdc)
 	else {
 		m_imgBg.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, m_nSizeBgX, m_nSizeBgY, SRCCOPY);
 	}
+}
+
+void CGameSystem::Update()
+{
+	if (m_pInGame)
+		m_pInGame->Update();
 }

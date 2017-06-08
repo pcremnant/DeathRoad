@@ -115,6 +115,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_TIMER:
 		switch (wParam) {
 		case WT_UPDATE:
+			gameSys.Update();
 			InvalidateRect(hWnd, NULL, FALSE);
 			break;
 		}

@@ -1,8 +1,10 @@
 #pragma once
 #include"define.h"
+#include"CBattle.h"
+#include"CManage.h"
 
-class CBattle;
-class CManage;
+#define PHASE_BATTLE 0
+#define PHASE_MANAGE 1
 
 class CInGame {
 
@@ -21,8 +23,15 @@ class CInGame {
 	
 
 public:
+	// 초기화 해주는 함수
+	void Init();
+
 	// 키보드 명령 받는 함수
 	void GetKey(const WPARAM& wParam);
+
 	// 게임 안에서 그려주는 함수
-	void DrawInGame(HDC hdc) {};
+	void DrawInGame(HDC hdc);;
+
+	// 게임 안 업데이트 함수
+	void Update();
 };

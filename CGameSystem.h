@@ -18,4 +18,6 @@ public:
 	void GetKey(const WPARAM& wParam);
 	// 드로우 함수
 	void DrawGame(HDC hdc);
+	void Update();
+
 };

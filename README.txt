@@ -4,3 +4,4 @@
 # 2017.06.05 - Make Framework
 # 2017.06.06 - Collect Resources
 # 2017,06,07 - Give ChanPark CObject
+# 2017.06.08 - create class instruction

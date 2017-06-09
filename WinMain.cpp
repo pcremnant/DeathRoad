@@ -109,6 +109,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		EndPaint(hWnd, &ps);
 	}
 	break;
+	case WM_MOUSEMOVE:
+		gameSys.MouseMove(lParam);
+		break;
+	case WM_LBUTTONDOWN:
+		gameSys.LButtonDown(lParam);
+		break;
 	case WM_KEYDOWN:
 		gameSys.GetKey(wParam);
 		break;

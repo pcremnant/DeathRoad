@@ -30,6 +30,9 @@ public:
 	// 초기화 해주는 함수
 	void Init();
 
+	void MouseMove(const LPARAM& lParam);
+	void LButtonDown(const LPARAM& lParam);
+
 	// 키보드 명령 받는 함수
 	void GetKey(const WPARAM& wParam);
 

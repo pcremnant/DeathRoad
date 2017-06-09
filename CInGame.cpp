@@ -26,6 +26,14 @@ void CInGame::Init()
 	m_bSet = true;
 }
 
+void CInGame::MouseMove(const LPARAM & lParam)
+{
+}
+
+void CInGame::LButtonDown(const LPARAM & lParam)
+{
+}
+
 void CInGame::GetKey(const WPARAM & wParam)
 {
 	if (!m_bSet)return;

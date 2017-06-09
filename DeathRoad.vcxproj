@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAnimatedSprite.h" />
     <ClInclude Include="CBattle.h" />
     <ClInclude Include="CCastle.h" />
     <ClInclude Include="CCrusader.h" />
@@ -150,9 +151,12 @@
     <ClInclude Include="CEnemyManager.h" />
     <ClInclude Include="CGameSystem.h" />
     <ClInclude Include="CInGame.h" />
+    <ClInclude Include="CIntro.h" />
     <ClInclude Include="CItem.h" />
+    <ClInclude Include="CManage.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPeasant.h" />
+    <ClInclude Include="CSprite.h" />
     <ClInclude Include="CVector3D.h" />
     <ClInclude Include="CWarrior.h" />
     <ClInclude Include="define.h" />
@@ -165,6 +169,8 @@
     <ClCompile Include="CEnemyInfant.cpp" />
     <ClCompile Include="CGameSystem.cpp" />
     <ClCompile Include="CInGame.cpp" />
+    <ClCompile Include="CIntro.cpp" />
+    <ClCompile Include="CManage.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPeasant.cpp" />
     <ClCompile Include="CWarrior.cpp" />

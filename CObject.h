@@ -69,6 +69,10 @@ struct Sprite {
 		return 0;
 	}
 
+
+
+
+
 private:
 	// ÀÌ¹ÌÁö
 	CImage m_imgWalk;

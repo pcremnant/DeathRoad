@@ -2,13 +2,15 @@
 #include"CObject.h"
 
 class CEnemyInfant : public CObject {
+protected:
+
 	int m_nSpeed;
 	int m_nDeadTimer;
 public:
-	void Init() override;
-	void SetPosition() override;
-	void DrawObject(HDC hdc)override;
-	void Move()override;
-	void SetFrameType(const int& nType) override;
-	void GetUpgrade()override {};
+	virtual void Init() override = 0;
+	void SetPosition() override final;
+	void DrawObject(HDC hdc)override final;
+	void Move()override final;
+	void SetFrameType(const int& nType) override final;
+	void GetUpgrade()override final {};
 };

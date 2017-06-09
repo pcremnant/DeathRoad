@@ -1,5 +1,7 @@
 #pragma once
-#include"CEnemyInfant.h"
+#include"CCrusader.h"
+#include"CPeasant.h"
+#include"CWarrior.h"
 #include"CEnemyList.h"
 //#include"SoundManager.h"
 
@@ -28,7 +30,7 @@ public:
 	{ 
 		m_nStage = nStage;
 		m_nSpawnTimer = 0;
-		CObject* newObj = new CEnemyInfant;
+		CObject* newObj = new CWarrior;
 		m_enemyList.Insert(newObj);
 	}
 
@@ -44,9 +46,16 @@ public:
 
 		if (m_nSpawnTimer >= SPAWN_ENEMY) {
 			m_nSpawnTimer %= SPAWN_ENEMY;
-			int nTmp = rand() % m_nStage + 2;
+			int nTmp = rand() % (m_nStage+2) + 2;
 			for (int i = 0;i < nTmp;++i) {
-				CObject* newObj = new CEnemyInfant;
+				int random = rand() % 3;
+				CObject* newObj;
+				if (random == 0)
+					newObj = new CPeasant;
+				else if (random == 1)
+					newObj = new CCrusader;
+				else
+					newObj = new CWarrior;
 				m_enemyList.Insert(newObj);
 			}
 		}

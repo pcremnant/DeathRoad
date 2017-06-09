@@ -6,3 +6,4 @@
 # 2017,06,07 - Give ChanPark CObject
 # 2017.06.08 - create class instruction
 # 2017.06.09 - Add castle
+# 2017.06.09 - Add 3 Infants

@@ -40,11 +40,23 @@
     <Filter Include="소스 파일\Objects\Manager">
       <UniqueIdentifier>{30867e2a-21b4-44d1-a642-b29d8f98fd7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Items">
+    <Filter Include="소스 파일\Objects\Items">
       <UniqueIdentifier>{d427a39f-a8e1-4dc8-bff7-df1d77257a5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Items\Castle">
+    <Filter Include="소스 파일\Objects\Items\Castle">
       <UniqueIdentifier>{56f13752-2575-4878-942b-743b93e707ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\CCrusader">
+      <UniqueIdentifier>{7b454e51-a443-4c5c-88fc-ac9141364201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Peasant">
+      <UniqueIdentifier>{f9b27692-4e98-4207-ad4a-4af9c55c9506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Warrior">
+      <UniqueIdentifier>{dc2a8ce4-e901-471d-935d-34dbc8fb3a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\Archer">
+      <UniqueIdentifier>{f17ed225-4d3a-41ad-88bf-8eae6e2b2fcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,10 +91,19 @@
       <Filter>소스 파일\Objects\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CItem.h">
-      <Filter>소스 파일\Items</Filter>
+      <Filter>소스 파일\Objects\Items</Filter>
     </ClInclude>
     <ClInclude Include="CCastle.h">
-      <Filter>소스 파일\Items\Castle</Filter>
+      <Filter>소스 파일\Objects\Items\Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="CCrusader.h">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\CCrusader</Filter>
+    </ClInclude>
+    <ClInclude Include="CPeasant.h">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Peasant</Filter>
+    </ClInclude>
+    <ClInclude Include="CWarrior.h">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Warrior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +129,16 @@
       <Filter>소스 파일\Objects\Enemy\EnemyInfant</Filter>
     </ClCompile>
     <ClCompile Include="CCastle.cpp">
-      <Filter>소스 파일\Items\Castle</Filter>
+      <Filter>소스 파일\Objects\Items\Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="CCrusader.cpp">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\CCrusader</Filter>
+    </ClCompile>
+    <ClCompile Include="CPeasant.cpp">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Peasant</Filter>
+    </ClCompile>
+    <ClCompile Include="CWarrior.cpp">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Warrior</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

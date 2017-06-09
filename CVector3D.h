@@ -26,6 +26,8 @@ public:
 	// 사각형과 오브젝트 충돌체크
 	bool ColisionBox(const int& szWidth, const int& szHeight, const RECT& rcOther)
 	{
+		// szWidth, szheight -> 화살의 가로 세로 길이
+		// rcOther는 충돌 체크 대상의 위치
 		RECT rcTmp = { x - szWidth,y - szHeight,x + szWidth,y + szHeight };
 		// 사각형 충돌 체크
 		if (PtInRect(&rcTmp, POINT{ rcOther.left,rcOther.top }))

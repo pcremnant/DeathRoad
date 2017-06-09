@@ -11,6 +11,7 @@ protected:
 	CVector3D m_vtCoord{ 0,0,0 };
 	int m_nWidth{ 0 };
 	int m_nHeight{ 0 };
+	
 	RECT m_rcPosition{ 0,0,0,0 };
 
 	// 물체가 가지고 있는 값

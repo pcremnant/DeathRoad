@@ -2,13 +2,17 @@
 #include"define.h"
 #include"CBattle.h"
 #include"CManage.h"
+#include"SoundManager.h"
+
 
 #define PHASE_BATTLE 0
 #define PHASE_MANAGE 1
 
 class CInGame {
-	bool m_bSet{ false };
+	const CSoundManager* m_pSoundManager;
 
+	// 제대로 세팅이 넘어왔는지 확인
+	bool m_bSet{ false };
 
 	// 페이즈 2개를 번갈아 사용한다.
 	CBattle* m_pBattlePhase;
@@ -25,7 +29,7 @@ class CInGame {
 	
 
 public:
-	CInGame() {}
+	CInGame(const CSoundManager* sound) : m_pSoundManager(sound) {}
 	~CInGame();
 	// 초기화 해주는 함수
 	void Init();

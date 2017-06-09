@@ -3,7 +3,7 @@
 #include"CPeasant.h"
 #include"CWarrior.h"
 #include"CEnemyList.h"
-//#include"SoundManager.h"
+#include"SoundManager.h"
 
 #define SPAWN_ENEMY 240
 
@@ -15,13 +15,14 @@
 // È¿°úÀ½
 
 class CEnemyManager {
+	const CSoundManager* m_pSoundManager;
 	UINT m_nStage;
 	int m_nSpawnTimer;
 	CEnemyList m_enemyList;
 
 	//CSoundManager m_soundManager;
 public:
-	CEnemyManager()
+	CEnemyManager(const CSoundManager* sound) : m_pSoundManager(sound)
 	{
 		m_nSpawnTimer = 0;
 	}

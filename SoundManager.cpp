@@ -27,6 +27,14 @@ CSoundManager::~CSoundManager()
 	m_System->release();
 }
 
+void CSoundManager::SetSounds()
+{
+	AddSound(BGM_INTRO, ("resource/sound/bgm/Intro.mp3"), true);
+	AddSound(BGM_MAINMENU, ("resource/sound/bgm/MainMenu.mp3"), true);
+	AddSound(EFFECT_CLICK_BUTTON_00, ("resource/effect/ClickButton.mp3"));
+	AddSound(EFFECT_INFANT_ATTACK_00, ("resource/sound/effect/Infant_Attack_00.mp3"));
+}
+
 bool CSoundManager::AddSound(size_t idx, LPCSTR szPath, bool bBGM)
 {
 	if (idx < 0)return false;

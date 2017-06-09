@@ -2,8 +2,12 @@
 #include"define.h"
 #include"CSprite.h"
 #include"CInGame.h"
+#include"SoundManager.h"
 
 class CGameSystem {
+	// 사운드 매니저
+	CSoundManager* m_pSoundManager;
+
 	// 인트로 이미지 -> 후에 인트로 클래스로 바꿀 것
 	CImage m_imgIntro;
 	UINT m_nSizeIntroX;
@@ -23,6 +27,7 @@ class CGameSystem {
 public:
 
 	CGameSystem();
+	~CGameSystem();
 	// 키보드 명령 받는 함수
 	void GetKey(const WPARAM& wParam);
 	// 드로우 함수

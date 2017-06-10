@@ -9,6 +9,8 @@
 #define ENEMYLEFT 1
 #define ENEMYTOP 1
 
+#define START_ATTACK -1
+
 // 움직일 때 애니메이션이 발생하는 오브젝트 클래스
 class CObject {
 protected:
@@ -34,12 +36,16 @@ public:
 
 	virtual void Init() {};										// 초기화 해주는 함수
 	virtual void DrawObject(HDC hdc) {};						// 드로우 함수
+	virtual int Update() = 0;
 	virtual void Move() {};										// Update시 움직이는 함수
+	virtual int Attack() = 0;									// Update시 공격하는 함수
+	virtual void Dead() {}										// Update시 죽는 함수
 	virtual void GetUpgrade() {};								// 배틀페이즈 시작시 (혹은 오브젝트 생성시) 업그레이드 정보를 정해준다.
 	virtual void SetPosition() {};								// m_vtCoord에 따라 바운딩 박스(이미지 위치 및 크기)를 정해주는 함수
 	virtual void SetFrameType(const int& nType) {};				// 특정 상황에서 동작을 바꿔준다.(걷다가 사거리 안으로 들어오면 공격 모션으로 바꿔줌)
 	const float ReturnZ() const { return m_vtCoord.GetZ(); }	// 충돌판정을 위해 z값을 리턴
 	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄
+	const bool& InRange() const { return m_bInRange; }			// 공격 사거리 안에 있는지
 	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
 	{
 		if (vtPosition.GetX() - nWidth <= m_vtCoord.GetX() + m_nAttackRange)

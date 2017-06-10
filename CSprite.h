@@ -2,6 +2,12 @@
 #include"define.h"
 
 struct CSprite {
+	~CSprite()
+	{
+		m_imgSprite.Destroy();
+		if (m_bExist)
+			m_imgPointed.Destroy();
+	}
 	void GetImage(LPCTSTR path, const RECT& rcPosition, LPCTSTR pointedPath = nullptr)
 	{
 		m_bPointed = false;
@@ -66,6 +72,7 @@ struct CSprite {
 		return m_bPointed;
 	}
 
+	
 private:
 	CImage m_imgSprite;
 	UINT m_nWidth;

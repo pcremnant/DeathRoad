@@ -4,9 +4,17 @@
 #include"CEnemyManager.h"
 #include"SoundManager.h"
 
+#define BATTLE_EXIT -1
+#define	BATTLE_NONE 0
+
 class CBattle {
+
+	// 시스템 변수
+	bool m_bPause{ false };
+
+
 	// 사운드 매니저
-	const CSoundManager* m_pSoundManager;
+	CSoundManager* m_pSoundManager;
 
 	// 백그라운드 이미지
 	CImage m_imgBGBack;
@@ -25,10 +33,10 @@ class CBattle {
 
 
 public:
-	CBattle(const UINT& nStage, int& nGold, const int& nCastleHp, const CSoundManager* sound);;
+	CBattle(const UINT& nStage, int& nGold, CItem* castle,CSoundManager* sound);
 	~CBattle();
 
 	void DrawPhase(HDC hdc);
 	void UpdatePhase();
-	void GetKey(const WPARAM& wParam);
+	int GetKey(const WPARAM& wParam);
 };

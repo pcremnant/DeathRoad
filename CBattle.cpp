@@ -1,14 +1,13 @@
 #include"CBattle.h"
 
-CBattle::CBattle(const UINT & nStage, int & nGold, const int & nCastleHp, const CSoundManager * sound) : m_pSoundManager(sound)
+CBattle::CBattle(const UINT & nStage, int & nGold, CItem* castle, CSoundManager * sound) : m_pSoundManager(sound)
 {
 	m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
 	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
 	m_pEnemyManager = new CEnemyManager(m_pSoundManager);
 	m_pEnemyManager->Init(nStage);
 
-	m_pCastle = new CCastle;
-	m_pCastle->Init();
+	m_pCastle = castle;
 
 	if (m_imgBGFront.GetBPP() == 32)
 	{
@@ -36,8 +35,7 @@ CBattle::CBattle(const UINT & nStage, int & nGold, const int & nCastleHp, const 
 
 CBattle::~CBattle()
 {
-	if (m_pSoundManager)
-		delete m_pSoundManager;
+
 }
 
 void CBattle::DrawPhase(HDC hdc)
@@ -50,18 +48,24 @@ void CBattle::DrawPhase(HDC hdc)
 
 void CBattle::UpdatePhase()
 {
-	m_pEnemyManager->Update();
-	m_pEnemyManager->SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth() / 2);
-	//m_enemy->Move();
+	if (!m_bPause) {
+		m_pEnemyManager->Update();
+		m_pEnemyManager->SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth() / 2);
+	}
 }
 
-void CBattle::GetKey(const WPARAM & wParam)
+int CBattle::GetKey(const WPARAM & wParam)
 {
 	static int nType = 0;
 	switch (wParam) {
-	case VK_SPACE:
+	case VK_ESCAPE:
+		if (!m_bPause)
+			m_bPause = true;
+		else
+			return BATTLE_EXIT;
 		break;
 	default:
 		break;
 	}
+	return BATTLE_NONE;
 }

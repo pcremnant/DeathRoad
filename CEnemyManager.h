@@ -15,16 +15,16 @@
 // È¿°úÀ½
 
 class CEnemyManager {
-	const CSoundManager* m_pSoundManager;
+	CSoundManager* m_pSoundManager;
 	UINT m_nStage;
 	int m_nSpawnTimer;
-	CEnemyList m_enemyList;
+	CEnemyList* m_pEnemyList;
 
-	//CSoundManager m_soundManager;
 public:
-	CEnemyManager(const CSoundManager* sound) : m_pSoundManager(sound)
+	CEnemyManager(CSoundManager* sound) : m_pSoundManager(sound)
 	{
 		m_nSpawnTimer = 0;
+		m_pEnemyList = new CEnemyList(sound);
 	}
 
 	void Init(const UINT& nStage)
@@ -32,17 +32,17 @@ public:
 		m_nStage = nStage;
 		m_nSpawnTimer = 0;
 		CObject* newObj = new CWarrior;
-		m_enemyList.Insert(newObj);
+		m_pEnemyList->Insert(newObj);
 	}
 
 	void DrawEnemy(HDC hdc)
 	{
-		m_enemyList.DrawObj(hdc);
+		m_pEnemyList->DrawObj(hdc);
 	}
 
 	void Update()
 	{
-		m_enemyList.Update();
+		m_pEnemyList->Update();
 		m_nSpawnTimer++;
 
 		if (m_nSpawnTimer >= SPAWN_ENEMY) {
@@ -57,13 +57,13 @@ public:
 					newObj = new CCrusader;
 				else
 					newObj = new CWarrior;
-				m_enemyList.Insert(newObj);
+				m_pEnemyList->Insert(newObj);
 			}
 		}
 	}
 
 	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
 	{
-		m_enemyList.SetTarget(vtPosition, nWidth);
+		m_pEnemyList->SetTarget(vtPosition, nWidth);
 	}
 };

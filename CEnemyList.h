@@ -1,6 +1,7 @@
 #pragma once
 #include"define.h"
 #include"CEnemyInfant.h"
+#include"SoundManager.h"
 
 // 적군 매니저를 만들기 위한 열결리스트의 노드
 class CEnemyNode {
@@ -30,11 +31,13 @@ public:
 
 // 적군 연결리스트
 class CEnemyList {
+	CSoundManager* m_pSoundManager;
 public:
+
 	CEnemyNode* m_pHead;
 	CEnemyNode* m_pTail;
 
-	CEnemyList()
+	CEnemyList(CSoundManager* sound) : m_pSoundManager(sound)
 	{
 		m_pHead = new CEnemyNode;
 		m_pTail = new CEnemyNode;
@@ -129,6 +132,7 @@ public:
 		}
 	}
 
+	// 성의 클래스를 받아와 공격 -> 후에 추가
 	void Update()
 	{
 		CEnemyNode* p = m_pHead->m_pNext;
@@ -139,7 +143,8 @@ public:
 				p = tmp;
 			}
 			else {
-				p->m_pEnemy->Move();
+				if (p->m_pEnemy->Update() == START_ATTACK)
+					m_pSoundManager->PlayEffect(EFFECT_INFANT_ATTACK_00);
 				p = p->m_pNext;
 			}
 		}

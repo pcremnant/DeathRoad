@@ -7,3 +7,4 @@
 # 2017.06.08 - create class instruction
 # 2017.06.09 - Add castle
 # 2017.06.09 - Add 3 Infants
+# 2017.06.10 - Create Phases and Pause in BattlePhase(ESC Key)

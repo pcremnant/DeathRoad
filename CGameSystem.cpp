@@ -63,8 +63,13 @@ void CGameSystem::MouseMove(const LPARAM & lParam)
 
 void CGameSystem::LButtonDown(const LPARAM & lParam)
 {
-	if (m_pInGame)
-		m_pInGame->LButtonDown(lParam);
+	if (m_pInGame) {
+		if (m_pInGame->LButtonDown(lParam) == INGAME_EXIT) {
+			delete m_pInGame;
+			m_pInGame = nullptr;
+
+		}
+	}
 	else {
 		if (m_spIconExitButton.GetPointed()) {
 			m_pSoundManager->PlayEffect(EFFECT_CLICK_BUTTON_00);

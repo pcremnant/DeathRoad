@@ -13,7 +13,7 @@ public:
 	int Update() override final;
 	void Move()override final;
 	int Attack() override final;
-	void Dead() override final;
+	int Dead() override final;
 	void SetFrameType(const int& nType) override final;
 	void GetUpgrade()override final {};
 };

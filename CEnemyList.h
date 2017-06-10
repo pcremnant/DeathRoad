@@ -143,8 +143,11 @@ public:
 				p = tmp;
 			}
 			else {
-				if (p->m_pEnemy->Update() == START_ATTACK)
+				int nTmp = p->m_pEnemy->Update();
+				if (nTmp == UNIT_ATTACK)
 					m_pSoundManager->PlayEffect(EFFECT_INFANT_ATTACK_00);
+				else if (nTmp == UNIT_DEAD)
+					m_pSoundManager->PlayEffect(EFFECT_INFANT_DEAD_00);
 				p = p->m_pNext;
 			}
 		}

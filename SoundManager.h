@@ -18,6 +18,7 @@
 
 // 유닛 관련 효과음
 #define EFFECT_INFANT_ATTACK_00 20
+#define EFFECT_INFANT_DEAD_00 21
 
 
 class CSoundManager {

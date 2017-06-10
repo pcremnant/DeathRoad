@@ -117,7 +117,7 @@ int CEnemyInfant::Attack()
 	else {
 		if (m_nFrame == 7) {
 			m_nFrame++;
-			return START_ATTACK;
+			return UNIT_ATTACK;
 		}
 		else
 			m_nFrame++;
@@ -126,8 +126,12 @@ int CEnemyInfant::Attack()
 }
 
 // TYPE_DEAD ¿œ ∂ß
-void CEnemyInfant::Dead()
+int CEnemyInfant::Dead()
 {
+	int nTmp = UNIT_NONE;
+	if (m_nFrame == 0)
+		nTmp = UNIT_DEAD;
+
 	if (m_nFrame / 4 != m_sprImg.MaxFrame(m_nFrameType) - 1)
 		m_vtCoord.Move(0.5f, 0, 0);
 	m_nDeadTimer++;
@@ -135,6 +139,8 @@ void CEnemyInfant::Dead()
 		m_bDead = true;
 	else if ((m_nFrame / 4) == m_sprImg.MaxFrame(m_nFrameType) - 1)
 		;
-	else
+	else 
 		m_nFrame++;
+
+	return nTmp;
 }

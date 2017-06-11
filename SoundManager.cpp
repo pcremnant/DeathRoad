@@ -14,6 +14,8 @@ CSoundManager::CSoundManager()
 	);
 
 	for (auto& p : m_Sound) p = nullptr;
+
+	SetSounds();
 }
 
 CSoundManager::~CSoundManager()
@@ -33,7 +35,8 @@ void CSoundManager::SetSounds()
 	AddSound(BGM_MAINMENU, ("resource/sound/bgm/MainMenu.mp3"), true);
 	AddSound(EFFECT_CLICK_BUTTON_00, ("resource/effect/ClickButton.mp3"));
 	AddSound(EFFECT_INFANT_ATTACK_00, ("resource/sound/effect/Infant_Attack_00.mp3"));
-	AddSound(EFFECT_INFANT_DEAD_00, ("resourc/sound/effect/Infant_Dead_00.mp3"));
+	AddSound(EFFECT_INFANT_DEAD_00, ("resource/sound/effect/Infant_Dead_00.mp3"));
+	AddSound(EFFECT_ARCHER_ATTACK_00, ("resource/sound/effect/Archer_Attack_00.mp3"));
 }
 
 bool CSoundManager::AddSound(size_t idx, LPCSTR szPath, bool bBGM)

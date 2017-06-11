@@ -11,7 +11,7 @@ class CBattle {
 
 	// 시스템 변수
 	bool m_bPause{ false };
-
+	bool m_bBattleEnd{ false };
 
 	// 사운드 매니저
 	CSoundManager* m_pSoundManager;
@@ -39,4 +39,8 @@ public:
 	void DrawPhase(HDC hdc);
 	void UpdatePhase();
 	int GetKey(const WPARAM& wParam);
+	bool IsBattleEnd() const
+	{
+		return m_bBattleEnd;
+	}
 };

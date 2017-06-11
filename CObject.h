@@ -2,6 +2,7 @@
 #include"define.h"
 #include"CVector3D.h"
 #include"CAnimatedSprite.h"
+#include"SoundManager.h"
 
 #define GRAVITY -9.8
 #define CHARACTERLEFT 1150
@@ -31,11 +32,14 @@ protected:
 
 	bool m_bInRange;					// 공격 사거리 안에 있는가
 	bool m_bAttackCharge;				// 공격을 준비하고 있는가 (활 시위를 당기고 있는 때)
+	bool m_bReroad{ false };			// 재장전중인가
 	int m_nAttackRange;					// 공격 사거리
-
+	int m_nAttackFrame{ 0 };			// 효과음을 낼 프레임
 	bool m_bDead;						// 오브젝트가 죽었는가
-public:
 
+	CSoundManager* m_pSoundManager{ nullptr };
+public:
+	CObject(CSoundManager* sound) : m_pSoundManager(sound) {}
 	virtual void Init() {};										// 초기화 해주는 함수
 	virtual void DrawObject(HDC hdc) {};						// 드로우 함수
 	virtual int Update() = 0;

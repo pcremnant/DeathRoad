@@ -2,6 +2,7 @@
 
 void CCrusader::Init()
 {
+	m_nAttackFrame = 5;
 	m_sprImg.GetImage(TEXT("resource/image/enemy/Enemy_Infant_00_Walk.png")
 		, TEXT("resource/image/enemy/Enemy_Infant_00_Attack.png")
 		, TEXT("resource/image/enemy/Enemy_Infant_00_Dead.png")

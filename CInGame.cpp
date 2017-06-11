@@ -61,15 +61,10 @@ int CInGame::LButtonDown(const LPARAM & lParam)
 				if (m_pBattlePhase)
 					delete m_pBattlePhase;
 				m_pBattlePhase = nullptr;
-
 				return INGAME_EXIT;
 				break;
 			case MANAGE_BATTLESTART:
-				m_nPhase = PHASE_BATTLE;
-				// 매니지페이즈에서 했던 행동들 저장
-				delete m_pManagePhase;
-				m_pManagePhase = nullptr;
-				m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager);
+				SetBattlePhase();
 				break;
 			default:
 				break;
@@ -88,11 +83,7 @@ void CInGame::GetKey(const WPARAM & wParam)
 		if (m_pBattlePhase) {
 			switch (m_pBattlePhase->GetKey(wParam)) {
 			case BATTLE_EXIT:
-				m_nPhase = PHASE_MANAGE;
-				// 배틀페이즈에서 했던 행동들 저장
-				delete m_pBattlePhase;
-				m_pBattlePhase = nullptr;
-				m_pManagePhase = new CManage(m_pSoundManager);
+				SetManagePhase();
 				break;
 			case BATTLE_NONE:
 				break;
@@ -133,8 +124,12 @@ void CInGame::Update()
 {
 	if (m_bSet) {
 		if (m_nPhase == PHASE_BATTLE) {
-			if (m_pBattlePhase)
+			if (m_pBattlePhase) {
 				m_pBattlePhase->UpdatePhase();
+				if (m_pBattlePhase->IsBattleEnd()) {
+					SetManagePhase();
+				}
+			}
 		}
 		else {
 			if (m_pManagePhase)

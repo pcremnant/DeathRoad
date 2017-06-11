@@ -144,10 +144,10 @@ public:
 			}
 			else {
 				int nTmp = p->m_pEnemy->Update();
-				if (nTmp == UNIT_ATTACK)
-					m_pSoundManager->PlayEffect(EFFECT_INFANT_ATTACK_00);
-				else if (nTmp == UNIT_DEAD)
-					m_pSoundManager->PlayEffect(EFFECT_INFANT_DEAD_00);
+				//if (nTmp == UNIT_ATTACK)
+				//	m_pSoundManager->PlayEffect(EFFECT_INFANT_ATTACK_00);
+				//else if (nTmp == UNIT_DEAD)
+				//	m_pSoundManager->PlayEffect(EFFECT_INFANT_DEAD_00);
 				p = p->m_pNext;
 			}
 		}
@@ -160,5 +160,16 @@ public:
 			p->m_pEnemy->SetTarget(vtPosition, nWidth);
 			p = p->m_pNext;
 		}
+	}
+
+	int GetNumber() const
+	{
+		CEnemyNode* p = m_pHead->m_pNext;
+		int nTmp = 0;
+		while (p != m_pTail) {
+			nTmp++;
+			p = p->m_pNext;
+		}
+		return nTmp;
 	}
 };

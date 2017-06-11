@@ -7,6 +7,7 @@ void CWarrior::Init()
 		, TEXT("resource/image/enemy/Enemy_Infant_02_Dead.png")
 		, 11, 14, 10);
 
+	m_nAttackFrame = 4;
 	m_bAttackCharge = false;
 	m_nFrame = 0;
 	m_nFrameType = TYPE_WALK;

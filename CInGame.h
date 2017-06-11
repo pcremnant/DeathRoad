@@ -23,7 +23,7 @@ class CInGame {
 
 	// 두 페이즈 모두에서 쓰이는 변수
 	int m_nGold;
-	UINT m_nStage;
+	UINT m_nStage{ 1 };
 	// 플레이어의 상태 (업그레이드 상태)
 	// ...
 	CItem* m_pCastle{ nullptr };
@@ -47,4 +47,22 @@ public:
 
 	// 게임 안 업데이트 함수
 	void Update();
+
+	// 각 Phase를 세팅
+	void SetManagePhase()
+	{
+		m_nPhase = PHASE_MANAGE;
+		// 배틀페이즈에서 했던 행동들 저장
+		delete m_pBattlePhase;
+		m_pBattlePhase = nullptr;
+		m_pManagePhase = new CManage(m_pSoundManager);
+	}
+	void SetBattlePhase()
+	{
+		m_nPhase = PHASE_BATTLE;
+		// 매니지페이즈에서 했던 행동들 저장
+		delete m_pManagePhase;
+		m_pManagePhase = nullptr;
+		m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager);
+	}
 };

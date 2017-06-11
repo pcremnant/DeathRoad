@@ -46,23 +46,26 @@
     <Filter Include="소스 파일\Objects\Items\Castle">
       <UniqueIdentifier>{56f13752-2575-4878-942b-743b93e707ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\CCrusader">
-      <UniqueIdentifier>{7b454e51-a443-4c5c-88fc-ac9141364201}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Peasant">
       <UniqueIdentifier>{f9b27692-4e98-4207-ad4a-4af9c55c9506}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Warrior">
       <UniqueIdentifier>{dc2a8ce4-e901-471d-935d-34dbc8fb3a63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Objects\Enemy\Archer">
-      <UniqueIdentifier>{f17ed225-4d3a-41ad-88bf-8eae6e2b2fcf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\System\Scene\Manage">
       <UniqueIdentifier>{23ff4ece-a62c-49d4-bd4a-fc746c9d63c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\System\Scene\Intro">
       <UniqueIdentifier>{e4021840-686f-4ba2-bddd-9570a34a5f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\CEnemyArcher">
+      <UniqueIdentifier>{f17ed225-4d3a-41ad-88bf-8eae6e2b2fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\CEnemyArcher\Crossbowman">
+      <UniqueIdentifier>{c69be30d-dc4b-4d76-98c0-4d13de65dfbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Crusader">
+      <UniqueIdentifier>{7b454e51-a443-4c5c-88fc-ac9141364201}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +106,7 @@
       <Filter>소스 파일\Objects\Items\Castle</Filter>
     </ClInclude>
     <ClInclude Include="CCrusader.h">
-      <Filter>소스 파일\Objects\Enemy\EnemyInfant\CCrusader</Filter>
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Crusader</Filter>
     </ClInclude>
     <ClInclude Include="CPeasant.h">
       <Filter>소스 파일\Objects\Enemy\EnemyInfant\Peasant</Filter>
@@ -122,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="CAnimatedSprite.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyArcher.h">
+      <Filter>소스 파일\Objects\Enemy\CEnemyArcher</Filter>
+    </ClInclude>
+    <ClInclude Include="CCrossbowman.h">
+      <Filter>소스 파일\Objects\Enemy\CEnemyArcher\Crossbowman</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +159,7 @@
       <Filter>소스 파일\Objects\Items\Castle</Filter>
     </ClCompile>
     <ClCompile Include="CCrusader.cpp">
-      <Filter>소스 파일\Objects\Enemy\EnemyInfant\CCrusader</Filter>
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Crusader</Filter>
     </ClCompile>
     <ClCompile Include="CPeasant.cpp">
       <Filter>소스 파일\Objects\Enemy\EnemyInfant\Peasant</Filter>
@@ -163,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="CIntro.cpp">
       <Filter>소스 파일\System\Scene\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemyArcher.cpp">
+      <Filter>소스 파일\Objects\Enemy\CEnemyArcher</Filter>
+    </ClCompile>
+    <ClCompile Include="CCrossbowman.cpp">
+      <Filter>소스 파일\Objects\Enemy\CEnemyArcher\Crossbowman</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -49,6 +49,10 @@ void CBattle::DrawPhase(HDC hdc)
 void CBattle::UpdatePhase()
 {
 	if (!m_bPause) {
+		if (m_pEnemyManager->IsStageEnd()) {
+			m_bBattleEnd = true;
+			return;
+		}
 		m_pEnemyManager->Update();
 		m_pEnemyManager->SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth() / 2);
 	}

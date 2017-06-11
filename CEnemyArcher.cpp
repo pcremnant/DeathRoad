@@ -1,6 +1,6 @@
-#include"CEnemyInfant.h"
+#include"CEnemyArcher.h"
 
-void CEnemyInfant::SetPosition()
+void CEnemyArcher::SetPosition()
 {
 	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
 	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
@@ -8,12 +8,12 @@ void CEnemyInfant::SetPosition()
 	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
 }
 
-void CEnemyInfant::DrawObject(HDC hdc)
+void CEnemyArcher::DrawObject(HDC hdc)
 {
-	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame/4, m_rcPosition);
+	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
 }
 
-int CEnemyInfant::Update()
+int CEnemyArcher::Update()
 {
 	int tmp = 0;
 	if (m_nFrameType == TYPE_WALK)
@@ -29,7 +29,7 @@ int CEnemyInfant::Update()
 }
 
 // TYPE_WALK 일 때
-void CEnemyInfant::Move()
+void CEnemyArcher::Move()
 {
 
 	if (m_rcPosition.right >= CLIENT_WIDTH)
@@ -50,7 +50,7 @@ void CEnemyInfant::Move()
 		m_nFrame++;
 }
 
-void CEnemyInfant::SetFrameType(const int & nType)
+void CEnemyArcher::SetFrameType(const int & nType)
 {
 	if (nType <= 2 && nType >= 0) {
 		m_nFrameType = nType;
@@ -59,33 +59,45 @@ void CEnemyInfant::SetFrameType(const int & nType)
 }
 
 // TYPE_ATTACK 일 때
-int CEnemyInfant::Attack()
+int CEnemyArcher::Attack()
 {
 	if(m_nFrame==m_nAttackFrame)
-		m_pSoundManager->PlayEffect(EFFECT_INFANT_ATTACK_00);
+		m_pSoundManager->PlayEffect(EFFECT_ARCHER_ATTACK_00);
 
-	if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
-		m_nFrame = 0;
-		if (m_nFrameType == TYPE_ATTACK) {
-			if (rand() % 2)
-				SetFrameType(TYPE_DEAD);
+	if (m_bReroad) {
+		if (m_nCurrentReroad < m_nReroad)
+			m_nCurrentReroad++;
+		else {
+			m_nCurrentReroad = 0;
+			m_bReroad = false;
 		}
-		// 공격력만큼 리턴
-		return 10;
 	}
 	else {
-		if (m_nFrame == 7) {
-			m_nFrame++;
-			return UNIT_ATTACK;
+		if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
+			m_nFrame = 0;
+			if (m_nFrameType == TYPE_ATTACK) {
+				if (rand() % 2)
+					SetFrameType(TYPE_DEAD);
+			}
+			// 공격력만큼 리턴
+			m_bReroad = true;
+			m_nCurrentReroad = 0;
+			return 10;
 		}
-		else
-			m_nFrame++;
+		else {
+			if (m_nFrame == 7) {
+				m_nFrame++;
+				return UNIT_ATTACK;
+			}
+			else
+				m_nFrame++;
+		}
 	}
 	return 0;
 }
 
 // TYPE_DEAD 일 때
-int CEnemyInfant::Dead()
+int CEnemyArcher::Dead()
 {
 	int nTmp = UNIT_NONE;
 	if (m_nFrame == 0) {
@@ -99,7 +111,7 @@ int CEnemyInfant::Dead()
 		m_bDead = true;
 	else if ((m_nFrame / 4) == m_sprImg.MaxFrame(m_nFrameType) - 1)
 		;
-	else 
+	else
 		m_nFrame++;
 
 	return nTmp;

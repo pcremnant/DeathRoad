@@ -48,19 +48,38 @@ void CMainCharacter::Move() {
 	else
 		m_nFrame++;
 }
-/*void CMainCharacter::Attack() {
-	if (m_nAttack) {
+int CMainCharacter::Attack() {
+	if (m_nClick) {
 		m_nFrameType = TYPE_ATTACK;
 		if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
 			m_nFrame = 0;
 		}
 		else
-			m_nFrame++;
+		{
+			if (!m_nClick) {
+				m_nFrame++;
+				return UNIT_ATTACK;
+			}
+			else
+				m_nFrame++;
+		}
 	}
-}*/
+}
 void CMainCharacter::SetFrameType(const int &nType) {
 	if (nType <= 2 && nType >= 0) {
 		m_nFrameType = nType;
 		m_nFrame = 0;
 	}
+}
+int CMainCharacter::Dead() {
+
+}
+int CMainCharacter::Upgrade() {
+	int tmp = 0;
+	if (m_nFrameType == TYPE_ATTACK)
+		tmp = Attack();
+	if (tmp != 0)
+		return tmp;
+	else
+		return 0;
 }

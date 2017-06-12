@@ -2,6 +2,10 @@
 #include"define.h"
 #include"CVector3D.h"
 
+#define OBJECT_TYPE_CASTLE 700
+#define OBJECT_TYPE_ENEMYARROW 701
+#define OBJECT_TYPE_PLAYERARROW 702
+
 // 움직일 때 애니메이션이 없는 오브젝트
 class CItem {
 protected:
@@ -13,6 +17,8 @@ protected:
 	int m_nHeight{ 0 };
 	
 	RECT m_rcPosition{ 0,0,0,0 };
+
+	CVector3D m_vtDirect{ 0,0,0 };
 
 	// 물체가 가지고 있는 값
 	int m_nValue{ 0 };											//성이면 체력, 화살이면 공격력이 된다.

@@ -145,9 +145,11 @@
     <ClInclude Include="CAnimatedSprite.h" />
     <ClInclude Include="CBattle.h" />
     <ClInclude Include="CCastle.h" />
+    <ClInclude Include="CCrossbowArrow.h" />
     <ClInclude Include="CCrossbowman.h" />
     <ClInclude Include="CCrusader.h" />
     <ClInclude Include="CEnemyArcher.h" />
+    <ClInclude Include="CEnemyArrow.h" />
     <ClInclude Include="CEnemyInfant.h" />
     <ClInclude Include="CEnemyList.h" />
     <ClInclude Include="CEnemyManager.h" />
@@ -155,6 +157,7 @@
     <ClInclude Include="CInGame.h" />
     <ClInclude Include="CIntro.h" />
     <ClInclude Include="CItem.h" />
+    <ClInclude Include="CMainCharacter.h" />
     <ClInclude Include="CManage.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPeasant.h" />
@@ -167,13 +170,16 @@
   <ItemGroup>
     <ClCompile Include="CBattle.cpp" />
     <ClCompile Include="CCastle.cpp" />
+    <ClCompile Include="CCrossbowArrow.cpp" />
     <ClCompile Include="CCrossbowman.cpp" />
     <ClCompile Include="CCrusader.cpp" />
     <ClCompile Include="CEnemyArcher.cpp" />
+    <ClCompile Include="CEnemyArrow.cpp" />
     <ClCompile Include="CEnemyInfant.cpp" />
     <ClCompile Include="CGameSystem.cpp" />
     <ClCompile Include="CInGame.cpp" />
     <ClCompile Include="CIntro.cpp" />
+    <ClCompile Include="CMainCharacter.cpp" />
     <ClCompile Include="CManage.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPeasant.cpp" />

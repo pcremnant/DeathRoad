@@ -50,6 +50,16 @@ public:
 		this->z += z;
 	}
 
+	// 뒤에 true값을 넣으면 z값까지 더해준다.
+	void Move(const CVector3D& vector, bool bZ = false)
+	{
+		if (bZ) {
+			*this += vector;
+		}
+		else {
+			this->Move(vector.x, vector.y);
+		}
+	}
 
 	bool operator==(const CVector3D& other) const
 	{
@@ -64,10 +74,32 @@ public:
 		this->z = other.z;
 		return *this;
 	}
-	CVector3D operator+(const CVector3D& other) {
+	CVector3D operator+(const CVector3D& other) 
+	{
+		CVector3D vtTmp;
+		vtTmp.x += other.x;
+		vtTmp.y += other.y;
+		vtTmp.z += other.z;
+		return vtTmp;
+	}
+	CVector3D operator-(const CVector3D& other) 
+	{
+		CVector3D vtTmp;
+		vtTmp.x -= other.x;
+		vtTmp.y -= other.y;
+		vtTmp.z -= other.z;
+		return vtTmp;
+	}
+	void operator+=(const CVector3D& other)
+	{
 		this->x += other.x;
 		this->y += other.y;
 		this->z += other.z;
-		return *this;
+	}
+	void operator-=(const CVector3D& other)
+	{
+		this->x -= other.x;
+		this->y -= other.y;
+		this->z -= other.z;
 	}
 };

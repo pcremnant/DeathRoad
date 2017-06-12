@@ -1,5 +1,6 @@
 #pragma once
 #include"CObject.h"
+#include"CCrossbowArrow.h"
 
 class CEnemyArcher : public CObject {
 protected:
@@ -8,6 +9,7 @@ protected:
 	int m_nDeadTimer;
 	int m_nReroad;
 	int m_nCurrentReroad;
+	CItem* newArrow{ nullptr };
 public:
 	CEnemyArcher(CSoundManager* sound) : CObject(sound) {}
 	virtual void Init() override = 0;

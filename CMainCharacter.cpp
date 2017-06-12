@@ -48,7 +48,7 @@ void CMainCharacter::Move() {
 	else
 		m_nFrame++;
 }
-void CMainCharacter::Attack() {
+/*void CMainCharacter::Attack() {
 	if (m_nAttack) {
 		m_nFrameType = TYPE_ATTACK;
 		if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
@@ -57,7 +57,7 @@ void CMainCharacter::Attack() {
 		else
 			m_nFrame++;
 	}
-}
+}*/
 void CMainCharacter::SetFrameType(const int &nType) {
 	if (nType <= 2 && nType >= 0) {
 		m_nFrameType = nType;

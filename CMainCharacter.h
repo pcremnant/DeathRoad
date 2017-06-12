@@ -13,5 +13,5 @@ public:
 	void SetPosition()override;
 	void SetFrameType(const int& nType)override;
 	void Move()override;
-	void Attack();
+	//void Attack();
 };

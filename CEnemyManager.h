@@ -101,6 +101,9 @@ class CEnemyManager {
 	CEnemyList* m_pEnemyList{ nullptr };
 	CTriger* m_pTriger{ nullptr };
 	bool m_bStageEnd{ false };
+
+
+
 public:
 	CEnemyManager(CSoundManager* sound): m_pSoundManager(sound)
 	{

@@ -9,3 +9,4 @@
 # 2017.06.09 - Add 3 Infants
 # 2017.06.10 - Create Phases and Pause in BattlePhase(ESC Key)
 # 2017.06.13 - Add Enemy Arrow
+# 2017.06.13 - Add Resources

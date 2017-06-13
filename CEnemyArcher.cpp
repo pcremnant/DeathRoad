@@ -35,7 +35,6 @@ int CEnemyArcher::Update()
 // TYPE_WALK ÀÏ ¶§
 void CEnemyArcher::Move()
 {
-
 	if (m_rcPosition.right >= CLIENT_WIDTH)
 		m_vtCoord.SetX(0);
 	else if (m_bInRange) {

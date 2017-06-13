@@ -1,6 +1,8 @@
 #pragma once
 #include"CObject.h"
 #include"CCrossbowArrow.h"
+#include"CEnemyArrowManager.h"
+#include"CCastle.h"
 
 class CEnemyArcher : public CObject {
 protected:
@@ -9,9 +11,15 @@ protected:
 	int m_nDeadTimer;
 	int m_nReroad;
 	int m_nCurrentReroad;
-	CItem* newArrow{ nullptr };
+
+	CEnemyArrowManager* m_pArrowManager{ nullptr };
+
+	CItem* m_pCastle{ nullptr };
 public:
-	CEnemyArcher(CSoundManager* sound) : CObject(sound) {}
+	CEnemyArcher(CSoundManager* sound, CEnemyArrowManager* arrow, CItem* castle) : CObject(sound) {
+		m_pCastle = castle;
+		m_pArrowManager = arrow;
+	}
 	virtual void Init() override = 0;
 	void SetPosition() override final;
 	void DrawObject(HDC hdc)override final;

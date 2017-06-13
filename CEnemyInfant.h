@@ -1,13 +1,17 @@
 #pragma once
 #include"CObject.h"
+#include"CCastle.h"
 
 class CEnemyInfant : public CObject {
 protected:
 
 	int m_nSpeed;
 	int m_nDeadTimer;
+	CItem* m_pCastle{ nullptr };
 public:
-	CEnemyInfant(CSoundManager* sound) : CObject(sound) {}
+	CEnemyInfant(CSoundManager* sound, CItem* castle) : CObject(sound) {
+		m_pCastle = castle;
+	}
 	virtual void Init() override = 0;
 	void SetPosition() override final;
 	void DrawObject(HDC hdc)override final;

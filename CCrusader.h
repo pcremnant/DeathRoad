@@ -3,6 +3,6 @@
 
 class CCrusader : public CEnemyInfant {
 public:
-	CCrusader(CSoundManager* sound) : CEnemyInfant(sound) {  }
+	CCrusader(CSoundManager* sound,CItem* castle) : CEnemyInfant(sound, castle) {  }
 	void Init() override final;
 };

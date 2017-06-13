@@ -1,6 +1,6 @@
 #include"CCrossbowArrow.h"
 
-CCrossbowArrow::CCrossbowArrow(const CVector3D & vtPosition, const int & nAttack) : CEnemyArrow()
+CCrossbowArrow::CCrossbowArrow(const CVector3D & vtPosition, const int & nAttack, CItem* castle) : CEnemyArrow(castle)
 {
 	m_imgBitmap.Load(TEXT("resource/image/object/Object_Arrow_01.png"));
 	m_vtCoord = vtPosition;
@@ -15,17 +15,3 @@ CCrossbowArrow::CCrossbowArrow(const CVector3D & vtPosition, const int & nAttack
 
 void CCrossbowArrow::Init() {}
 
-void CCrossbowArrow::Move()
-{
-	m_vtCoord.Move(m_vtDirect);
-	m_vtDirect.Move(0, m_fGravity);
-	SetPosition();
-}
-
-void CCrossbowArrow::SetPosition()
-{
-	m_rcPosition = { static_cast<LONG>(m_vtCoord.GetX() - m_nWidth)
-		,static_cast<LONG>(m_vtCoord.GetY() - m_nHeight)
-		, static_cast<LONG>(m_vtCoord.GetX() + m_nWidth)
-		,static_cast<LONG>(m_vtCoord.GetY() + m_nHeight) };
-}

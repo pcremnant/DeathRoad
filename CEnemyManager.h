@@ -5,6 +5,8 @@
 #include"CCrossbowman.h"
 #include"CEnemyList.h"
 #include"SoundManager.h"
+#include"CEnemyArrowManager.h"
+#include"CCastle.h"
 
 #define SPAWN_ENEMY 240
 
@@ -53,7 +55,7 @@ public:
 		return m_bEnd;
 	}
 
-	void Spawn(CEnemyList* enemyList, int nTime, CSoundManager* sound)
+	void Spawn(CEnemyList* enemyList, int nTime, CSoundManager* sound, CEnemyArrowManager* arrow, CItem* castle)
 	{
 		if (!m_bEnd) {
 			if (nTime == m_nTime) {
@@ -67,16 +69,16 @@ public:
 					m_ifsRead >> m_pEnemyType[i];
 					switch (m_pEnemyType[i]) {
 					case SPAWN_CROSSBOWMAN:
-						newObj = new CCrossbowman(sound);
+						newObj = new CCrossbowman(sound, arrow, castle);
 						break;
 					case SPAWN_CRUSADER:
-						newObj = new CCrusader(sound);
+						newObj = new CCrusader(sound, castle);
 						break;
 					case SPAWN_CWARRIOR:
-						newObj = new CWarrior(sound);
+						newObj = new CWarrior(sound, castle);
 						break;
 					case SPAWN_PEASANT:
-						newObj = new CPeasant(sound);
+						newObj = new CPeasant(sound, castle);
 						break;
 					default:
 						break;
@@ -95,6 +97,7 @@ public:
 };
 
 class CEnemyManager {
+	CItem* m_pCastle{ nullptr };
 	CSoundManager* m_pSoundManager;
 	UINT m_nStage;
 	int m_nSpawnTimer{ 0 };							// 적군 생성 타이밍
@@ -102,13 +105,14 @@ class CEnemyManager {
 	CTriger* m_pTriger{ nullptr };
 	bool m_bStageEnd{ false };
 
-
+	CEnemyArrowManager* m_pArrows;
 
 public:
-	CEnemyManager(CSoundManager* sound): m_pSoundManager(sound)
+	CEnemyManager(CSoundManager* sound, CItem* castle): m_pSoundManager(sound), m_pCastle(castle)
 	{
 		m_nSpawnTimer = 0;
 		m_pEnemyList = new CEnemyList(sound);
+		m_pArrows = new CEnemyArrowManager(sound);
 	}
 
 	~CEnemyManager()
@@ -117,6 +121,8 @@ public:
 			delete m_pTriger;
 		if (m_pEnemyList)
 			delete m_pEnemyList;
+		if (m_pArrows)
+			delete m_pArrows;
 	}
 
 	void Init(const UINT& nStage)
@@ -129,12 +135,14 @@ public:
 	void DrawEnemy(HDC hdc)
 	{
 		m_pEnemyList->DrawObj(hdc);
+		m_pArrows->DrawArrow(hdc);
 	}
 
 	void Update()
 	{
-		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager);
+		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
 		m_pEnemyList->Update();
+		m_pArrows->Update();
 		if (m_pTriger->IsFileEnd()) {
 			if (m_pEnemyList->GetNumber() == 0)
 				m_bStageEnd = true;

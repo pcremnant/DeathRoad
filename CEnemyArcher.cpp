@@ -11,14 +11,14 @@ void CEnemyArcher::SetPosition()
 void CEnemyArcher::DrawObject(HDC hdc)
 {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
-	if (newArrow)
-		newArrow->DrawItem(hdc);
+	//if (newArrow)
+	//	newArrow->DrawItem(hdc);
 }
 
 int CEnemyArcher::Update()
 {
-	if (newArrow)
-		newArrow->Move();
+	//if (newArrow)
+	//	newArrow->Move();
 	int tmp = 0;
 	if (m_nFrameType == TYPE_WALK)
 		Move();
@@ -35,6 +35,7 @@ int CEnemyArcher::Update()
 // TYPE_WALK ÀÏ ¶§
 void CEnemyArcher::Move()
 {
+
 	if (m_rcPosition.right >= CLIENT_WIDTH)
 		m_vtCoord.SetX(0);
 	else if (m_bInRange) {
@@ -66,13 +67,7 @@ int CEnemyArcher::Attack()
 {
 	if (m_nFrame == m_nAttackFrame) {
 		m_pSoundManager->PlayEffect(EFFECT_ARCHER_ATTACK_00);
-		if (!newArrow)
-			newArrow = new CCrossbowArrow(m_vtCoord, 10);
-		else {
-			delete newArrow;
-			newArrow = new CCrossbowArrow(m_vtCoord, 10);
-		}
-		//CItem* newArrow = new CCrossbowArrow(m_vtCoord, 10);
+		m_pArrowManager->CreateArrow(new CCrossbowArrow(m_vtCoord, 10, m_pCastle));
 	}
 	if (m_bReroad) {
 		if (m_nCurrentReroad < m_nReroad)

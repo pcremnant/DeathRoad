@@ -2,12 +2,12 @@
 
 CBattle::CBattle(const UINT & nStage, int & nGold, CItem* castle, CSoundManager * sound) : m_pSoundManager(sound)
 {
+	m_pCastle = castle;
 	m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
 	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
-	m_pEnemyManager = new CEnemyManager(m_pSoundManager);
+	m_pEnemyManager = new CEnemyManager(m_pSoundManager,m_pCastle);
 	m_pEnemyManager->Init(nStage);
 
-	m_pCastle = castle;
 
 	if (m_imgBGFront.GetBPP() == 32)
 	{

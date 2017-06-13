@@ -143,7 +143,7 @@ public:
 				p = tmp;
 			}
 			else {
-				int nTmp = p->m_pEnemy->Update();
+				p->m_pEnemy->Update();
 				p = p->m_pNext;
 			}
 		}

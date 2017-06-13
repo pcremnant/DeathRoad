@@ -3,6 +3,6 @@
 
 class CWarrior : public CEnemyInfant {
 public:
-	CWarrior(CSoundManager* sound) : CEnemyInfant(sound) {}
+	CWarrior(CSoundManager* sound, CItem* castle) : CEnemyInfant(sound,castle) {}
 	void Init() override final;
 };

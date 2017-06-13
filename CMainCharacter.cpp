@@ -10,7 +10,7 @@ void CMainCharacter::Init() {
 	m_nFrameType = TYPE_WALK;
 	int nTmp = 4;
 	float fTmp = static_cast<float>(nTmp) / 10.f + 1;
-	m_vtCoord = { static_cast<float>(960),250 + static_cast<float>((5 - nTmp) * 10),fTmp };
+	m_vtCoord = { static_cast<float>(960),210 + static_cast<float>((5 - nTmp) ),fTmp };
 	m_nHeight = 57;
 	m_nWidth = 62;
 	SetPosition();
@@ -99,7 +99,7 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 			m_vtCoord.SetZ(m_vtCoord.GetZ());
 		}
 		else {
-			m_nMoving={static_cast<float>(10),static_cast<float>(-10),static_cast<float>(1)/10.f };
+			m_nMoving={static_cast<float>(10),static_cast<float>(-20),static_cast<float>(1)/10.f };
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
 		}
@@ -111,7 +111,7 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 			m_vtCoord.SetZ(m_vtCoord.GetZ());
 		}
 		else {
-			m_nMoving = { static_cast<float>(-10),static_cast<float>(10),static_cast<float>(-1) / 10.f };
+			m_nMoving = { static_cast<float>(-10),static_cast<float>(20),static_cast<float>(-1) / 10.f };
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
 		}

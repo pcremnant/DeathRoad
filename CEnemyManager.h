@@ -3,19 +3,21 @@
 #include"CPeasant.h"
 #include"CWarrior.h"
 #include"CCrossbowman.h"
+#include"CKnight.h"
 #include"CEnemyList.h"
 #include"SoundManager.h"
 #include"CEnemyArrowManager.h"
 #include"CCastle.h"
 
-#define SPAWN_ENEMY 240
+#define SPAWN_ENEMY			240
 
-#define SPAWN_CRUSADER 3000
-#define SPAWN_PEASANT 3001
-#define SPAWN_CWARRIOR 3002
-#define SPAWN_CROSSBOWMAN 3003
+#define SPAWN_CRUSADER		3000
+#define SPAWN_PEASANT		3001
+#define SPAWN_CWARRIOR		3002
+#define SPAWN_CROSSBOWMAN	3003
+#define SPAWN_KNIGHT		3004
 
-#define STAGE_END -1
+#define STAGE_END			-1
 // 매니저에서 해야할 일
 
 // 적군 생성
@@ -50,6 +52,14 @@ public:
 		m_ifsRead.close();
 	}
 
+	void ResetSpawn()
+	{
+		m_bEnd = false;
+		m_ifsRead.close();
+		m_ifsRead.open(m_szPath, ios::binary);
+		m_ifsRead >> m_nTime;
+	}
+
 	const bool& IsFileEnd() const
 	{
 		return m_bEnd;
@@ -79,6 +89,9 @@ public:
 						break;
 					case SPAWN_PEASANT:
 						newObj = new CPeasant(sound, castle);
+						break;
+					case SPAWN_KNIGHT:
+						newObj = new CKnight(sound, castle);
 						break;
 					default:
 						break;
@@ -149,12 +162,21 @@ public:
 		}
 		else
 			m_nSpawnTimer++;
-		
 	}
 
 	bool IsStageEnd() const
 	{
 		return m_bStageEnd;
+	}
+
+	void ResetSpawnTimer()
+	{
+		m_nSpawnTimer = 0;
+		m_pTriger->ResetSpawn();
+	}
+	const bool& IsFileEnd()
+	{
+		return m_pTriger->IsFileEnd();
 	}
 
 	void SetTarget(const CVector3D& vtPosition, const int& nWidth)

@@ -76,6 +76,9 @@
     <Filter Include="소스 파일\Objects\Player">
       <UniqueIdentifier>{1784e7c5-65ed-46fd-a3c9-0f0082bad25d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Knight">
+      <UniqueIdentifier>{7626cf60-ae51-435b-9569-db5867bbde9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -156,6 +159,9 @@
     <ClInclude Include="CEnemyArrowList.h">
       <Filter>소스 파일\Objects\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="CKnight.h">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -211,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="CMainCharacter.cpp">
       <Filter>소스 파일\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CKnight.cpp">
+      <Filter>소스 파일\Objects\Enemy\EnemyInfant\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -159,6 +159,7 @@
     <ClInclude Include="CInGame.h" />
     <ClInclude Include="CIntro.h" />
     <ClInclude Include="CItem.h" />
+    <ClInclude Include="CKnight.h" />
     <ClInclude Include="CMainCharacter.h" />
     <ClInclude Include="CManage.h" />
     <ClInclude Include="CObject.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="CGameSystem.cpp" />
     <ClCompile Include="CInGame.cpp" />
     <ClCompile Include="CIntro.cpp" />
+    <ClCompile Include="CKnight.cpp" />
     <ClCompile Include="CMainCharacter.cpp" />
     <ClCompile Include="CManage.cpp" />
     <ClCompile Include="CObject.cpp" />

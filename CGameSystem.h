@@ -3,15 +3,14 @@
 #include"CSprite.h"
 #include"CInGame.h"
 #include"SoundManager.h"
+#include"CIntro.h"
 
 class CGameSystem {
 	// 사운드 매니저
 	CSoundManager* m_pSoundManager;
 
 	// 인트로 이미지 -> 후에 인트로 클래스로 바꿀 것
-	CImage m_imgIntro;
-	UINT m_nSizeIntroX;
-	UINT m_nSizeIntroY;
+	CIntro* m_pIntro{ nullptr };
 	bool m_bIntro;
 
 	// 메인메뉴 백그라운드 이미지

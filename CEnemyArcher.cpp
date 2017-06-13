@@ -11,14 +11,10 @@ void CEnemyArcher::SetPosition()
 void CEnemyArcher::DrawObject(HDC hdc)
 {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
-	//if (newArrow)
-	//	newArrow->DrawItem(hdc);
 }
 
 int CEnemyArcher::Update()
 {
-	//if (newArrow)
-	//	newArrow->Move();
 	int tmp = 0;
 	if (m_nFrameType == TYPE_WALK)
 		Move();

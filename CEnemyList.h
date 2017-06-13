@@ -49,7 +49,7 @@ public:
 		CEnemyNode* p = m_pHead;
 		CEnemyNode* next = p->m_pNext;
 		while (next!= m_pTail) {
-			next->m_pNext = p->m_pNext;
+			p->m_pNext = next->m_pNext;
 			delete next;
 			next = p->m_pNext;
 		}

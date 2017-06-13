@@ -3,9 +3,7 @@
 CGameSystem::CGameSystem()
 {
 	// 인트로 화면 이미지 불러오기
-	m_imgIntro.Load(TEXT("resource/image/intro/bg_00.PNG"));
-	m_nSizeIntroX = m_imgIntro.GetWidth();
-	m_nSizeIntroY = m_imgIntro.GetHeight();
+	m_pIntro = new CIntro();
 	m_bIntro = true;
 
 	m_spBg.GetImage(TEXT("resource/image/intro/bg_03.png"), RECT{ 0,0,CLIENT_WIDTH,CLIENT_HEIGHT });
@@ -19,6 +17,8 @@ CGameSystem::CGameSystem()
 
 CGameSystem::~CGameSystem()
 {
+	if (m_pIntro)
+		delete m_pIntro;
 	if (m_pInGame)
 		delete m_pInGame;
 	if (m_pSoundManager)
@@ -33,8 +33,6 @@ void CGameSystem::GetKey(const WPARAM & wParam) {
 		m_pInGame->GetKey(wParam);
 	else {
 		switch (wParam) {
-		case VK_SPACE:
-			break;
 		case VK_ESCAPE:
 			PostQuitMessage(0);
 			break;
@@ -43,6 +41,8 @@ void CGameSystem::GetKey(const WPARAM & wParam) {
 				m_bIntro = false;
 				m_pSoundManager->Stop(BGM_INTRO);
 				m_pSoundManager->PlayBGM(BGM_MAINMENU);
+				delete m_pIntro;
+				m_pIntro = nullptr;
 			}
 			break;
 		}
@@ -71,7 +71,14 @@ void CGameSystem::LButtonDown(const LPARAM & lParam)
 		}
 	}
 	else {
-		if (m_spIconExitButton.GetPointed()) {
+		if (m_bIntro) {
+			m_bIntro = false;
+			m_pSoundManager->Stop(BGM_INTRO);
+			m_pSoundManager->PlayBGM(BGM_MAINMENU);
+			delete m_pIntro;
+			m_pIntro = nullptr;
+		}
+		else if (m_spIconExitButton.GetPointed()) {
 			m_pSoundManager->PlayEffect(EFFECT_CLICK_BUTTON_00);
 			PostQuitMessage(0);
 		}
@@ -83,11 +90,7 @@ void CGameSystem::LButtonDown(const LPARAM & lParam)
 				m_pInGame->Init();
 			}
 		}
-		else if (m_bIntro) {
-			m_bIntro = false;
-			m_pSoundManager->Stop(BGM_INTRO);
-			m_pSoundManager->PlayBGM(BGM_MAINMENU);
-		}
+		
 	}
 }
 
@@ -104,7 +107,7 @@ void CGameSystem::DrawGame(HDC hdc)
 	if (m_pInGame)
 		m_pInGame->DrawInGame(hdc);
 	else if(m_bIntro) {
-		m_imgIntro.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, m_nSizeIntroX, m_nSizeIntroY, SRCCOPY);
+		m_pIntro->DrawIntro(hdc);
 	}
 	else {
 		m_spBg.DrawSprite(hdc);
@@ -115,6 +118,9 @@ void CGameSystem::DrawGame(HDC hdc)
 
 void CGameSystem::Update()
 {
-	if (m_pInGame)
+	if (m_bIntro) {
+		m_pIntro->Update();
+	}
+	else if (m_pInGame)
 		m_pInGame->Update();
 }

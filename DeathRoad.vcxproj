@@ -150,6 +150,8 @@
     <ClInclude Include="CCrusader.h" />
     <ClInclude Include="CEnemyArcher.h" />
     <ClInclude Include="CEnemyArrow.h" />
+    <ClInclude Include="CEnemyArrowList.h" />
+    <ClInclude Include="CEnemyArrowManager.h" />
     <ClInclude Include="CEnemyInfant.h" />
     <ClInclude Include="CEnemyList.h" />
     <ClInclude Include="CEnemyManager.h" />

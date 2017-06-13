@@ -1,9 +1,10 @@
 #include"CMainCharacter.h"
+
 void CMainCharacter::Init() {
 	m_sprImg.GetImage(TEXT("resource/image/player/Player_Character_Wait.png"),
 		TEXT("resource/image/player/Player_Character_Attack.png"),
-		NULL,
-		9, 6, 0);
+		TEXT("resource/image/player/Player_Character_Attack.png"),
+		9, 6, 1);
 	m_bAttackCharge = false;
 	m_nFrame = 0;
 	m_nFrameType = TYPE_WALK;
@@ -14,15 +15,18 @@ void CMainCharacter::Init() {
 	m_nWidth = 62;
 	SetPosition();
 };
+
 void CMainCharacter::SetPosition() {
 	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
 	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
 	m_rcPosition.top = m_vtCoord.GetY() - m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
 	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
 }
+
 void CMainCharacter::DrawObject(HDC hdc) {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
 }
+
 void CMainCharacter::Move() {
 	if (m_nDirection == 2) {
 		if (m_vtCoord.GetZ() >= MAXZ) {
@@ -48,6 +52,7 @@ void CMainCharacter::Move() {
 	else
 		m_nFrame++;
 }
+
 int CMainCharacter::Attack() {
 	if (m_nClick) {
 		m_nFrameType = TYPE_ATTACK;
@@ -65,6 +70,7 @@ int CMainCharacter::Attack() {
 		}
 	}
 }
+
 void CMainCharacter::SetFrameType(const int &nType) {
 	if (nType <= 2 && nType >= 0) {
 		m_nFrameType = nType;
@@ -72,9 +78,10 @@ void CMainCharacter::SetFrameType(const int &nType) {
 	}
 }
 int CMainCharacter::Dead() {
-
+	return 0;
 }
-int CMainCharacter::Upgrade() {
+
+int CMainCharacter::Update() {
 	int tmp = 0;
 	if (m_nFrameType == TYPE_ATTACK)
 		tmp = Attack();

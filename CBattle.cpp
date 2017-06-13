@@ -38,11 +38,12 @@ CBattle::~CBattle()
 
 }
 
-void CBattle::DrawPhase(HDC hdc)
+void CBattle::DrawPhase(HDC hdc, CObject* player)
 {
 	m_imgBGBack.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, SRCCOPY);
 	m_pEnemyManager->DrawEnemy(hdc);
 	m_pCastle->DrawItem(hdc);
+	player->DrawObject(hdc);
 	m_imgBGFront.Draw(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT);
 }
 
@@ -58,9 +59,8 @@ void CBattle::UpdatePhase()
 	}
 }
 
-int CBattle::GetKey(const WPARAM & wParam)
+int CBattle::GetKey(const WPARAM & wParam, CObject* player)
 {
-	static int nType = 0;
 	switch (wParam) {
 	case VK_ESCAPE:
 		if (!m_bPause)
@@ -69,7 +69,28 @@ int CBattle::GetKey(const WPARAM & wParam)
 			return BATTLE_EXIT;
 		break;
 	default:
+		player->GetKey(wParam);
 		break;
 	}
 	return BATTLE_NONE;
+}
+
+int CBattle::LButtonUp(const LPARAM & lParam, CObject * player)
+{
+	return player->LButtonUp(lParam);
+}
+
+void CBattle::LButtonDown(const LPARAM & lParam, CObject * player)
+{
+	player->LButtonDown(lParam);
+}
+
+void CBattle::MouseMove(const LPARAM & lParam, CObject * player)
+{
+	player->MouseMove(lParam);
+}
+
+bool CBattle::IsBattleEnd() const
+{
+	return m_bBattleEnd;
 }

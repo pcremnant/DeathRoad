@@ -76,11 +76,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 			DispatchMessage(&Message);
 		}
 	}
-
-	/*while (GetMessage(&Message, 0, 0, 0)) {
-		TranslateMessage(&Message);
-		DispatchMessage(&Message);
-	}*/
 	return Message.wParam;
 }
 
@@ -109,6 +104,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		EndPaint(hWnd, &ps);
 	}
 	break;
+	case WM_LBUTTONUP:
+		gameSys.LButtonUp(lParam);
+		break;
 	case WM_MOUSEMOVE:
 		gameSys.MouseMove(lParam);
 		break;

@@ -52,6 +52,12 @@ public:
 	const float ReturnZ() const { return m_vtCoord.GetZ(); }	// 충돌판정을 위해 z값을 리턴
 	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄
 	const bool& InRange() const { return m_bInRange; }			// 공격 사거리 안에 있는지
+	
+	virtual int GetKey(const WPARAM& wParam) { return 0; }		// 키보드 받는 함수
+	virtual void MouseMove(const LPARAM& lParam) {}				// 마우스 관련 함수들
+	virtual void LButtonDown(const LPARAM& lParam) {}
+	virtual int LButtonUp(const LPARAM& lParam) { return 0; }
+
 	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
 	{
 		if (vtPosition.GetX() - nWidth <= m_vtCoord.GetX() + m_nAttackRange)

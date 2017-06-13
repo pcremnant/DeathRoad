@@ -91,6 +91,12 @@ void CGameSystem::LButtonDown(const LPARAM & lParam)
 	}
 }
 
+void CGameSystem::LButtonUp(const LPARAM & lParam)
+{
+	if (m_pInGame)
+		m_pInGame->LButtonUp(lParam);
+}
+
 // 드로우 함수
 
 void CGameSystem::DrawGame(HDC hdc)

@@ -3,6 +3,7 @@
 #include"CBattle.h"
 #include"CManage.h"
 #include"SoundManager.h"
+#include"CMainCharacter.h"
 
 #define INGAME_NONE 0
 #define INGAME_EXIT -1
@@ -12,6 +13,9 @@
 
 class CInGame {
 	CSoundManager* m_pSoundManager;
+
+	// 플레이어 클래스
+	CMainCharacter* m_pPlayer;
 
 	// 제대로 세팅이 넘어왔는지 확인
 	bool m_bSet{ false };
@@ -38,12 +42,12 @@ public:
 
 	void MouseMove(const LPARAM& lParam);
 	int LButtonDown(const LPARAM& lParam);
-
+	void LButtonUp(const LPARAM& lParam);
 	// 키보드 명령 받는 함수
 	void GetKey(const WPARAM& wParam);
 
 	// 게임 안에서 그려주는 함수
-	void DrawInGame(HDC hdc);;
+	void DrawInGame(HDC hdc);
 
 	// 게임 안 업데이트 함수
 	void Update();

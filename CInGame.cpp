@@ -5,7 +5,11 @@
 
 // 초기화 해주는 함수
 
-CInGame::CInGame(CSoundManager* sound) : m_pSoundManager(sound) {}
+CInGame::CInGame(CSoundManager* sound) : m_pSoundManager(sound) 
+{
+	m_pPlayer = new CMainCharacter(m_pSoundManager);
+	m_pPlayer->Init();
+}
 
 CInGame::~CInGame()
 {
@@ -33,8 +37,9 @@ void CInGame::MouseMove(const LPARAM & lParam)
 	if (!m_bSet)return;
 
 	if (m_nPhase == PHASE_BATTLE) {
-		if (m_pBattlePhase)
-			;
+		if (m_pBattlePhase) {
+			m_pBattlePhase->MouseMove(lParam, m_pPlayer);
+		}
 	}
 	else if (m_nPhase == PHASE_MANAGE) {
 		if (m_pManagePhase)
@@ -48,7 +53,7 @@ int CInGame::LButtonDown(const LPARAM & lParam)
 
 	if (m_nPhase == PHASE_BATTLE) {
 		if (m_pBattlePhase)
-			;
+			m_pBattlePhase->LButtonDown(lParam, m_pPlayer);
 	}
 	else if (m_nPhase == PHASE_MANAGE) {
 		if (m_pManagePhase) {
@@ -75,13 +80,21 @@ int CInGame::LButtonDown(const LPARAM & lParam)
 	return INGAME_NONE;
 }
 
+void CInGame::LButtonUp(const LPARAM & lParam)
+{
+	if (m_nPhase == PHASE_BATTLE) {
+		if (m_pBattlePhase)
+			m_pBattlePhase->LButtonUp(lParam, m_pPlayer);
+	}
+}
+
 void CInGame::GetKey(const WPARAM & wParam)
 {
 	if (!m_bSet)return;
 
 	if (m_nPhase == PHASE_BATTLE) {
 		if (m_pBattlePhase) {
-			switch (m_pBattlePhase->GetKey(wParam)) {
+			switch (m_pBattlePhase->GetKey(wParam, m_pPlayer)) {
 			case BATTLE_EXIT:
 				SetManagePhase();
 				break;
@@ -109,7 +122,7 @@ void CInGame::DrawInGame(HDC hdc) {
 	if (m_bSet) {
 		if (m_nPhase == PHASE_BATTLE) {
 			if (m_pBattlePhase)
-				m_pBattlePhase->DrawPhase(hdc);
+				m_pBattlePhase->DrawPhase(hdc, m_pPlayer);
 		}
 		else {
 			if (m_pManagePhase)

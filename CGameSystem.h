@@ -33,6 +33,7 @@ public:
 	// 드로우 함수
 	void MouseMove(const LPARAM& lParam);
 	void LButtonDown(const LPARAM& lParam);
+	void LButtonUp(const LPARAM& lParam);
 	void DrawGame(HDC hdc);
 	void Update();
 

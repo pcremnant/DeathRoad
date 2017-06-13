@@ -36,11 +36,11 @@ public:
 	CBattle(const UINT& nStage, int& nGold, CItem* castle,CSoundManager* sound);
 	~CBattle();
 
-	void DrawPhase(HDC hdc);
+	void DrawPhase(HDC hdc, CObject* player);
 	void UpdatePhase();
-	int GetKey(const WPARAM& wParam);
-	bool IsBattleEnd() const
-	{
-		return m_bBattleEnd;
-	}
+	int GetKey(const WPARAM& wParam, CObject* player);
+	int LButtonUp(const LPARAM& lParam, CObject* player);
+	void LButtonDown(const LPARAM& lParam, CObject* player);
+	void MouseMove(const LPARAM& lParam, CObject* player);
+	bool IsBattleEnd() const;
 };

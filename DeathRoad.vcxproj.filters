@@ -73,6 +73,9 @@
     <Filter Include="소스 파일\Objects\Items\EnemyArrow\CrossbowArrow">
       <UniqueIdentifier>{56c10fc0-b1cf-44be-a87d-40e426bf4e9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects\Player">
+      <UniqueIdentifier>{1784e7c5-65ed-46fd-a3c9-0f0082bad25d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -138,14 +141,20 @@
     <ClInclude Include="CCrossbowman.h">
       <Filter>소스 파일\Objects\Enemy\CEnemyArcher\Crossbowman</Filter>
     </ClInclude>
-    <ClInclude Include="CMainCharacter.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CEnemyArrow.h">
       <Filter>소스 파일\Objects\Items\EnemyArrow</Filter>
     </ClInclude>
     <ClInclude Include="CCrossbowArrow.h">
       <Filter>소스 파일\Objects\Items\EnemyArrow\CrossbowArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainCharacter.h">
+      <Filter>소스 파일\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyArrowManager.h">
+      <Filter>소스 파일\Objects\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyArrowList.h">
+      <Filter>소스 파일\Objects\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,14 +203,14 @@
     <ClCompile Include="CCrossbowman.cpp">
       <Filter>소스 파일\Objects\Enemy\CEnemyArcher\Crossbowman</Filter>
     </ClCompile>
-    <ClCompile Include="CMainCharacter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CEnemyArrow.cpp">
       <Filter>소스 파일\Objects\Items\EnemyArrow</Filter>
     </ClCompile>
     <ClCompile Include="CCrossbowArrow.cpp">
       <Filter>소스 파일\Objects\Items\EnemyArrow\CrossbowArrow</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainCharacter.cpp">
+      <Filter>소스 파일\Objects\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

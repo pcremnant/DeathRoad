@@ -3,9 +3,9 @@
 #define MAXZ 1.4
 #define MINZ 1.0
 class CMainCharacter :public CObject {
-	int m_nDirection;
 	bool m_nClick;
 	CVector3D m_nMoving;
+	int Damage;
 public:
 	CMainCharacter(CSoundManager* sound) : CObject(sound) {}
 

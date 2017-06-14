@@ -14,13 +14,14 @@ void CMainCharacter::Init() {
 	m_nHeight = 57;
 	m_nWidth = 62;
 	SetPosition();
+	Damage = 100;
 };
 
 void CMainCharacter::SetPosition() {
-	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
-	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
-	m_rcPosition.top = m_vtCoord.GetY() - m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
-	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
+	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - (m_vtCoord.GetZ())) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
+	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - (m_vtCoord.GetZ())) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
+	m_rcPosition.top = m_vtCoord.GetY() - m_nHeight*(2.2f - (m_vtCoord.GetZ() ));
+	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() ));
 }
 
 void CMainCharacter::DrawObject(HDC hdc) {
@@ -28,24 +29,6 @@ void CMainCharacter::DrawObject(HDC hdc) {
 }
 
 void CMainCharacter::Move() {
-	if (m_nDirection == 2) {
-		if (m_vtCoord.GetZ() >= MAXZ) {
-			m_vtCoord.SetZ(0);
-		}
-		else {
-			m_vtCoord.SetZ(0.1);
-			SetPosition();
-		}
-	}
-	else if (m_nDirection == 1) {
-		if (m_vtCoord.GetZ() <= MINZ) {
-			m_vtCoord.SetZ(0);
-		}
-		else {
-			m_vtCoord.SetZ(-0.1);
-			SetPosition();
-		}
-	}
 	if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
 		m_nFrame = 0;
 	}
@@ -54,20 +37,13 @@ void CMainCharacter::Move() {
 }
 
 int CMainCharacter::Attack() {
-	if (m_nClick) {
-		m_nFrameType = TYPE_ATTACK;
 		if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
 			m_nFrame = 0;
 		}
 		else
 		{
-			if (!m_nClick) {
 				m_nFrame++;
 				return UNIT_ATTACK;
-			}
-			else
-				m_nFrame++;
-		}
 	}
 }
 
@@ -100,6 +76,7 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 		}
 		else {
 			m_nMoving={static_cast<float>(10),static_cast<float>(-20),static_cast<float>(1)/10.f };
+		
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
 		}
@@ -112,25 +89,31 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 		}
 		else {
 			m_nMoving = { static_cast<float>(-10),static_cast<float>(20),static_cast<float>(-1) / 10.f };
+			
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
 		}
 		break;
 
 	}
-	return 0;
+	return m_vtCoord.GetZ();
 }
 void CMainCharacter::MouseMove(const LPARAM&lParam) {
 
+
 }
 void CMainCharacter::LButtonDown(const LPARAM&lParam) {
-	m_nFrame = TYPE_ATTACK;
-
-
+	m_nFrameType = TYPE_ATTACK;
+	if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
+		m_nFrame = 0;
+	}
+	else
+	{
+			m_nFrame++;
+	}
 
 }
 int CMainCharacter::LButtonUp(const LPARAM&lParam) {
-
-	m_nFrame = TYPE_WALK;
-	return 0;
+	m_nFrameType = TYPE_WALK;
+	return Damage;
 }

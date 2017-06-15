@@ -11,6 +11,29 @@ void CEnemyArcher::SetPosition()
 void CEnemyArcher::DrawObject(HDC hdc)
 {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
+	
+	HBRUSH hBrush, oldBrush;
+	float fTmp = static_cast<float>(m_nHp) / static_cast<float>(m_nMaxHp);
+	if (fTmp > 0.7)
+		hBrush = CreateSolidBrush(RGB(0, 255, 0));
+	else if (fTmp > 0.3)
+		hBrush = CreateSolidBrush(RGB(255, 255, 0));
+	else
+		hBrush = CreateSolidBrush(RGB(255, 0, 0));
+	if (fTmp < 0)
+		fTmp = 0;
+
+	oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+	RECT rcTmp = { m_vtCoord.GetX() + 20,m_vtCoord.GetY() - 20 - m_nHeight,m_vtCoord.GetX() +20 + 50 * fTmp,m_vtCoord.GetY() - 10 - m_nHeight };
+	FillRect(hdc, &rcTmp, hBrush);
+	SelectObject(hdc, oldBrush);
+	DeleteObject(hBrush);
+	hBrush = CreateSolidBrush(TRANSPARENT);
+	oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+	rcTmp = { static_cast<LONG>(m_vtCoord.GetX() + 20),static_cast<LONG>(m_vtCoord.GetY() - 20 - m_nHeight),static_cast<LONG>(m_vtCoord.GetX() + 70) ,static_cast<LONG>(m_vtCoord.GetY() - 10 - m_nHeight) };
+	FrameRect(hdc, &rcTmp, hBrush);
+	SelectObject(hdc, oldBrush);
+	DeleteObject(hBrush);
 }
 
 int CEnemyArcher::Update()
@@ -100,6 +123,7 @@ int CEnemyArcher::Attack()
 // TYPE_DEAD ¿œ ∂ß
 int CEnemyArcher::Dead()
 {
+	m_nHp = 0;
 	int nTmp = UNIT_NONE;
 	if (m_nFrame == 0) {
 		nTmp = UNIT_DEAD;

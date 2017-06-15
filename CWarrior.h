@@ -6,6 +6,7 @@ public:
 	CWarrior(CSoundManager* sound, CItem* castle, const int& nStage) : CEnemyInfant(sound,castle) {
 		m_nAttack = nStage * 3 + 10;
 		m_nMaxHp = nStage * 40 + 50;
+		m_nHp = m_nMaxHp;
 	}
 	void Init() override final;
 };

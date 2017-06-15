@@ -45,7 +45,7 @@ public:
 		while (next != m_pTail) {
 			p->m_pNext = next->m_pNext;
 			delete next;
-			next->m_pNext = p->m_pNext;
+			next = p->m_pNext;
 		}
 		delete m_pHead;
 		delete m_pTail;
@@ -129,13 +129,4 @@ public:
 			}
 		}
 	}
-
-	/*void SetTarget(const CVector3D& vtPosition, const int& nWidth)
-	{
-		CEnemyArrowNode* p = m_pHead->m_pNext;
-		while (p != m_pTail) {
-			p->m_pData->SetTarget(vtPosition, nWidth);
-			p = p->m_pNext;
-		}
-	}*/
 };

@@ -28,7 +28,7 @@ void CInGame::Init()
 	m_nPhase = PHASE_MANAGE;
 	m_pManagePhase = new CManage(m_pSoundManager);
 	m_bSet = true;
-	m_pCastle = new CCastle();
+	m_pCastle = new CCastle(500, 500);							// 후에는 이전의 상태가 저장
 	m_pCastle->Init();
 }
 

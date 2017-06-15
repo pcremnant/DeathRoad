@@ -5,8 +5,6 @@
 
 class CEnemyArrowManager {
 	CSoundManager* m_pSoundManager;
-	//UINT m_nStage;
-	//int m_nSpawnTimer{ 0 };							// 적군 생성 타이밍
 	CEnemyArrowList* m_pArrowList{ nullptr };
 	bool m_bStageEnd{ false };
 
@@ -15,7 +13,6 @@ class CEnemyArrowManager {
 public:
 	CEnemyArrowManager(CSoundManager* sound) : m_pSoundManager(sound)
 	{
-		//m_pEnemyList = new CEnemyList(sound);
 		m_pArrowList = new CEnemyArrowList();
 	}
 

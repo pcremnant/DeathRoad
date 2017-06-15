@@ -1,6 +1,6 @@
-#include"CEnemyArcher.h"
+#include"CPlayerArcher.h"
 
-void CEnemyArcher::SetPosition()
+void CPlayerArcher::SetPosition()
 {
 	m_rcPosition.left = m_vtCoord.GetX() - m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
 	m_rcPosition.right = m_vtCoord.GetX() + m_nWidth*(2.2f - (m_vtCoord.GetZ() / 6 * 5)) + (m_vtCoord.GetZ() - 0.4f) * 10 * 5;
@@ -8,12 +8,12 @@ void CEnemyArcher::SetPosition()
 	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
 }
 
-void CEnemyArcher::DrawObject(HDC hdc)
+void CPlayerArcher::DrawObject(HDC hdc)
 {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
 }
 
-int CEnemyArcher::Update()
+int CPlayerArcher::Update()
 {
 	int tmp = 0;
 	if (m_nFrameType == TYPE_WALK)
@@ -29,7 +29,7 @@ int CEnemyArcher::Update()
 }
 
 // TYPE_WALK 일 때
-void CEnemyArcher::Move()
+void CPlayerArcher::Move()
 {
 
 	if (m_rcPosition.right >= CLIENT_WIDTH)
@@ -50,7 +50,7 @@ void CEnemyArcher::Move()
 		m_nFrame++;
 }
 
-void CEnemyArcher::SetFrameType(const int & nType)
+void CPlayerArcher::SetFrameType(const int & nType)
 {
 	if (nType <= 2 && nType >= 0) {
 		m_nFrameType = nType;
@@ -59,11 +59,10 @@ void CEnemyArcher::SetFrameType(const int & nType)
 }
 
 // TYPE_ATTACK 일 때
-int CEnemyArcher::Attack()
+int CPlayerArcher::Attack()
 {
 	if (m_nFrame == m_nAttackFrame) {
 		m_pSoundManager->PlayEffect(EFFECT_ARCHER_ATTACK_00);
-		m_pArrowManager->CreateArrow(new CCrossbowArrow(m_vtCoord, m_nAttack, m_pCastle));
 	}
 	if (m_bReroad) {
 		if (m_nCurrentReroad < m_nReroad)
@@ -98,7 +97,7 @@ int CEnemyArcher::Attack()
 }
 
 // TYPE_DEAD 일 때
-int CEnemyArcher::Dead()
+int CPlayerArcher::Dead()
 {
 	int nTmp = UNIT_NONE;
 	if (m_nFrame == 0) {

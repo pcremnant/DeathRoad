@@ -19,23 +19,26 @@ class CObject {
 protected:
 	// 이미지 정보
 	CAnimatedSprite m_sprImg;
-	int m_nFrameType;
+	int m_nFrameType{ 0 };
 	int m_nFrame{ 0 };
 
 	// 오브젝트의 위치정보
-	CVector3D m_vtCoord{ 0,0,0 };		// 좌표
-	int m_nWidth{ 0 };					// x 크기 -> 중심 기준으로 좌 우 끝까지의 거리
-	int m_nHeight{ 0 };					// y 크기 -> 중심 기준으로 상 하 끝까지의 거리
-										// 실질적인 바운딩박스(충돌 박스)						
+	CVector3D m_vtCoord{ 0,0,0 };			// 좌표
+	int m_nWidth{ 0 };						// x 크기 -> 중심 기준으로 좌 우 끝까지의 거리
+	int m_nHeight{ 0 };						// y 크기 -> 중심 기준으로 상 하 끝까지의 거리
+											// 실질적인 바운딩박스(충돌 박스)						
 
-	RECT m_rcPosition{ 0,0,0,0 };		// 실제 이미지가 나오는 사각형
+	RECT m_rcPosition{ 0,0,0,0 };			// 실제 이미지가 나오는 사각형
 
-	bool m_bInRange;					// 공격 사거리 안에 있는가
-	bool m_bAttackCharge;				// 공격을 준비하고 있는가 (활 시위를 당기고 있는 때)
-	bool m_bReroad{ false };			// 재장전중인가
-	int m_nAttackRange;					// 공격 사거리
-	int m_nAttackFrame{ 0 };			// 효과음을 낼 프레임
-	bool m_bDead;						// 오브젝트가 죽었는가
+	bool m_bInRange{ false };				// 공격 사거리 안에 있는가
+	bool m_bAttackCharge{ false };			// 공격을 준비하고 있는가 (활 시위를 당기고 있는 때)
+	bool m_bReroad{ false };				// 재장전중인가
+	int m_nAttackRange{ 0 };				// 공격 사거리
+	int m_nAttack{ 0 };						// 공격력
+	int m_nAttackFrame{ 0 };				// 효과음을 낼 프레임
+	int m_nMaxHp{ 0 };						// 최대체력
+	int m_nHp{ 0 };							// 현재체력
+	bool m_bDead{ false };					// 오브젝트가 죽었는가
 
 	CSoundManager* m_pSoundManager{ nullptr };
 public:

@@ -10,17 +10,13 @@ const bool & CEnemyArrow::IsDelete() const
 	return m_bDelete;
 }
 
-/*void CEnemyArrow::SetTarget(const CVector3D & vtPosition, const int & nWidth)
-{
-	m_vtTarget = vtPosition;
-	m_nTargetWidth = nWidth;
-}*/
-
 void CEnemyArrow::Move()
 {
 	if (!m_bColision && !m_bDelete) {
-		if (m_vtCoord.GetX() >= m_pCastle->GetPositionVt().GetX() - m_pCastle->GetWidth()/2*(2-m_vtCoord.GetZ()*5/7) + 50)
+		if (m_vtCoord.GetX() >= m_pCastle->GetPositionVt().GetX() - m_pCastle->GetWidth() / 2 * (2 - m_vtCoord.GetZ() * 5 / 7) + 50) {
 			m_bColision = true;
+			dynamic_cast<CCastle*>(m_pCastle)->GetDamage(m_nValue);
+		}
 		else {
 			m_vtCoord.Move(m_vtDirect);
 			m_vtDirect.Move(0, m_fGravity);

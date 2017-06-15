@@ -3,7 +3,7 @@
 CIntro::CIntro()
 {
 	m_pSound = new CSoundManager;
-	m_pCastle = new CCastle;
+	m_pCastle = new CCastle(10000, 10000);
 	m_pCastle->Init();
 	m_pEnemyManager = new CEnemyManager(m_pSound, m_pCastle);
 	m_pEnemyManager->Init(0);

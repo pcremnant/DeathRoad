@@ -79,6 +79,9 @@
     <Filter Include="소스 파일\Objects\Enemy\EnemyInfant\Knight">
       <UniqueIdentifier>{7626cf60-ae51-435b-9569-db5867bbde9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects\Player\Archer">
+      <UniqueIdentifier>{984127b6-58c5-4283-ac5c-ba2226a2ec15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -162,6 +165,9 @@
     <ClInclude Include="CKnight.h">
       <Filter>소스 파일\Objects\Enemy\EnemyInfant\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerArcher.h">
+      <Filter>소스 파일\Objects\Player\Archer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -220,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="CKnight.cpp">
       <Filter>소스 파일\Objects\Enemy\EnemyInfant\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerArcher.cpp">
+      <Filter>소스 파일\Objects\Player\Archer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

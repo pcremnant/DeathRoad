@@ -75,6 +75,14 @@ public:
 			else
 				p = p->m_pNext;	
 		}
+
+		if (p == m_pTail) {
+			newData->m_pNext = m_pTail;
+			newData->m_pPrev = m_pTail->m_pPrev;
+			m_pTail->m_pPrev->m_pNext = newData;
+			m_pTail->m_pPrev = newData;
+			return;
+		}
 	}
 
 	void Delete(CEnemyArrowNode* delNode)

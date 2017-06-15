@@ -30,6 +30,9 @@
 // 스폰타임 적군숫자  적군 종류(적 숫자만큼)
 
 class CTriger {
+
+	int m_nStage{ 0 };							// 스테이지
+
 	TCHAR m_szPath[30]{ NULL, };				// 파일의 경로
 	int m_nTime{ 0 };							// 스폰 시간
 	int m_nEnemyNumber{ 0 };					// 적 숫자
@@ -41,6 +44,7 @@ public:
 	//CEnemyList* m_pEnemyList;
 	CTriger(int nStage)
 	{
+		m_nStage = nStage;
 		wsprintf(m_szPath, TEXT("triger/stage_%d.txt"), nStage);
 		m_ifsRead.open(m_szPath, ios::binary);
 		m_ifsRead >> m_nTime;
@@ -79,19 +83,19 @@ public:
 					m_ifsRead >> m_pEnemyType[i];
 					switch (m_pEnemyType[i]) {
 					case SPAWN_CROSSBOWMAN:
-						newObj = new CCrossbowman(sound, arrow, castle);
+						newObj = new CCrossbowman(sound, arrow, castle, m_nStage);
 						break;
 					case SPAWN_CRUSADER:
-						newObj = new CCrusader(sound, castle);
+						newObj = new CCrusader(sound, castle, m_nStage);
 						break;
 					case SPAWN_CWARRIOR:
-						newObj = new CWarrior(sound, castle);
+						newObj = new CWarrior(sound, castle, m_nStage);
 						break;
 					case SPAWN_PEASANT:
-						newObj = new CPeasant(sound, castle);
+						newObj = new CPeasant(sound, castle, m_nStage);
 						break;
 					case SPAWN_KNIGHT:
-						newObj = new CKnight(sound, castle);
+						newObj = new CKnight(sound, castle, m_nStage);
 						break;
 					default:
 						break;

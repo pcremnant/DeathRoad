@@ -1,10 +1,7 @@
 #pragma once
 #include"CObject.h"
-#include"CCrossbowArrow.h"
-#include"CEnemyArrowManager.h"
-#include"CCastle.h"
 
-class CEnemyArcher : public CObject {
+class CPlayerArcher : public CObject {
 protected:
 
 	int m_nSpeed;
@@ -12,14 +9,9 @@ protected:
 	int m_nReroad;
 	int m_nCurrentReroad;
 
-	CEnemyArrowManager* m_pArrowManager{ nullptr };
-
-	CItem* m_pCastle{ nullptr };
+	//CEnemyArrowManager* m_pArrowManager{ nullptr }; 플레이어 화살 매니저
 public:
-	CEnemyArcher(CSoundManager* sound, CEnemyArrowManager* arrow, CItem* castle) : CObject(sound) {
-		m_pCastle = castle;
-		m_pArrowManager = arrow;
-	}
+	CPlayerArcher(CSoundManager* sound) : CObject(sound) {}
 	virtual void Init() override = 0;
 	void SetPosition() override final;
 	void DrawObject(HDC hdc)override final;
@@ -29,5 +21,5 @@ public:
 	int Dead() override final;
 	void SetFrameType(const int& nType) override final;
 
-	void GetUpgrade()override final {}
+	void GetUpgrade()override final {};
 };

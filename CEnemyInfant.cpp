@@ -61,9 +61,10 @@ void CEnemyInfant::SetFrameType(const int & nType)
 // TYPE_ATTACK ÀÏ ¶§
 int CEnemyInfant::Attack()
 {
-	if(m_nFrame==m_nAttackFrame)
+	if (m_nFrame == m_nAttackFrame) {
 		m_pSoundManager->PlayEffect(EFFECT_INFANT_ATTACK_00);
-
+		dynamic_cast<CCastle*>(m_pCastle)->GetDamage(m_nAttack);
+	}
 	if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
 		m_nFrame = 0;
 		if (m_nFrameType == TYPE_ATTACK) {

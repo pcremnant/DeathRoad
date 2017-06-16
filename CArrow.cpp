@@ -5,37 +5,51 @@ void CArrow::Init() {
 	m_nHeight = m_imgBitmap.GetHeight();
 	m_nWidth = m_imgBitmap.GetWidth();
 	m_nObjectType = OBJECT_TYPE_ARROW;
-	m_nValue = 100;
-	m_vtCoord = {
-		static_cast<float>(m_nWidth / 2),static_cast<float>(m_nHeight / 2),static_cast<float>()
-	};
+	SetPosition();
+}
+void CArrow::SetPosition() {
 	m_rcPosition = {
-
+		static_cast<LONG>(m_vtCoord.GetX() - m_nWidth),
+		static_cast<LONG>(m_vtCoord.GetY() - m_nHeight),
+		static_cast<LONG>(m_vtCoord.GetX() + m_nWidth),
+		static_cast<LONG>(m_vtCoord.GetY() + m_nHeight)
 	};
-	m_nCoorinate = { 0,0 };
-	m_nDirection_Vector={}
 }
-
-void CArrow::Ready(int mx, int my, bool Click,RECT pos) {
-	m_nPower = 0;
-	m_nCross = sqrt(pow(mx, 2) + pow(my, 2));
-	while (!Click) {
-		if (m_nPower >= m_nCross)
-			m_nPower = m_nCross;
-		else {
-			m_nPower++;
+void CArrow::Ready(int mx, int my) {
+	m_fAngle = atan2f(static_cast<float>(my) - m_vtCoord.GetX(), static_cast<float>(mx) - m_vtCoord.GetY())*180/3.14;
+	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
+	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
+	m_vtDirect.SetZ(0);
+}
+void CArrow::Move() {	
+	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
+	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
+	if (!m_bColision && !m_bDelete) {
+		
 		}
-
+		else {
+			m_vtCoord.Move(m_vtDirect);
+			m_vtDirect.Move(0, -GRAVITY);
+		}
+		SetPosition();
 	}
-	m_nAngle = atan2f(static_cast<float>(my) - pos.top, static_cast<float>(mx) - pos.left)*180/3.14;
-	
-	m_nFy = tanf(m_nAngle);
-	
-
+//	else {
+	//	m_nDeleteTimer++;
+//		if (m_nDeleteTimer >= 120)
+//			m_bDelete = true;
+//	}
+//}
+void CArrow::DrawItem(HDC hdc) {
+	m_imgBitmap.TransparentBlt(hdc, m_rcPosition.left, m_rcPosition.top, m_rcPosition.right, m_rcPosition.bottom);
 }
-void CArrow::Move() {
-	
 
-
-
+const bool&CArrow::IsDelete()const {
+	return m_bDelete;
 }
+void CArrow::Update() {
+	Move();
+}
+
+//void CArrow::LButtonUp(const LPARAM&lParam) {
+
+//}

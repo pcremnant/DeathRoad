@@ -42,9 +42,9 @@ int CMainCharacter::Attack() {
 		}
 		else
 		{
-				m_nFrame++;
-				return UNIT_ATTACK;
-	}
+			m_nFrame++;
+		}
+		return 0;
 }
 
 void CMainCharacter::SetFrameType(const int &nType) {
@@ -59,12 +59,12 @@ int CMainCharacter::Dead() {
 
 int CMainCharacter::Update() {
 	int tmp = 0;
-	if (m_nFrameType == TYPE_ATTACK)
+	if (m_nFrameType == TYPE_WALK)
+		Move();
+	else if (m_nFrameType == TYPE_ATTACK)
 		tmp = Attack();
-	if (tmp != 0)
 		return tmp;
-	else
-		return 0;
+	
 }
 int CMainCharacter::GetKey(const WPARAM&wParam) {
 	switch (wParam) {
@@ -75,7 +75,7 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 			m_vtCoord.SetZ(m_vtCoord.GetZ());
 		}
 		else {
-			m_nMoving={static_cast<float>(10),static_cast<float>(-20),static_cast<float>(1)/10.f };
+			m_nMoving={static_cast<float>(0),static_cast<float>(-20),static_cast<float>(1)/10.f };
 		
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
@@ -88,7 +88,7 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 			m_vtCoord.SetZ(m_vtCoord.GetZ());
 		}
 		else {
-			m_nMoving = { static_cast<float>(-10),static_cast<float>(20),static_cast<float>(-1) / 10.f };
+			m_nMoving = { static_cast<float>(0),static_cast<float>(20),static_cast<float>(-1) / 10.f };
 			
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
@@ -104,16 +104,9 @@ void CMainCharacter::MouseMove(const LPARAM&lParam) {
 }
 void CMainCharacter::LButtonDown(const LPARAM&lParam) {
 	m_nFrameType = TYPE_ATTACK;
-	if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
-		m_nFrame = 0;
-	}
-	else
-	{
-			m_nFrame++;
-	}
-
 }
 int CMainCharacter::LButtonUp(const LPARAM&lParam) {
 	m_nFrameType = TYPE_WALK;
+	m_nFrame = 0;
 	return Damage;
 }

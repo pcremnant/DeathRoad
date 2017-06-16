@@ -39,6 +39,7 @@ protected:
 	int m_nMaxHp{ 0 };						// 최대체력
 	int m_nHp{ 0 };							// 현재체력
 	bool m_bDead{ false };					// 오브젝트가 죽었는가
+	int m_nTargeted{ 0 };					// 현재 타게팅 된 수
 
 	CSoundManager* m_pSoundManager{ nullptr };
 public:
@@ -53,6 +54,7 @@ public:
 	virtual void SetPosition() {};								// m_vtCoord에 따라 바운딩 박스(이미지 위치 및 크기)를 정해주는 함수
 	virtual void SetFrameType(const int& nType) {};				// 특정 상황에서 동작을 바꿔준다.(걷다가 사거리 안으로 들어오면 공격 모션으로 바꿔줌)
 	const float ReturnZ() const { return m_vtCoord.GetZ(); }	// 충돌판정을 위해 z값을 리턴
+	CVector3D ReturnCoord()const { return m_vtCoord; }
 	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄
 	const bool& InRange() const { return m_bInRange; }			// 공격 사거리 안에 있는지
 	
@@ -61,12 +63,14 @@ public:
 	virtual void LButtonDown(const LPARAM& lParam) {}
 	virtual int LButtonUp(const LPARAM& lParam) { return 0; }
 
-	void SetTarget(const CVector3D& vtPosition, const int& nWidth)
+	// enemy 전용 세팅
+	virtual void SetTarget(const CVector3D& vtPosition, const int& nWidth)
 	{
 		if (vtPosition.GetX() - nWidth <= m_vtCoord.GetX() + m_nAttackRange)
 			m_bInRange = true;
 		else m_bInRange = false;
 	}
+	int ReturnTargeted() const { return m_nTargeted; }			// 현재 얼마나 타게팅 되어있나
 private:
 
 };

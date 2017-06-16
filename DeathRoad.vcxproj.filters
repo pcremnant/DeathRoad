@@ -82,6 +82,18 @@
     <Filter Include="소스 파일\Objects\Player\Archer">
       <UniqueIdentifier>{984127b6-58c5-4283-ac5c-ba2226a2ec15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects\Items\PlayerArrow">
+      <UniqueIdentifier>{29044bd5-80d2-4ebd-a54c-646935b6d36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Manager\EnemyArrow">
+      <UniqueIdentifier>{16541f1e-87ac-4229-b229-a748c22582ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Manager\Enemy">
+      <UniqueIdentifier>{51eed9e3-1246-40d6-bc25-35b66709374c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Manager\PlayerArrow">
+      <UniqueIdentifier>{5250a038-105d-49fb-8cf6-064d0d9774fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -107,12 +119,6 @@
     </ClInclude>
     <ClInclude Include="CEnemyInfant.h">
       <Filter>소스 파일\Objects\Enemy\EnemyInfant</Filter>
-    </ClInclude>
-    <ClInclude Include="CEnemyManager.h">
-      <Filter>소스 파일\Objects\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CEnemyList.h">
-      <Filter>소스 파일\Objects\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CItem.h">
       <Filter>소스 파일\Objects\Items</Filter>
@@ -156,17 +162,35 @@
     <ClInclude Include="CMainCharacter.h">
       <Filter>소스 파일\Objects\Player</Filter>
     </ClInclude>
-    <ClInclude Include="CEnemyArrowManager.h">
-      <Filter>소스 파일\Objects\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="CEnemyArrowList.h">
-      <Filter>소스 파일\Objects\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="CKnight.h">
       <Filter>소스 파일\Objects\Enemy\EnemyInfant\Knight</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerArcher.h">
       <Filter>소스 파일\Objects\Player\Archer</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerArrow.h">
+      <Filter>소스 파일\Objects\Items\PlayerArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyArrowList.h">
+      <Filter>소스 파일\Objects\Manager\EnemyArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyArrowManager.h">
+      <Filter>소스 파일\Objects\Manager\EnemyArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyList.h">
+      <Filter>소스 파일\Objects\Manager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyManager.h">
+      <Filter>소스 파일\Objects\Manager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerArrowList.h">
+      <Filter>소스 파일\Objects\Manager\PlayerArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerArrowManager.h">
+      <Filter>소스 파일\Objects\Manager\PlayerArrow</Filter>
+    </ClInclude>
+    <ClInclude Include="CFunc.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="CPlayerArcher.cpp">
       <Filter>소스 파일\Objects\Player\Archer</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerArrow.cpp">
+      <Filter>소스 파일\Objects\Items\PlayerArrow</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

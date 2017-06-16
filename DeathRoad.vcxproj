@@ -155,6 +155,7 @@
     <ClInclude Include="CEnemyInfant.h" />
     <ClInclude Include="CEnemyList.h" />
     <ClInclude Include="CEnemyManager.h" />
+    <ClInclude Include="CFunc.h" />
     <ClInclude Include="CGameSystem.h" />
     <ClInclude Include="CInGame.h" />
     <ClInclude Include="CIntro.h" />
@@ -165,6 +166,9 @@
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPeasant.h" />
     <ClInclude Include="CPlayerArcher.h" />
+    <ClInclude Include="CPlayerArrow.h" />
+    <ClInclude Include="CPlayerArrowList.h" />
+    <ClInclude Include="CPlayerArrowManager.h" />
     <ClInclude Include="CSprite.h" />
     <ClInclude Include="CVector3D.h" />
     <ClInclude Include="CWarrior.h" />
@@ -189,6 +193,7 @@
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPeasant.cpp" />
     <ClCompile Include="CPlayerArcher.cpp" />
+    <ClCompile Include="CPlayerArrow.cpp" />
     <ClCompile Include="CWarrior.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="WinMain.cpp" />

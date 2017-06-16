@@ -4,6 +4,8 @@
 #include"CEnemyManager.h"
 #include"SoundManager.h"
 #include"CEnemyArrowManager.h"
+#include"CPlayerArrowManager.h"
+#include"CPlayerArcher.h"
 
 #define BATTLE_EXIT -1
 #define	BATTLE_NONE 0
@@ -28,6 +30,9 @@ class CBattle {
 	// 적 오브젝트들
 	// 매니저로 관리할 것
 	CEnemyManager* m_pEnemyManager;
+	CPlayerArrowManager* m_pArrowManager;
+	CObject* m_pArcher;
+
 	// 플레이어 오브젝트들
 	CItem* m_pCastle;
 

@@ -2,6 +2,7 @@
 #include"define.h"
 #include"CEnemyInfant.h"
 #include"SoundManager.h"
+#include"CPlayerArcher.h"
 
 // 적군 매니저를 만들기 위한 열결리스트의 노드
 class CEnemyNode {
@@ -167,5 +168,14 @@ public:
 			p = p->m_pNext;
 		}
 		return nTmp;
+	}
+
+	void PlayerTarget(CObject* player)					// 플레이어측의 타겟팅
+	{
+		CEnemyNode* p = m_pHead->m_pNext;
+		while (p != m_pTail) {
+			dynamic_cast<CPlayerArcher*>(player)->SetTarget(p->m_pEnemy);
+			p = p->m_pNext;
+		}
 	}
 };

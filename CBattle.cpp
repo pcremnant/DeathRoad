@@ -7,7 +7,9 @@ CBattle::CBattle(const UINT & nStage, int & nGold, CItem* castle, CSoundManager 
 	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
 	m_pEnemyManager = new CEnemyManager(m_pSoundManager,m_pCastle);
 	m_pEnemyManager->Init(nStage);
-
+	m_pArrowManager = new CPlayerArrowManager(m_pSoundManager);
+	m_pArcher = new CPlayerArcher(m_pSoundManager, m_pArrowManager);
+	m_pArcher->Init();
 
 	if (m_imgBGFront.GetBPP() == 32)
 	{
@@ -35,7 +37,10 @@ CBattle::CBattle(const UINT & nStage, int & nGold, CItem* castle, CSoundManager 
 
 CBattle::~CBattle()
 {
-
+	if (m_pArcher)
+		delete m_pArcher;
+	if (m_pArrowManager)
+		delete m_pArrowManager;
 }
 
 void CBattle::DrawPhase(HDC hdc, CObject* player)
@@ -43,7 +48,9 @@ void CBattle::DrawPhase(HDC hdc, CObject* player)
 	m_imgBGBack.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, SRCCOPY);
 	m_pEnemyManager->DrawEnemy(hdc);
 	m_pCastle->DrawItem(hdc);
+	m_pArcher->DrawObject(hdc);
 	player->DrawObject(hdc);
+	m_pArrowManager->DrawArrow(hdc);
 	m_imgBGFront.Draw(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT);
 }
 
@@ -54,8 +61,11 @@ void CBattle::UpdatePhase()
 			m_bBattleEnd = true;
 			return;
 		}
-		m_pEnemyManager->Update();
+		m_pEnemyManager->Update(m_pArcher);
 		m_pEnemyManager->SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth() / 2);
+		//dynamic_cast<CPlayerArcher*>(m_pArcher)->SetTarget();
+		m_pArcher->Update();
+		m_pArrowManager->Update();
 	}
 }
 

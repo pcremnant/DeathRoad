@@ -7,6 +7,7 @@
 #include<random>
 #include<math.h>
 #include<atlimage.h>
+#include"CFunc.h"
 
 using namespace std;
 

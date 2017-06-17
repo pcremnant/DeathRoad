@@ -3,6 +3,7 @@
 #include"CEnemyInfant.h"
 #include"SoundManager.h"
 #include"CPlayerArcher.h"
+#include"CPlayerArrowManager.h"
 
 // 적군 매니저를 만들기 위한 열결리스트의 노드
 class CEnemyNode {
@@ -175,6 +176,15 @@ public:
 		CEnemyNode* p = m_pHead->m_pNext;
 		while (p != m_pTail) {
 			dynamic_cast<CPlayerArcher*>(player)->SetTarget(p->m_pEnemy);
+			p = p->m_pNext;
+		}
+	}
+
+	void ColisionCheck(CPlayerArrowManager* arrow)
+	{
+		CEnemyNode* p = m_pHead->m_pNext;
+		while (p != m_pTail) {
+			arrow->ColisionCheck(p->m_pEnemy);
 			p = p->m_pNext;
 		}
 	}

@@ -41,4 +41,16 @@ public:
 	{
 		return m_nWidth;
 	}
+	const int& GetHeight() const
+	{
+		return m_nHeight;
+	}
+	virtual bool ColisionCheck(const RECT& rcBox)
+	{
+		return false;
+	}
+	const int& ReturnValue() const
+	{
+		return m_nValue;
+	}	
 };

@@ -61,7 +61,7 @@ void CBattle::UpdatePhase()
 			m_bBattleEnd = true;
 			return;
 		}
-		m_pEnemyManager->Update(m_pArcher);
+		m_pEnemyManager->Update(m_pArcher,m_pArrowManager);
 		m_pEnemyManager->SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth() / 2);
 		//dynamic_cast<CPlayerArcher*>(m_pArcher)->SetTarget();
 		m_pArcher->Update();

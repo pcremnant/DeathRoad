@@ -39,6 +39,12 @@ void CEnemyArcher::DrawObject(HDC hdc)
 int CEnemyArcher::Update()
 {
 	int tmp = 0;
+
+	if (m_nHp <= 0 && m_nFrameType!=TYPE_DEAD) {
+		m_nHp = 0;
+		SetFrameType(TYPE_DEAD);
+	}
+
 	if (m_nFrameType == TYPE_WALK)
 		Move();
 	else if (m_nFrameType == TYPE_ATTACK)
@@ -99,10 +105,6 @@ int CEnemyArcher::Attack()
 	else {
 		if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
 			m_nFrame = 0;
-			if (m_nFrameType == TYPE_ATTACK) {
-				if (rand() % 2)
-					SetFrameType(TYPE_DEAD);
-			}
 			// 공격력만큼 리턴
 			m_bReroad = true;
 			m_nCurrentReroad = 0;

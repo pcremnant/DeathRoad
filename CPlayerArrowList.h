@@ -1,6 +1,7 @@
 #pragma once
 #include"define.h"
 #include"CPlayerArrow.h"
+#include"CObject.h"
 
 class CPlayerArrowNode {
 public:
@@ -127,6 +128,20 @@ public:
 				p->m_pData->Move();
 				p = p->m_pNext;
 			}
+		}
+	}
+
+	void ColisionCheck(CObject* enemy)
+	{
+		CPlayerArrowNode* p = m_pHead->m_pNext;
+		while (p != m_pTail) {
+			if (p->m_pData->GetPositionVt().GetZ() == enemy->ReturnZ()) {
+				if (p->m_pData->ColisionCheck(enemy->ReturnPosition())) {
+					enemy->GetDamage(p->m_pData->ReturnValue());
+					p->m_pData->SetTarget(enemy);
+				}
+			}
+			p = p->m_pNext;
 		}
 	}
 };

@@ -27,6 +27,8 @@ void CPlayerArcher::Init()
 	m_nHeight = 35;
 	m_nWidth = 40;
 	SetPosition();
+
+	m_nAttack = 20;
 }
 
 void CPlayerArcher::SetPosition()
@@ -46,7 +48,7 @@ int CPlayerArcher::Update()
 {
 	// 타겟이 죽었으면 타게팅 변수들 초기화
 	if (m_pTarget) {
-		if (m_pTarget->IsDelete()) {
+		if (m_pTarget->IsDead()) {
 			m_pTarget = nullptr;
 			m_bInRange = false;
 		}
@@ -113,7 +115,7 @@ int CPlayerArcher::Attack()
 		m_pSoundManager->PlayEffect(EFFECT_ARCHER_ATTACK_00);
 		CVector3D vtTmp = m_vtCoord;
 		vtTmp.SetZ(m_pTarget->ReturnCoord().GetZ());
-		m_pArrow->CreateArrow(new CPlayerArrow(vtTmp, m_nAttack));
+		m_pArrow->CreateArrow(new CPlayerArrow(vtTmp, m_nAttack, m_pTarget->ReturnCoord()));
 		// 화살매니저에 화살을 넣는다.
 	}
 

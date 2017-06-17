@@ -10,8 +10,6 @@ protected:
 
 	CObject* m_pTarget{ nullptr };
 	CPlayerArrowManager* m_pArrow{ nullptr };
-
-	//CEnemyArrowManager* m_pArrowManager{ nullptr }; 플레이어 화살 매니저
 public:
 	CPlayerArcher(CSoundManager* sound, CPlayerArrowManager* arrow) : CObject(sound) {
 		m_pArrow = arrow;
@@ -31,7 +29,7 @@ public:
 			return;
 
 		if (enemy->ReturnTargeted() <= 2) {
-			if (m_vtCoord.GetX() - enemy->ReturnCoord().GetX() <= m_nAttackRange) {
+			if (!enemy->IsDead() && m_vtCoord.GetX() - enemy->ReturnCoord().GetX() <= m_nAttackRange) {
 				// 해당 적 타게팅
 				m_pTarget = enemy;
 				m_bInRange = true;

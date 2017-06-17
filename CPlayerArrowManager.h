@@ -36,4 +36,9 @@ public:
 	{
 		m_pArrowList->Update();
 	}
+
+	void ColisionCheck(CObject* enemy)
+	{
+		m_pArrowList->ColisionCheck(enemy);
+	}
 };

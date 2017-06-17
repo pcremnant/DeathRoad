@@ -5,9 +5,12 @@
 #include"CCrossbowman.h"
 #include"CKnight.h"
 #include"CEnemyList.h"
+
 #include"SoundManager.h"
-#include"CEnemyArrowManager.h"
+
 #include"CCastle.h"
+#include"CEnemyArrowManager.h"
+#include"CPlayerArrowManager.h"
 
 #define SPAWN_ENEMY			240
 
@@ -168,12 +171,13 @@ public:
 			m_nSpawnTimer++;
 	}
 
-	void Update(CObject* pPlayerArcher)
+	void Update(CObject* pPlayerArcher, CPlayerArrowManager* arrow)
 	{
 		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
 		m_pEnemyList->Update();
 		m_pArrows->Update();
 		m_pEnemyList->PlayerTarget(pPlayerArcher);
+		m_pEnemyList->ColisionCheck(arrow);
 		if (m_pTriger->IsFileEnd()) {
 			if (m_pEnemyList->GetNumber() == 0)
 				m_bStageEnd = true;

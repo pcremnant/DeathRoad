@@ -4,12 +4,6 @@
 #include"CAnimatedSprite.h"
 #include"SoundManager.h"
 
-#define GRAVITY -9.8
-#define CHARACTERLEFT 1150
-#define CHARACTERTOP 590
-#define ENEMYLEFT 1
-#define ENEMYTOP 1
-
 #define UNIT_NONE 0
 #define UNIT_ATTACK -1
 #define UNIT_DEAD -2
@@ -54,8 +48,21 @@ public:
 	virtual void SetPosition() {};								// m_vtCoord에 따라 바운딩 박스(이미지 위치 및 크기)를 정해주는 함수
 	virtual void SetFrameType(const int& nType) {};				// 특정 상황에서 동작을 바꿔준다.(걷다가 사거리 안으로 들어오면 공격 모션으로 바꿔줌)
 	const float ReturnZ() const { return m_vtCoord.GetZ(); }	// 충돌판정을 위해 z값을 리턴
-	CVector3D ReturnCoord()const { return m_vtCoord; }
-	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄
+	CVector3D ReturnCoord()const { return m_vtCoord; }			// 좌표 리턴
+	RECT ReturnPosition() const { return m_rcPosition; }		// 사각형 리턴
+	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄 -> Manager에서 확인
+	
+	void GetDamage(const int& nDamage)
+	{
+		m_nHp -= nDamage;
+	}
+
+	const bool IsDead() const { 
+		if (m_nFrameType == TYPE_DEAD)
+			return true; 
+		else 
+			return false;
+	}
 	const bool& InRange() const { return m_bInRange; }			// 공격 사거리 안에 있는지
 	
 	virtual int GetKey(const WPARAM& wParam) { return 0; }		// 키보드 받는 함수

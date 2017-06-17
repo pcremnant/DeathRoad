@@ -38,6 +38,18 @@ public:
 			return true;
 		else if (PtInRect(&rcTmp, POINT{ rcOther.right,rcOther.bottom }))
 			return true;
+		else if (PtInRect(&rcOther, POINT{ rcTmp.left,rcTmp.top }))
+			return true;
+		else if (PtInRect(&rcOther, POINT{ rcTmp.right,rcTmp.top }))
+			return true;
+		else if (PtInRect(&rcOther, POINT{ rcTmp.left,rcTmp.bottom }))
+			return true;
+		else if (PtInRect(&rcOther, POINT{ rcTmp.right,rcTmp.bottom }))
+			return true;
+		else if (rcOther.left <rcTmp.left && rcOther.right>rcTmp.right && rcOther.top < rcTmp.top && rcOther.bottom>rcTmp.bottom)
+			return true;
+		else if (rcTmp.left <rcOther.left && rcTmp.right>rcOther.right && rcTmp.top < rcOther.top && rcTmp.bottom>rcOther.bottom)
+			return true;
 		else
 			return false;
 	}

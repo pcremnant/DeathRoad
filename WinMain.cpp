@@ -97,7 +97,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		HBITMAP memBit = CreateCompatibleBitmap(hdc, CLIENT_WIDTH, CLIENT_HEIGHT);
 		SelectObject(memdc, memBit);
 		Rectangle(memdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT);
+
 		WMPaint(memdc);
+
 		BitBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, memdc, 0, 0, SRCCOPY);
 		DeleteDC(memdc);
 		DeleteObject(memBit);

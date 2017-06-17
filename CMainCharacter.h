@@ -11,7 +11,7 @@ public:
 	CMainCharacter(CSoundManager* sound) : CObject(sound) {}
 
 	void Init()override;
-	void DrawObject(HDC hdc)override;
+	void DrawObject(HDC hdc, bool bIntro = false)override;
 	void SetPosition()override;
 	void SetFrameType(const int& nType)override;
 	void Move()override;

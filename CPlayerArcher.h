@@ -16,7 +16,7 @@ public:
 	}
 	virtual void Init() override final;
 	void SetPosition() override final;
-	void DrawObject(HDC hdc)override final;
+	void DrawObject(HDC hdc, bool bIntro = false)override final;
 	int Update() override final;
 	void Move()override final;
 	int Attack() override final;
@@ -31,6 +31,7 @@ public:
 		if (enemy->ReturnTargeted() <= 2) {
 			if (!enemy->IsDead() && m_vtCoord.GetX() - enemy->ReturnCoord().GetX() <= m_nAttackRange) {
 				// 해당 적 타게팅
+				enemy->GetTarget();
 				m_pTarget = enemy;
 				m_bInRange = true;
 			}

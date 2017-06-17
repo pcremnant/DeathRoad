@@ -16,10 +16,14 @@ void CPlayerArcher::Init()
 	m_bInRange = false;
 
 	// 실제로 할 때는 랜덤으로 값을 바꿔줄 것
-	int nTmp = rand() % 5;
-	float fTmp = static_cast<float>(nTmp) / 10.f + 1;
+	int nTmpY = rand() % 5;
+	float fTmp = static_cast<float>(nTmpY) / 10.f + 1;
+	int nTmpX = rand() % 4;
 
-	m_vtCoord = { static_cast<float>(rand() % 40 + 900),150 + static_cast<float>((5 - nTmp) * 20),fTmp };
+	if(nTmpX<2)
+		m_vtCoord = { static_cast<float>(nTmpX*10 + 900),180 + static_cast<float>((5 - nTmpY) * 30),fTmp };
+	else
+		m_vtCoord = { static_cast<float>(nTmpX * 10 + 950),180 + static_cast<float>((5 - nTmpY) * 30),fTmp };
 
 	m_nReroad = 60;
 	m_nCurrentReroad = 0;
@@ -39,7 +43,7 @@ void CPlayerArcher::SetPosition()
 	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() / 6 * 5));
 }
 
-void CPlayerArcher::DrawObject(HDC hdc)
+void CPlayerArcher::DrawObject(HDC hdc, bool bIntro)
 {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
 }

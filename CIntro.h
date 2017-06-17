@@ -2,6 +2,9 @@
 #include"define.h"
 #include"SoundManager.h"
 #include"CEnemyManager.h"
+#include"CPlayerArcher.h"
+
+#define INTRO_ARCHER_NUMBER 6
 
 class CIntro {
 	CEnemyManager* m_pEnemyManager{ nullptr };
@@ -11,11 +14,30 @@ class CIntro {
 	// 백그라운드 이미지
 	CImage m_imgBGBack;
 	CImage m_imgBGFront;
+
+	// 타이틀 이미지
+	CImage m_imgTitle;
+	RECT m_rcTitle{ 0, };
+	int m_nTitleWidth{ 0 };
+	int m_nTitleHeight{ 0 };
+	bool m_bFixed{ false };					// 타이틀이 고정되었는가
+
+	CImage m_imgPressAnyKey;
+	RECT m_rcPressAnyKey{ 0, };
+	int m_nPressWidth{ 0 };
+	int m_nPressHeight{ 0 };
+
+	CObject* m_pArcher[INTRO_ARCHER_NUMBER]{ nullptr, };
+	int m_nArcherNumber{ INTRO_ARCHER_NUMBER };
+	CPlayerArrowManager* m_pArrow{ nullptr };
+
 public:
 	CIntro();
 	~CIntro();
 
 	void Update();
-
 	void DrawIntro(HDC hdc);
+
+private:
+	void SetTitle();
 };

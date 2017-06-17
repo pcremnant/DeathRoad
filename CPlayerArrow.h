@@ -14,7 +14,7 @@ public:
 	CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, const CVector3D& vtTarget);
 	void Init() override final {};
 	virtual void Move() override final;
-	void DrawItem(HDC hdc) override final;
+	void DrawItem(HDC hdc, bool bIntro = false) override final;
 	const bool& IsDelete()  const;
 	const bool& IsColision() const
 	{

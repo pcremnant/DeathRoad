@@ -152,13 +152,13 @@ public:
 		m_pTriger = new CTriger(m_nStage);
 	}
 
-	void DrawEnemy(HDC hdc)
+	void DrawEnemy(HDC hdc, bool bIntro = false)
 	{
-		m_pEnemyList->DrawObj(hdc);
+		m_pEnemyList->DrawObj(hdc, bIntro);
 		m_pArrows->DrawArrow(hdc);
 	}
 
-	void Update()
+	/*void Update()
 	{
 		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
 		m_pEnemyList->Update();
@@ -169,15 +169,36 @@ public:
 		}
 		else
 			m_nSpawnTimer++;
-	}
+	}*/
 
 	void Update(CObject* pPlayerArcher, CPlayerArrowManager* arrow)
 	{
 		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
 		m_pEnemyList->Update();
+
 		m_pArrows->Update();
 		m_pEnemyList->PlayerTarget(pPlayerArcher);
 		m_pEnemyList->ColisionCheck(arrow);
+
+		if (m_pTriger->IsFileEnd()) {
+			if (m_pEnemyList->GetNumber() == 0)
+				m_bStageEnd = true;
+		}
+		else
+			m_nSpawnTimer++;
+	}
+
+	void Update(CObject* pPlayerArcher[], CPlayerArrowManager* arrow, int nNumber)
+	{
+		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
+		m_pEnemyList->Update();
+
+		m_pArrows->Update();
+		m_pEnemyList->ColisionCheck(arrow);
+
+		for(int i=0;i<nNumber;++i)
+			m_pEnemyList->PlayerTarget(pPlayerArcher[i]);
+
 		if (m_pTriger->IsFileEnd()) {
 			if (m_pEnemyList->GetNumber() == 0)
 				m_bStageEnd = true;

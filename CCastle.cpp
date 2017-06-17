@@ -20,27 +20,29 @@ void CCastle::Move()
 
 }
 
-void CCastle::DrawItem(HDC hdc)
+void CCastle::DrawItem(HDC hdc, bool bIntro)
 {
 	m_imgBitmap.TransparentBlt(hdc, m_rcPosition, RGB(255, 255, 255));
 	
-	HBRUSH hBrush, oldBrush;
-	float fTmp = static_cast<float>(m_nValue) / static_cast<float>(m_nMaxHp);
-	if (fTmp > 0.7)
-		hBrush = CreateSolidBrush(RGB(0, 255, 0));
-	else if (fTmp > 0.3)
-		hBrush = CreateSolidBrush(RGB(255, 255, 0));
-	else
-		hBrush = CreateSolidBrush(RGB(255, 0, 0));
-	oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
-	RECT rcTmp = { 20,20,20 + 500 * fTmp,50 };
-	FillRect(hdc, &rcTmp, hBrush);
-	SelectObject(hdc, oldBrush);
-	DeleteObject(hBrush);
-	hBrush = CreateSolidBrush(TRANSPARENT);
-	oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
-	rcTmp = { 20,20,520,50 };
-	FrameRect(hdc, &rcTmp, hBrush);
-	SelectObject(hdc, oldBrush);
-	DeleteObject(hBrush);
+	if (!bIntro) {
+		HBRUSH hBrush, oldBrush;
+		float fTmp = static_cast<float>(m_nValue) / static_cast<float>(m_nMaxHp);
+		if (fTmp > 0.7)
+			hBrush = CreateSolidBrush(RGB(0, 255, 0));
+		else if (fTmp > 0.3)
+			hBrush = CreateSolidBrush(RGB(255, 255, 0));
+		else
+			hBrush = CreateSolidBrush(RGB(255, 0, 0));
+		oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+		RECT rcTmp = { 20,20,20 + 500 * fTmp,50 };
+		FillRect(hdc, &rcTmp, hBrush);
+		SelectObject(hdc, oldBrush);
+		DeleteObject(hBrush);
+		hBrush = CreateSolidBrush(TRANSPARENT);
+		oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+		rcTmp = { 20,20,520,50 };
+		FrameRect(hdc, &rcTmp, hBrush);
+		SelectObject(hdc, oldBrush);
+		DeleteObject(hBrush);
+	}
 }

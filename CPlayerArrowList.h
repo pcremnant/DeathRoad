@@ -133,6 +133,8 @@ public:
 
 	void ColisionCheck(CObject* enemy)
 	{
+		if (enemy == nullptr)
+			return;
 		CPlayerArrowNode* p = m_pHead->m_pNext;
 		while (p != m_pTail) {
 			if (p->m_pData->GetPositionVt().GetZ() == enemy->ReturnZ()) {

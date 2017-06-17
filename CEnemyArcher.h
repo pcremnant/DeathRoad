@@ -22,7 +22,7 @@ public:
 	}
 	virtual void Init() override = 0;
 	void SetPosition() override final;
-	void DrawObject(HDC hdc)override final;
+	void DrawObject(HDC hdc, bool bIntro = false) override final;
 	int Update() override final;
 	void Move()override final;
 	int Attack() override final;

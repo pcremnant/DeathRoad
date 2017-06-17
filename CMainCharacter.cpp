@@ -24,7 +24,7 @@ void CMainCharacter::SetPosition() {
 	m_rcPosition.bottom = m_vtCoord.GetY() + m_nHeight*(2.2f - (m_vtCoord.GetZ() ));
 }
 
-void CMainCharacter::DrawObject(HDC hdc) {
+void CMainCharacter::DrawObject(HDC hdc, bool bIntro) {
 	m_sprImg.DrawObject(hdc, m_nFrameType, m_nFrame / 4, m_rcPosition);
 }
 

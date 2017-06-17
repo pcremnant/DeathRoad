@@ -26,7 +26,7 @@ protected:
 public:
 	virtual void Init() = 0;
 	virtual void Move() = 0;
-	virtual void DrawItem(HDC hdc) = 0;
+	virtual void DrawItem(HDC hdc, bool bIntro = false) = 0;
 
 	// 충돌체크를 위한 함수
 	const RECT& GetPositionRc() const

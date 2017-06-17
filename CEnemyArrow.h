@@ -17,7 +17,7 @@ public:
 	}
 	virtual void Init() override = 0;
 	virtual void Move() override final;
-	void DrawItem(HDC hdc) override final;
+	void DrawItem(HDC hdc, bool bIntro = false) override final;
 	const bool& IsDelete()  const;
 protected:
 	void SetPosition();

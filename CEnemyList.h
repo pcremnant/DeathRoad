@@ -125,11 +125,11 @@ public:
 		return nullptr;
 	}
 
-	void DrawObj(HDC hdc)
+	void DrawObj(HDC hdc, bool bIntro = false)
 	{
 		CEnemyNode* p = m_pHead->m_pNext;
 		while (p != m_pTail) {
-			p->m_pEnemy->DrawObject(hdc);
+			p->m_pEnemy->DrawObject(hdc, bIntro);
 			p = p->m_pNext;
 		}
 	}

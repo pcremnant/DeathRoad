@@ -15,7 +15,7 @@ public:
 
 	void Init() override final;
 	void Move() override final;
-	void DrawItem(HDC hdc) override final;
+	void DrawItem(HDC hdc, bool bIntro = false) override final;
 
 	void GetDamage(const int& damage)
 	{

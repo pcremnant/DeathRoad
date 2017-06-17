@@ -18,6 +18,9 @@ CPlayerArrow::CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, co
 		nTmpFrame++;
 	}
 
+	if (nTmpFrame == 0)
+		nTmpFrame = 1;
+
 	float fTmpVectorX = nTmpWidth / nTmpFrame;
 
 	m_vtDirect = { -fTmpVectorX,-1.2f };
@@ -29,7 +32,7 @@ CPlayerArrow::CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, co
 	SetPosition();
 }
 
-void CPlayerArrow::DrawItem(HDC hdc)
+void CPlayerArrow::DrawItem(HDC hdc, bool bIntro)
 {
 	m_imgBitmap.TransparentBlt(hdc, m_rcPosition.left, m_rcPosition.top, m_nWidth * 2, m_nHeight * 2, 0, 0, m_nWidth * 2, m_nHeight * 2, RGB(255, 255, 255));
 }

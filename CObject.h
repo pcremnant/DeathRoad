@@ -39,7 +39,7 @@ protected:
 public:
 	CObject(CSoundManager* sound) : m_pSoundManager(sound) {}
 	virtual void Init() {};										// 초기화 해주는 함수
-	virtual void DrawObject(HDC hdc) {};						// 드로우 함수
+	virtual void DrawObject(HDC hdc, bool bIntro = false) {};	// 드로우 함수
 	virtual int Update() = 0;
 	virtual void Move() {};										// Update시 움직이는 함수
 	virtual int Attack() = 0;									// Update시 공격하는 함수
@@ -55,6 +55,11 @@ public:
 	void GetDamage(const int& nDamage)
 	{
 		m_nHp -= nDamage;
+	}
+
+	void GetTarget()
+	{
+		m_nTargeted++;
 	}
 
 	const bool IsDead() const { 

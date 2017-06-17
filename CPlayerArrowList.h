@@ -2,13 +2,13 @@
 #include"define.h"
 #include"CPlayerArrow.h"
 #include"CObject.h"
+#include"CArrow.h"
 
 class CPlayerArrowNode {
 public:
 	CPlayerArrow* m_pData;
 	CPlayerArrowNode* m_pNext;
 	CPlayerArrowNode* m_pPrev;
-
 	CPlayerArrowNode(CPlayerArrow* newArrow) : m_pData(newArrow)
 	{
 		m_pNext = nullptr;

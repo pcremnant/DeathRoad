@@ -1,29 +1,34 @@
 #include "CPlayerArrow.h"
 
-CPlayerArrow::CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, const CVector3D& vtTarget) : CItem()
+CPlayerArrow::CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, const CVector3D& vtTarget, bool bPlayer) : CItem()
 {
 	m_imgBitmap.Load(TEXT("resource/image/object/Object_Arrow_02.png"));
 	m_vtCoord = vtPosition;
 	m_fGravity = 0.3f;
 
-	int nTmpWidth = abs(vtPosition.GetX() - vtTarget.GetX());
-	int nTmpHeight = abs(vtPosition.GetY() - vtTarget.GetY());
-	float fTmpSpeed = -1.2;
-	float fTmpHeight = 0;
-	int nTmpFrame = 0;
+	if (!bPlayer) {
+		int nTmpWidth = abs(vtPosition.GetX() - vtTarget.GetX());
+		int nTmpHeight = abs(vtPosition.GetY() - vtTarget.GetY());
+		float fTmpSpeed = -1.2;
+		float fTmpHeight = 0;
+		int nTmpFrame = 0;
 
-	while (fTmpHeight < nTmpHeight) {
-		fTmpHeight += fTmpSpeed;
-		fTmpSpeed += m_fGravity;
-		nTmpFrame++;
+		while (fTmpHeight < nTmpHeight) {
+			fTmpHeight += fTmpSpeed;
+			fTmpSpeed += m_fGravity;
+			nTmpFrame++;
+		}
+
+		if (nTmpFrame == 0)
+			nTmpFrame = 1;
+
+		float fTmpVectorX = nTmpWidth / nTmpFrame;
+
+		m_vtDirect = { -fTmpVectorX,-1.2f };
 	}
+	else
+		m_vtDirect = vtTarget;
 
-	if (nTmpFrame == 0)
-		nTmpFrame = 1;
-
-	float fTmpVectorX = nTmpWidth / nTmpFrame;
-
-	m_vtDirect = { -fTmpVectorX,-1.2f };
 	m_nValue = nAttack;
 	m_nWidth = m_imgBitmap.GetWidth() / 2;
 	m_nHeight = m_imgBitmap.GetHeight() / 2;

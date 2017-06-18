@@ -4,14 +4,16 @@
 
 class CPlayerArrow : public CItem {
 protected:
-//	CVector3D m_vtTarget{ 0,0,0 };				// 목표한 적군의 위치
+
 	float m_fGravity{ 0 };					// 화살에 작용하는 중력
 	bool m_bColision{ false };				// 화살이 충돌했는가
 	bool m_bDelete{ false };				// 화살을 지워야 하는가
 	int m_nDeleteTimer{ 0 };				// 화살이 충돌하고 일정시간 지나면 화살을 지워주도록 세는 변수
-	CObject* m_pTarget{ nullptr };					// 화살이 충돌한 후 적을 따라가게
+	CObject* m_pTarget{ nullptr };			// 화살이 충돌한 후 적을 따라가게
+
+	bool m_bPlayer{ false };				// 화살을 날린 것이 플레이어인가
 public:
-	CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, const CVector3D& vtTarget);
+	CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, const CVector3D& vtTarget, bool bPlayer = false);
 	void Init() override final {};
 	virtual void Move() override final;
 	void DrawItem(HDC hdc, bool bIntro = false) override final;

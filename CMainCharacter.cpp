@@ -8,9 +8,9 @@ void CMainCharacter::Init() {
 	m_bAttackCharge = false;
 	m_nFrame = 0;
 	m_nFrameType = TYPE_WALK;
-	int nTmp = 4;
+	nTmp = 4;
 	float fTmp = static_cast<float>(nTmp) / 10.f + 1;
-	m_vtCoord = { static_cast<float>(960),210 + static_cast<float>((5 - nTmp)),fTmp };
+	m_vtCoord = { static_cast<float>(960),250 + static_cast<float>((5 - nTmp) * 40),fTmp };
 	m_nHeight = 57;
 	m_nWidth = 62;
 	SetPosition();
@@ -79,11 +79,12 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 	case VK_UP:
 	case 'w':
 	case 'W':
-		if (m_vtCoord.GetZ() >= MAXZ) {
+		if (m_vtCoord.GetZ() > MAXZ) {
 			m_vtCoord.SetZ(m_vtCoord.GetZ());
 		}
 		else {
-			m_nMoving = { static_cast<float>(0),static_cast<float>(-20),static_cast<float>(1) / 10.f };
+			
+			m_nMoving = { static_cast<float>(0),static_cast<float>(-27),static_cast<float>(1) / 10.f };
 
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
@@ -92,12 +93,11 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 	case VK_DOWN:
 	case 'S':
 	case 's':
-		if (m_vtCoord.GetZ() <= MINZ) {
+		if (m_vtCoord.GetZ() < MINZ) {
 			m_vtCoord.SetZ(m_vtCoord.GetZ());
 		}
 		else {
-			m_nMoving = { static_cast<float>(0),static_cast<float>(20),static_cast<float>(-1) / 10.f };
-
+			m_nMoving = { static_cast<float>(0),static_cast<float>(27),static_cast<float>(-1) / 10.f };
 			m_vtCoord.Move(m_nMoving, true);
 			SetPosition();
 		}
@@ -127,13 +127,13 @@ int CMainCharacter::LButtonUp(const LPARAM&lParam) {
 	return m_nAttack;
 }
 void CMainCharacter::Ready() {
-	m_fAngle = atan2f(static_cast<float>(m_vtCoord.GetY()) -m_vtMouse.GetY() , static_cast<float>(m_vtCoord.GetX()) - m_vtMouse.GetX()) * 180 / 3.14;
+	m_fAngle = atan2f((static_cast<float>(m_vtMouse.GetY()) -m_vtCoord.GetY()) ,-( static_cast<float>(m_vtMouse.GetX()) - m_vtCoord.GetX())) * 180 / 3.1415f;
 	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
 	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
 	m_vtDirect.SetZ(0);
 }
 void CMainCharacter::Shot() {
 	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
-	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
+	m_vtDirect.SetY(-m_nPower*sin(m_fAngle));
 	m_vtDirect.Move(0, -m_fGravity);
 }

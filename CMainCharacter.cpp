@@ -14,7 +14,7 @@ void CMainCharacter::Init() {
 	m_nHeight = 57;
 	m_nWidth = 62;
 	SetPosition();
-	Damage = 100;
+	m_nDamage = 100;
 };
 
 void CMainCharacter::SetPosition() {
@@ -37,6 +37,12 @@ void CMainCharacter::Move() {
 }
 
 int CMainCharacter::Attack() {
+	if (m_nFrame == m_nAttackFrame) {
+		m_pSoundManager->PlayEffect(EFFECT_ARCHER_ATTACK_00);
+		CVector3D  vtTmp = m_vtCoord;
+		m_pArrow->CreateArrow(new CPlayerArrow(vtTmp, m_nAttack, m_pTarget->ReturnCoord()));
+	}
+
 		if ((m_nFrame / 4) >= m_sprImg.MaxFrame(m_nFrameType) - 1) {
 			m_nFrame = 0;
 		}
@@ -53,17 +59,14 @@ void CMainCharacter::SetFrameType(const int &nType) {
 		m_nFrame = 0;
 	}
 }
-int CMainCharacter::Dead() {
-	return 0;
-}
-
 int CMainCharacter::Update() {
 	int tmp = 0;
 	if (m_nFrameType == TYPE_WALK)
 		Move();
 	else if (m_nFrameType == TYPE_ATTACK)
 		tmp = Attack();
-		return tmp;
+
+	return tmp;
 	
 }
 int CMainCharacter::GetKey(const WPARAM&wParam) {
@@ -104,9 +107,16 @@ void CMainCharacter::MouseMove(const LPARAM&lParam) {
 }
 void CMainCharacter::LButtonDown(const LPARAM&lParam) {
 	m_nFrameType = TYPE_ATTACK;
+	m_vtMouse = {
+		static_cast<float>(LOWORD(lParam)),
+		static_cast<float>(HIWORD(lParam)),
+		m_vtCoord.GetZ()
+	};
+
+
 }
 int CMainCharacter::LButtonUp(const LPARAM&lParam) {
 	m_nFrameType = TYPE_WALK;
 	m_nFrame = 0;
-	return Damage;
+	return m_nDamage;
 }

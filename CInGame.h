@@ -5,6 +5,7 @@
 #include"SoundManager.h"
 #include"CMainCharacter.h"
 #include"CUpgrade.h"
+#include"CPlayerArrowManager.h"
 
 #define INGAME_NONE 0
 #define INGAME_EXIT -1
@@ -16,7 +17,7 @@ class CInGame {
 	CSoundManager* m_pSoundManager;
 
 	// 플레이어 클래스
-	CMainCharacter* m_pPlayer;
+	CObject* m_pPlayer;
 
 	// 제대로 세팅이 넘어왔는지 확인
 	bool m_bSet{ false };
@@ -35,7 +36,7 @@ class CInGame {
 	CUpgrade* m_pUpgrade{ nullptr };
 	CItem* m_pCastle{ nullptr };
 	// 배틀페이즈에서 쓰이는 변수
-	
+	CPlayerArrowManager* m_pArrow{ nullptr };
 
 public:
 	CInGame(CSoundManager* sound);
@@ -70,6 +71,6 @@ public:
 		// 매니지페이즈에서 했던 행동들 저장
 		delete m_pManagePhase;
 		m_pManagePhase = nullptr;
-		m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager, m_pUpgrade, m_pArcher, m_nNumArcher, m_pPlayer);
+		m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager, m_pUpgrade, m_pArcher, m_nNumArcher, m_pPlayer, m_pArrow);
 	}
 };

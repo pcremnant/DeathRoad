@@ -1,13 +1,15 @@
 #include"CBattle.h"
 
-CBattle::CBattle(const UINT& nStage, int& nGold, CItem* castle, CSoundManager* sound, CUpgrade* upgrade, CObject** pArcher, const int& nNumArcher, CObject* player) : m_pSoundManager(sound)
+CBattle::CBattle(const UINT& nStage, int& nGold, CItem* castle, CSoundManager* sound, CUpgrade* upgrade, CObject** pArcher, const int& nNumArcher, CObject* player, CPlayerArrowManager* arrowManager) : m_pSoundManager(sound)
 {
 	m_pCastle = castle;
 	m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
 	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
 	m_pEnemyManager = new CEnemyManager(m_pSoundManager,m_pCastle);
 	m_pEnemyManager->Init(nStage);
-	m_pArrowManager = new CPlayerArrowManager(m_pSoundManager);
+
+	m_pArrowManager = arrowManager;
+
 	m_pPlayer = player;
 	m_pArcher = new CObject*[nNumArcher];
 	for (int i = 0;i < m_nNumArcher;++i) {

@@ -7,7 +7,8 @@
 
 CInGame::CInGame(CSoundManager* sound) : m_pSoundManager(sound) 
 {
-	m_pPlayer = new CMainCharacter(m_pSoundManager);
+	m_pArrow = new CPlayerArrowManager(sound);
+	m_pPlayer = new CMainCharacter(m_pSoundManager, m_pArrow);
 	m_pPlayer->Init();
 }
 

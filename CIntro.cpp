@@ -1,4 +1,5 @@
 #include"CIntro.h"
+#include"CUpgrade.h"
 
 CIntro::CIntro()
 {
@@ -43,10 +44,11 @@ CIntro::CIntro()
 		m_imgBGFront.SetHasAlphaChannel(true);
 	}
 
+	CUpgrade upgrade;
 	m_nArcherNumber = INTRO_ARCHER_NUMBER;
 	m_pArrow = new CPlayerArrowManager(m_pSound);
 	for (int i = 0;i < m_nArcherNumber;++i) {
-		m_pArcher[i] = new CPlayerArcher(m_pSound, m_pArrow);
+		m_pArcher[i] = new CPlayerArcher(m_pSound, m_pArrow, &upgrade);
 		m_pArcher[i]->Init();
 	}
 

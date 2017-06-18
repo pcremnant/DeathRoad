@@ -1,6 +1,6 @@
 #include"CBattle.h"
 
-CBattle::CBattle(const UINT & nStage, int & nGold, CItem* castle, CSoundManager * sound) : m_pSoundManager(sound)
+CBattle::CBattle(const UINT& nStage, int& nGold, CItem* castle, CSoundManager* sound, CUpgrade* upgrade, CObject** pArcher, const int& nNumArcher, CObject* player) : m_pSoundManager(sound)
 {
 	m_pCastle = castle;
 	m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
@@ -8,8 +8,12 @@ CBattle::CBattle(const UINT & nStage, int & nGold, CItem* castle, CSoundManager 
 	m_pEnemyManager = new CEnemyManager(m_pSoundManager,m_pCastle);
 	m_pEnemyManager->Init(nStage);
 	m_pArrowManager = new CPlayerArrowManager(m_pSoundManager);
-	m_pArcher = new CPlayerArcher(m_pSoundManager, m_pArrowManager);
-	m_pArcher->Init();
+	m_pPlayer = player;
+	m_pArcher = new CObject*[nNumArcher];
+	for (int i = 0;i < m_nNumArcher;++i) {
+		m_pArcher[i] = new CPlayerArcher(m_pSoundManager, m_pArrowManager, upgrade);
+		m_pArcher[i]->Init();
+	}
 
 	if (m_imgBGFront.GetBPP() == 32)
 	{
@@ -43,13 +47,15 @@ CBattle::~CBattle()
 		delete m_pArrowManager;
 }
 
-void CBattle::DrawPhase(HDC hdc, CObject* player)
+void CBattle::DrawPhase(HDC hdc)
 {
 	m_imgBGBack.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, SRCCOPY);
 	m_pEnemyManager->DrawEnemy(hdc);
 	m_pCastle->DrawItem(hdc);
-	m_pArcher->DrawObject(hdc);
-	player->DrawObject(hdc);
+	for (int i = 0;i < m_nNumArcher;++i) {
+		m_pArcher[i]->DrawObject(hdc);
+	}
+	m_pPlayer->DrawObject(hdc);
 	m_pArrowManager->DrawArrow(hdc);
 	m_imgBGFront.Draw(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT);
 }
@@ -57,19 +63,21 @@ void CBattle::DrawPhase(HDC hdc, CObject* player)
 void CBattle::UpdatePhase()
 {
 	if (!m_bPause) {
+		m_pPlayer->Update();
 		if (m_pEnemyManager->IsStageEnd()) {
 			m_bBattleEnd = true;
 			return;
 		}
-		m_pEnemyManager->Update(m_pArcher,m_pArrowManager);
+		m_pEnemyManager->Update(m_pArcher, m_pArrowManager, m_nNumArcher);
 		m_pEnemyManager->SetTarget(m_pCastle->GetPositionVt(), m_pCastle->GetWidth() / 2);
-		//dynamic_cast<CPlayerArcher*>(m_pArcher)->SetTarget();
-		m_pArcher->Update();
+		for (int i = 0;i < m_nNumArcher;++i) {
+			m_pArcher[i]->Update();
+		}
 		m_pArrowManager->Update();
 	}
 }
 
-int CBattle::GetKey(const WPARAM & wParam, CObject* player)
+int CBattle::GetKey(const WPARAM & wParam)
 {
 	switch (wParam) {
 	case VK_ESCAPE:
@@ -79,25 +87,25 @@ int CBattle::GetKey(const WPARAM & wParam, CObject* player)
 			return BATTLE_EXIT;
 		break;
 	default:
-		player->GetKey(wParam);
+		m_pPlayer->GetKey(wParam);
 		break;
 	}
 	return BATTLE_NONE;
 }
 
-int CBattle::LButtonUp(const LPARAM & lParam, CObject * player)
+int CBattle::LButtonUp(const LPARAM & lParam)
 {
-	return player->LButtonUp(lParam);
+	return m_pPlayer->LButtonUp(lParam);
 }
 
-void CBattle::LButtonDown(const LPARAM & lParam, CObject * player)
+void CBattle::LButtonDown(const LPARAM & lParam)
 {
-	player->LButtonDown(lParam);
+	m_pPlayer->LButtonDown(lParam);
 }
 
-void CBattle::MouseMove(const LPARAM & lParam, CObject * player)
+void CBattle::MouseMove(const LPARAM & lParam)
 {
-	player->MouseMove(lParam);
+	m_pPlayer->MouseMove(lParam);
 }
 
 bool CBattle::IsBattleEnd() const

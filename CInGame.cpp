@@ -38,7 +38,7 @@ void CInGame::MouseMove(const LPARAM & lParam)
 
 	if (m_nPhase == PHASE_BATTLE) {
 		if (m_pBattlePhase) {
-			m_pBattlePhase->MouseMove(lParam, m_pPlayer);
+			m_pBattlePhase->MouseMove(lParam);
 		}
 	}
 	else if (m_nPhase == PHASE_MANAGE) {
@@ -53,7 +53,7 @@ int CInGame::LButtonDown(const LPARAM & lParam)
 
 	if (m_nPhase == PHASE_BATTLE) {
 		if (m_pBattlePhase)
-			m_pBattlePhase->LButtonDown(lParam, m_pPlayer);
+			m_pBattlePhase->LButtonDown(lParam);
 	}
 	else if (m_nPhase == PHASE_MANAGE) {
 		if (m_pManagePhase) {
@@ -84,7 +84,7 @@ void CInGame::LButtonUp(const LPARAM & lParam)
 {
 	if (m_nPhase == PHASE_BATTLE) {
 		if (m_pBattlePhase)
-			m_pBattlePhase->LButtonUp(lParam, m_pPlayer);
+			m_pBattlePhase->LButtonUp(lParam);
 	}
 }
 
@@ -94,7 +94,7 @@ void CInGame::GetKey(const WPARAM & wParam)
 
 	if (m_nPhase == PHASE_BATTLE) {
 		if (m_pBattlePhase) {
-			switch (m_pBattlePhase->GetKey(wParam, m_pPlayer)) {
+			switch (m_pBattlePhase->GetKey(wParam)) {
 			case BATTLE_EXIT:
 				SetManagePhase();
 				break;
@@ -122,7 +122,7 @@ void CInGame::DrawInGame(HDC hdc) {
 	if (m_bSet) {
 		if (m_nPhase == PHASE_BATTLE) {
 			if (m_pBattlePhase)
-				m_pBattlePhase->DrawPhase(hdc, m_pPlayer);
+				m_pBattlePhase->DrawPhase(hdc);
 		}
 		else {
 			if (m_pManagePhase)

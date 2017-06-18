@@ -192,6 +192,9 @@
     <ClInclude Include="CFunc.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CUpgrade.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="CPlayerArrow.cpp">
       <Filter>소스 파일\Objects\Items\PlayerArrow</Filter>
+    </ClCompile>
+    <ClCompile Include="CUpgrade.cpp">
+      <Filter>소스 파일\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

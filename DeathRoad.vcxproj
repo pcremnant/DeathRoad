@@ -170,6 +170,7 @@
     <ClInclude Include="CPlayerArrowList.h" />
     <ClInclude Include="CPlayerArrowManager.h" />
     <ClInclude Include="CSprite.h" />
+    <ClInclude Include="CUpgrade.h" />
     <ClInclude Include="CVector3D.h" />
     <ClInclude Include="CWarrior.h" />
     <ClInclude Include="define.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="CPeasant.cpp" />
     <ClCompile Include="CPlayerArcher.cpp" />
     <ClCompile Include="CPlayerArrow.cpp" />
+    <ClCompile Include="CUpgrade.cpp" />
     <ClCompile Include="CWarrior.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="WinMain.cpp" />

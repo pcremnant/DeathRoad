@@ -1,6 +1,7 @@
 #pragma once
 #include"CObject.h"
 #include"CPlayerArrowManager.h"
+#include"CUpgrade.h"
 
 class CPlayerArcher : public CObject {
 protected:
@@ -11,7 +12,7 @@ protected:
 	CObject* m_pTarget{ nullptr };
 	CPlayerArrowManager* m_pArrow{ nullptr };
 public:
-	CPlayerArcher(CSoundManager* sound, CPlayerArrowManager* arrow) : CObject(sound) {
+	CPlayerArcher(CSoundManager* sound, CPlayerArrowManager* arrow, CUpgrade* upgrade) : CObject(sound) {
 		m_pArrow = arrow;
 	}
 	virtual void Init() override final;

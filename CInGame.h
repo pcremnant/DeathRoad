@@ -4,6 +4,7 @@
 #include"CManage.h"
 #include"SoundManager.h"
 #include"CMainCharacter.h"
+#include"CUpgrade.h"
 
 #define INGAME_NONE 0
 #define INGAME_EXIT -1
@@ -26,10 +27,12 @@ class CInGame {
 	UINT m_nPhase;
 
 	// 두 페이즈 모두에서 쓰이는 변수
-	int m_nGold;
+	int m_nGold{ 0 };
 	UINT m_nStage{ 1 };
+	CObject** m_pArcher{ nullptr };
+	int m_nNumArcher{ 0 };
 	// 플레이어의 상태 (업그레이드 상태)
-	// ...
+	CUpgrade* m_pUpgrade{ nullptr };
 	CItem* m_pCastle{ nullptr };
 	// 배틀페이즈에서 쓰이는 변수
 	
@@ -67,6 +70,6 @@ public:
 		// 매니지페이즈에서 했던 행동들 저장
 		delete m_pManagePhase;
 		m_pManagePhase = nullptr;
-		m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager);
+		m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager, m_pUpgrade, m_pArcher, m_nNumArcher, m_pPlayer);
 	}
 };

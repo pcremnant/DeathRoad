@@ -6,6 +6,8 @@
 #include"CEnemyArrowManager.h"
 #include"CPlayerArrowManager.h"
 #include"CPlayerArcher.h"
+#include"CUpgrade.h"
+#include"CMainCharacter.h"
 
 #define BATTLE_EXIT -1
 #define	BATTLE_NONE 0
@@ -24,28 +26,28 @@ class CBattle {
 	CImage m_imgBGFront;
 
 	// 적군이 생성되는 시간을 재는 변수
-
 	UINT m_nTimer;
-
 	// 적 오브젝트들
 	// 매니저로 관리할 것
 	CEnemyManager* m_pEnemyManager;
 	CPlayerArrowManager* m_pArrowManager;
-	CObject* m_pArcher;
+	CObject** m_pArcher;
+	UINT m_nNumArcher{ 0 };					// 용병 궁수들의 숫자
 
 	// 플레이어 오브젝트들
 	CItem* m_pCastle;
+	CObject* m_pPlayer;
 
 
 public:
-	CBattle(const UINT& nStage, int& nGold, CItem* castle,CSoundManager* sound);
+	CBattle(const UINT& nStage, int& nGold, CItem* castle,CSoundManager* sound, CUpgrade* upgrade, CObject** pArcher, const int& nNumArcher, CObject* player);
 	~CBattle();
 
-	void DrawPhase(HDC hdc, CObject* player);
+	void DrawPhase(HDC hdc);
 	void UpdatePhase();
-	int GetKey(const WPARAM& wParam, CObject* player);
-	int LButtonUp(const LPARAM& lParam, CObject* player);
-	void LButtonDown(const LPARAM& lParam, CObject* player);
-	void MouseMove(const LPARAM& lParam, CObject* player);
+	int GetKey(const WPARAM& wParam);
+	int LButtonUp(const LPARAM& lParam);
+	void LButtonDown(const LPARAM& lParam);
+	void MouseMove(const LPARAM& lParam);
 	bool IsBattleEnd() const;
 };

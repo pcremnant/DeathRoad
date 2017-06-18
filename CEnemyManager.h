@@ -158,19 +158,6 @@ public:
 		m_pArrows->DrawArrow(hdc);
 	}
 
-	/*void Update()
-	{
-		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
-		m_pEnemyList->Update();
-		m_pArrows->Update();
-		if (m_pTriger->IsFileEnd()) {
-			if (m_pEnemyList->GetNumber() == 0)
-				m_bStageEnd = true;
-		}
-		else
-			m_nSpawnTimer++;
-	}*/
-
 	void Update(CObject* pPlayerArcher, CPlayerArrowManager* arrow)
 	{
 		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
@@ -188,7 +175,7 @@ public:
 			m_nSpawnTimer++;
 	}
 
-	void Update(CObject* pPlayerArcher[], CPlayerArrowManager* arrow, int nNumber)
+	void Update(CObject** pPlayerArcher, CPlayerArrowManager* arrow, int nNumber)
 	{
 		m_pTriger->Spawn(m_pEnemyList, m_nSpawnTimer, m_pSoundManager, m_pArrows, m_pCastle);
 		m_pEnemyList->Update();

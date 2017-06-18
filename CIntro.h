@@ -37,7 +37,7 @@ public:
 
 	void Update();
 	void DrawIntro(HDC hdc);
-
+	//const bool& IsFixed();
 private:
 	void SetTitle();
 };

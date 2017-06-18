@@ -124,13 +124,10 @@ void CMainCharacter::LButtonDown(const LPARAM&lParam) {
 int CMainCharacter::LButtonUp(const LPARAM&lParam) {
 	Shot();
 	m_bClick = false;
-	//SetFrameType(TYPE_ATTACK);
-	//m_nFrameType = TYPE_WALK;
-	//m_nFrame = 0;
 	return m_nAttack;
 }
 void CMainCharacter::Ready() {
-	m_fAngle = atan2f(static_cast<float>(m_vtMouse.GetY()) - m_vtCoord.GetY(), static_cast<float>(m_vtMouse.GetX()) - m_vtCoord.GetX()) * 180 / 3.14;
+	m_fAngle = atan2f(static_cast<float>(m_vtCoord.GetY()) -m_vtMouse.GetY() , static_cast<float>(m_vtCoord.GetX()) - m_vtMouse.GetX()) * 180 / 3.14;
 	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
 	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
 	m_vtDirect.SetZ(0);
@@ -138,5 +135,5 @@ void CMainCharacter::Ready() {
 void CMainCharacter::Shot() {
 	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
 	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
-	m_vtDirect.Move(0, m_fGravity);
+	m_vtDirect.Move(0, -m_fGravity);
 }

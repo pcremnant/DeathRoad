@@ -57,20 +57,6 @@ public:
 	void Update();
 
 	// 각 Phase를 세팅
-	void SetManagePhase()
-	{
-		m_nPhase = PHASE_MANAGE;
-		// 배틀페이즈에서 했던 행동들 저장
-		delete m_pBattlePhase;
-		m_pBattlePhase = nullptr;
-		m_pManagePhase = new CManage(m_pSoundManager);
-	}
-	void SetBattlePhase()
-	{
-		m_nPhase = PHASE_BATTLE;
-		// 매니지페이즈에서 했던 행동들 저장
-		delete m_pManagePhase;
-		m_pManagePhase = nullptr;
-		m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager, m_pUpgrade, m_pArcher, m_nNumArcher, m_pPlayer, m_pArrow);
-	}
+	void SetManagePhase();
+	void SetBattlePhase();
 };

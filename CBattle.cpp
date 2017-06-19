@@ -3,8 +3,33 @@
 CBattle::CBattle(const UINT& nStage, int& nGold, CItem* castle, CSoundManager* sound, CUpgrade* upgrade, CObject** pArcher, const int& nNumArcher, CObject* player, CPlayerArrowManager* arrowManager) : m_pSoundManager(sound)
 {
 	m_pCastle = castle;
-	m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
-	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
+
+	switch (nStage) {
+	case 1:
+	case 2:
+	case 3:
+		m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
+		m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front.png"));
+		break;
+	case 4: 
+	case 5:
+	case 6:
+		m_imgBGBack.Load(TEXT("resource/image/stage/Stage_01_Back.png"));
+		m_imgBGFront.Load(TEXT("resource/image/stage/Stage_01_Front.png"));
+		break;
+	case 7:
+	case 8:
+	case 9:
+		m_imgBGBack.Load(TEXT("resource/image/stage/Stage_02_Back.png"));
+		m_imgBGFront.Load(TEXT("resource/image/stage/Stage_02_Front.png"));
+		break;
+	default:
+		m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
+		m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front.png"));
+		break;
+	}
+	//m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
+	//m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front.png"));
 	m_pEnemyManager = new CEnemyManager(m_pSoundManager,m_pCastle);
 	m_pEnemyManager->Init(nStage);
 
@@ -45,8 +70,8 @@ CBattle::~CBattle()
 {
 	if (m_pArcher)
 		delete m_pArcher;
-	if (m_pArrowManager)
-		delete m_pArrowManager;
+	//if (m_pArrowManager)
+		//delete m_pArrowManager;
 }
 
 void CBattle::DrawPhase(HDC hdc)

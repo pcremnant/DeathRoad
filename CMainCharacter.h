@@ -30,4 +30,9 @@ public:
 	int Update()override final;
 	int Attack()override final;
 	int Dead()override final { return 0; };
+
+	void SetArrowManager(CPlayerArrowManager* pArrow)
+	{
+		m_pArrow = pArrow;
+	}
 };

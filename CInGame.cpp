@@ -27,7 +27,7 @@ void CInGame::Init()
 	m_nStage = 1;
 	m_nGold = 0;
 	m_nPhase = PHASE_MANAGE;
-	m_pManagePhase = new CManage(m_pSoundManager);
+	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage);
 	m_bSet = true;
 	m_pCastle = new CCastle(500, 500);							// 후에는 이전의 상태가 저장
 	m_pCastle->Init();
@@ -71,6 +71,14 @@ int CInGame::LButtonDown(const LPARAM & lParam)
 				break;
 			case MANAGE_BATTLESTART:
 				SetBattlePhase();
+				break;
+			case MANAGE_NEXTSTAGE:
+				if (m_nStage < 10)
+					m_nStage++;
+				break;
+			case MANAGE_PREVSTAGE:
+				if (m_nStage > 1)
+					m_nStage--;
 				break;
 			default:
 				break;
@@ -150,4 +158,30 @@ void CInGame::Update()
 				;// ManagePhase Update
 		}
 	}
+}
+
+// 각 Phase를 세팅
+
+void CInGame::SetManagePhase()
+{
+	m_nPhase = PHASE_MANAGE;
+
+	delete m_pBattlePhase;
+	m_pBattlePhase = nullptr;
+
+	delete m_pArrow;
+	m_pArrow = nullptr;
+
+	m_pManagePhase = new CManage(m_pSoundManager,&m_nStage);
+}
+
+void CInGame::SetBattlePhase()
+{
+	m_nPhase = PHASE_BATTLE;
+	// 매니지페이즈에서 했던 행동들 저장
+	delete m_pManagePhase;
+	m_pManagePhase = nullptr;
+	m_pArrow = new CPlayerArrowManager(m_pSoundManager);
+	dynamic_cast<CMainCharacter*>(m_pPlayer)->SetArrowManager(m_pArrow);
+	m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager, m_pUpgrade, m_pArcher, m_nNumArcher, m_pPlayer, m_pArrow);
 }

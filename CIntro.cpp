@@ -9,7 +9,7 @@ CIntro::CIntro()
 	m_pEnemyManager = new CEnemyManager(m_pSound, m_pCastle);
 	m_pEnemyManager->Init(0);
 	m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
-	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front1.png"));
+	m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front.png"));
 
 	m_imgTitle.Load(TEXT("resource/image/intro/bg_00_Deathroad.png"));
 	m_nTitleWidth = 800;

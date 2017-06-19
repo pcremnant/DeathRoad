@@ -2,7 +2,10 @@
 
 CPlayerArrow::CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, const CVector3D& vtTarget, bool bPlayer) : CItem()
 {
-	m_imgBitmap.Load(TEXT("resource/image/object/Object_Arrow_02.png"));
+	if (bPlayer)
+		m_imgBitmap.Load(TEXT("resource/image/object/Object_Arrow_03.png"));
+	else
+		m_imgBitmap.Load(TEXT("resource/image/object/Object_Arrow_02.png"));
 	m_vtCoord = vtPosition;
 	m_fGravity = 0.3f;
 

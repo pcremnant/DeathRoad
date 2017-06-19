@@ -14,6 +14,8 @@ CInGame::CInGame(CSoundManager* sound) : m_pSoundManager(sound)
 
 CInGame::~CInGame()
 {
+	if (m_pUpgrade)
+		delete m_pUpgrade;
 	if (m_pBattlePhase)
 		delete m_pBattlePhase;
 	if (m_pManagePhase)
@@ -24,10 +26,11 @@ CInGame::~CInGame()
 
 void CInGame::Init()
 {
+	m_pUpgrade = new CUpgrade;
 	m_nStage = 1;
 	m_nGold = 0;
 	m_nPhase = PHASE_MANAGE;
-	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage);
+	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage, m_pUpgrade, &m_nGold);
 	m_bSet = true;
 	m_pCastle = new CCastle(500, 500);							// 후에는 이전의 상태가 저장
 	m_pCastle->Init();
@@ -172,7 +175,7 @@ void CInGame::SetManagePhase()
 	delete m_pArrow;
 	m_pArrow = nullptr;
 
-	m_pManagePhase = new CManage(m_pSoundManager,&m_nStage);
+	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage, m_pUpgrade, &m_nGold);
 }
 
 void CInGame::SetBattlePhase()

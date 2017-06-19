@@ -8,9 +8,6 @@ int CUpgrade::RequiredGold(int nType)
 	case UPGRADE_PLAYER_ATTACK:
 		return level_PlayerAttack * 100;
 		break;
-	case UPGRADE_PLAYER_RANGE:
-		return level_PlayerRange * 150;
-		break;
 	case UPGRADE_ARCHER_ATTACK:
 		return level_ArcherAttack * 100;
 		break;
@@ -31,7 +28,7 @@ int CUpgrade::RequiredGold(int nType)
 
 // 업그레이드
 
-void CUpgrade::GetUpgrade(int nType, int & nGold)
+void CUpgrade::GetUpgrade(int nType, int* nGold)
 {
 	if (nGold - RequiredGold(nType) >= 0)
 		nGold -= RequiredGold(nType);
@@ -41,11 +38,6 @@ void CUpgrade::GetUpgrade(int nType, int & nGold)
 	case UPGRADE_PLAYER_ATTACK:
 		if (level_PlayerAttack < MAX_LEVEL) {
 			level_PlayerAttack++;
-		}
-		break;
-	case UPGRADE_PLAYER_RANGE:
-		if (level_PlayerRange < MAX_LEVEL) {
-			level_PlayerRange * 150;
 		}
 		break;
 	case UPGRADE_ARCHER_ATTACK:
@@ -79,8 +71,6 @@ int CUpgrade::ReturnUpgradeLevel(int nType)
 	case UPGRADE_PLAYER_ATTACK:
 		return level_PlayerAttack;
 		break;
-	case UPGRADE_PLAYER_RANGE:
-		return level_PlayerRange;
 		break;
 	case UPGRADE_ARCHER_ATTACK:
 		return level_ArcherAttack;

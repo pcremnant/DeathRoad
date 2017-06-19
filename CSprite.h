@@ -58,13 +58,21 @@ struct CSprite {
 		}
 	}
 
-	void DrawSprite(HDC hdc) const
+	void DrawSprite(HDC hdc, bool bTrans = false) const
 	{
 		RECT rcTmp = { 0,0,m_nWidth,m_nHeight };
-		if (!m_bPointed)
-			m_imgSprite.Draw(hdc, m_rcPosition, rcTmp);
-		else
-			m_imgPointed.Draw(hdc, m_rcPosition, rcTmp);
+		if (!m_bPointed) {
+			if (bTrans)
+				m_imgSprite.TransparentBlt(hdc, m_rcPosition, rcTmp, RGB(255, 255, 255));
+			else
+				m_imgSprite.Draw(hdc, m_rcPosition, rcTmp);
+		}
+		else {
+			if (bTrans)
+				m_imgPointed.TransparentBlt(hdc, m_rcPosition, rcTmp, RGB(255, 255, 255));
+			else
+				m_imgPointed.Draw(hdc, m_rcPosition, rcTmp);
+		}
 	}
 
 	const bool& GetPointed() const
@@ -72,7 +80,10 @@ struct CSprite {
 		return m_bPointed;
 	}
 
-	
+	const RECT& GetPosition() const
+	{
+		return m_rcPosition;
+	}
 private:
 	CImage m_imgSprite;
 	UINT m_nWidth;

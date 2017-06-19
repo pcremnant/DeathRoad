@@ -21,14 +21,14 @@ class CInGame {
 
 	// 제대로 세팅이 넘어왔는지 확인
 	bool m_bSet{ false };
-
+	bool m_bGameOver{ false };
 	// 페이즈 2개를 번갈아 사용한다.
 	CBattle* m_pBattlePhase{nullptr};
 	CManage* m_pManagePhase{nullptr};
 	UINT m_nPhase;
 
 	// 두 페이즈 모두에서 쓰이는 변수
-	int m_nGold{ 0 };
+	int m_nGold{ 10000 };
 	UINT m_nStage{ 1 };
 	CObject** m_pArcher{ nullptr };
 	int m_nNumArcher{ 0 };
@@ -59,4 +59,8 @@ public:
 	// 각 Phase를 세팅
 	void SetManagePhase();
 	void SetBattlePhase();
+	bool IsGameOver() const
+	{
+		return m_bGameOver;
+	}
 };

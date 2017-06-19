@@ -24,8 +24,20 @@ public:
 		if (m_nValue < 0)
 			m_nValue = 0;
 	}
+	const int& ReturnMaxHp() const
+	{
+		return m_nMaxHp;
+	}
 	const int& ReturnHp() const
 	{
 		return m_nValue;
+	}
+	void SetMaxHp(const int& nMaxHp)
+	{
+		m_nMaxHp = nMaxHp;
+	}
+	void SetHp(const int& nHp)
+	{
+		m_nValue = nHp;
 	}
 };

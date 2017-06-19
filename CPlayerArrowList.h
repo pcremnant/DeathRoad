@@ -133,7 +133,7 @@ public:
 
 	void ColisionCheck(CObject* enemy)
 	{
-		if (enemy == nullptr)
+		if (enemy == nullptr || enemy->IsDead())
 			return;
 		CPlayerArrowNode* p = m_pHead->m_pNext;
 		while (p != m_pTail) {

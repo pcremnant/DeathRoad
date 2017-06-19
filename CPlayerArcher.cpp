@@ -1,5 +1,13 @@
 #include"CPlayerArcher.h"
 
+CPlayerArcher::CPlayerArcher(CSoundManager * sound, CPlayerArrowManager * arrow, CUpgrade * upgrade) : CObject(sound) {
+	m_pArrow = arrow;
+	m_nAttackRange = 500 + upgrade->ReturnUpgradeLevel(UPGRADE_ARCHER_RANGE) * 50;
+	m_nReroad = 65 - upgrade->ReturnUpgradeLevel(UPGRADE_ARCHER_RANGE) * 5;
+	m_nAttack = 10 + upgrade->ReturnUpgradeLevel(UPGRADE_ARCHER_ATTACK) * 10;
+
+}
+
 void CPlayerArcher::Init()
 {
 	m_sprImg.GetImage(TEXT("resource/image/player/Player_Archer_00_Wait.png")
@@ -12,7 +20,7 @@ void CPlayerArcher::Init()
 	m_nFrameType = TYPE_WALK;
 	m_nAttackFrame = 4*4;
 	m_bDead = false;
-	m_nAttackRange = 600;
+
 	m_bInRange = false;
 
 	// 실제로 할 때는 랜덤으로 값을 바꿔줄 것
@@ -25,14 +33,11 @@ void CPlayerArcher::Init()
 	else
 		m_vtCoord = { static_cast<float>(nTmpX * 10 + 950),180 + static_cast<float>((5 - nTmpY) * 30),fTmp };
 
-	m_nReroad = 60;
 	m_nCurrentReroad = 0;
 
 	m_nHeight = 35;
 	m_nWidth = 40;
 	SetPosition();
-
-	m_nAttack = 20;
 }
 
 void CPlayerArcher::SetPosition()

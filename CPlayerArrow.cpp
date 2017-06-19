@@ -71,7 +71,7 @@ void CPlayerArrow::Move()
 			SetPosition();
 		}
 		m_nDeleteTimer++;
-		if (m_nDeleteTimer >= 120)
+		if (m_nDeleteTimer >= 30)
 			m_bDelete = true;
 	}
 }

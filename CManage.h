@@ -12,7 +12,7 @@
 #define MANAGE_NEXTSTAGE				1002
 #define MANAGE_PREVSTAGE				1003
 
-#define ICON_NUMBER						17
+#define ICON_NUMBER						19
 
 // 아이콘 고유번호
 
@@ -35,6 +35,8 @@
 #define ICON_UPGRADE_CASTLE_REPAIR		14			// 성 수리
 #define ICON_UPGRADE_CASTLE_REPAIRUP	15			// 성 수리
 #define ICON_GOLD						16			// 돈
+#define ICON_UPGRADE_ARCHER_ADD			17			// 궁수 추가
+#define ICON_UPGRADE_ARCHER_ADDUP		18			// 궁수 추가
 
 class CManage {
 	// 매니지 모드 이미지
@@ -47,13 +49,15 @@ class CManage {
 	CUpgrade* m_pUpgrade;
 	UINT* m_pStage{ nullptr };
 	int* m_pGold{ nullptr };
+
+	CItem* m_pCastle;
 	//CImage m_imgBG;							// 배경 이미지
 	//CImage m_imgIcon[ICON_NUMBER];			// 아이콘 이미지 - 위의 디파인값으로 읽는다.
 	//RECT m_rcIcon[ICON_NUMBER];				// 아이콘 위치 - 역시 위의 디파인값으로 읽는다.
 
 
 public:
-	CManage(CSoundManager* sound, UINT* pStage, CUpgrade* pUpgrade, int* pGold);
+	CManage(CSoundManager* sound, UINT* pStage, CUpgrade* pUpgrade, int* pGold, CItem* pCastle);
 	~CManage();
 
 	void MouseMove(const LPARAM& lParam);

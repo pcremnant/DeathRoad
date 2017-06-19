@@ -28,19 +28,19 @@ CBattle::CBattle(const UINT& nStage, int& nGold, CItem* castle, CSoundManager* s
 		m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front.png"));
 		break;
 	}
-	//m_imgBGBack.Load(TEXT("resource/image/stage/Stage_00_Back.png"));
-	//m_imgBGFront.Load(TEXT("resource/image/stage/Stage_00_Front.png"));
+
 	m_pEnemyManager = new CEnemyManager(m_pSoundManager,m_pCastle);
 	m_pEnemyManager->Init(nStage);
 
 	m_pArrowManager = arrowManager;
 
 	m_pPlayer = player;
-	m_pArcher = new CObject*[nNumArcher];
-	for (int i = 0;i < m_nNumArcher;++i) {
-		m_pArcher[i] = new CPlayerArcher(m_pSoundManager, m_pArrowManager, upgrade);
-		m_pArcher[i]->Init();
-	}
+
+	m_nNumArcher = nNumArcher;
+	m_pArcher = pArcher;
+
+	m_nGetGold = nStage * 100;
+	m_pGold = &nGold;
 
 	if (m_imgBGFront.GetBPP() == 32)
 	{
@@ -68,10 +68,11 @@ CBattle::CBattle(const UINT& nStage, int& nGold, CItem* castle, CSoundManager* s
 
 CBattle::~CBattle()
 {
-	if (m_pArcher)
-		delete m_pArcher;
-	//if (m_pArrowManager)
-		//delete m_pArrowManager;
+	if (m_pEnemyManager->IsStageEnd()) {
+		*m_pGold += m_nGetGold;
+	}
+
+	delete m_pEnemyManager;
 }
 
 void CBattle::DrawPhase(HDC hdc)
@@ -101,6 +102,10 @@ void CBattle::UpdatePhase()
 			m_pArcher[i]->Update();
 		}
 		m_pArrowManager->Update();
+		if (m_pCastle->ReturnValue() <= 0) {
+			m_bGameOver = true;
+			// 게임 종료
+		}
 	}
 }
 

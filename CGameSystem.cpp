@@ -6,6 +6,8 @@ CGameSystem::CGameSystem()
 	m_pIntro = new CIntro();
 	m_bIntro = true;
 
+	m_imgGameOver.Load(TEXT("resource/image/stage/GameOver.png"));
+
 	m_spBg.GetImage(TEXT("resource/image/intro/bg_03.png"), RECT{ 0,0,CLIENT_WIDTH,CLIENT_HEIGHT });
 	m_spIconStartButton.GetImage(TEXT("resource/image/Icon/Icon_StartButton.png"), RECT{ 400,130,800,230 }, TEXT("resource/image/Icon/Icon_StartButton_Pointed.png"));
 	m_spIconExitButton.GetImage(TEXT("resource/image/Icon/Icon_ExitButton.png"), RECT{ 400,330,800,430 }, TEXT("resource/image/Icon/Icon_ExitButton_Pointed.png"));
@@ -37,7 +39,15 @@ void CGameSystem::GetKey(const WPARAM & wParam) {
 			PostQuitMessage(0);
 			break;
 		default:
-			if (m_bIntro) {
+			if (m_bGameOver) {
+				m_bGameOver = false;
+				m_pSoundManager->PlayBGM(BGM_INTRO);
+				m_pIntro = new CIntro();
+				m_bIntro = true;
+				delete m_pInGame;
+				m_pInGame = nullptr;
+			}
+			else if (m_bIntro) {
 				m_bIntro = false;
 				m_pSoundManager->Stop(BGM_INTRO);
 				m_pSoundManager->PlayBGM(BGM_MAINMENU);
@@ -63,7 +73,15 @@ void CGameSystem::MouseMove(const LPARAM & lParam)
 
 void CGameSystem::LButtonDown(const LPARAM & lParam)
 {
-	if (m_pInGame) {
+	if (m_bGameOver) {
+		m_bGameOver = false;
+		m_pSoundManager->PlayBGM(BGM_INTRO);
+		m_pIntro = new CIntro();
+		m_bIntro = true;
+		delete m_pInGame;
+		m_pInGame = nullptr;
+	}
+	else if (m_pInGame) {
 		if (m_pInGame->LButtonDown(lParam) == INGAME_EXIT) {
 			delete m_pInGame;
 			m_pInGame = nullptr;
@@ -72,11 +90,16 @@ void CGameSystem::LButtonDown(const LPARAM & lParam)
 	}
 	else {
 		if (m_bIntro) {
-			m_bIntro = false;
-			m_pSoundManager->Stop(BGM_INTRO);
-			m_pSoundManager->PlayBGM(BGM_MAINMENU);
-			delete m_pIntro;
-			m_pIntro = nullptr;
+			if (!m_pIntro->IsFixed()) {
+				m_pIntro->SetFixed();
+			}
+			else {
+				m_bIntro = false;
+				m_pSoundManager->Stop(BGM_INTRO);
+				m_pSoundManager->PlayBGM(BGM_MAINMENU);
+				delete m_pIntro;
+				m_pIntro = nullptr;
+			}
 		}
 		else if (m_spIconExitButton.GetPointed()) {
 			m_pSoundManager->PlayEffect(EFFECT_CLICK_BUTTON_00);
@@ -90,7 +113,6 @@ void CGameSystem::LButtonDown(const LPARAM & lParam)
 				m_pInGame->Init();
 			}
 		}
-		
 	}
 }
 
@@ -104,9 +126,12 @@ void CGameSystem::LButtonUp(const LPARAM & lParam)
 
 void CGameSystem::DrawGame(HDC hdc)
 {
-	if (m_pInGame)
+	if (m_bGameOver) {
+		m_imgGameOver.StretchBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, SRCCOPY);
+	}
+	else if (m_pInGame)
 		m_pInGame->DrawInGame(hdc);
-	else if(m_bIntro) {
+	else if (m_bIntro) {
 		m_pIntro->DrawIntro(hdc);
 	}
 	else {
@@ -121,6 +146,10 @@ void CGameSystem::Update()
 	if (m_bIntro) {
 		m_pIntro->Update();
 	}
-	else if (m_pInGame)
+	else if (m_pInGame) {
 		m_pInGame->Update();
+		if (m_pInGame->IsGameOver()) {
+			m_bGameOver = true;
+		}
+	}
 }

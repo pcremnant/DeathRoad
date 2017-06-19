@@ -26,14 +26,14 @@ CInGame::~CInGame()
 
 void CInGame::Init()
 {
-	m_pUpgrade = new CUpgrade;
-	m_nStage = 1;
-	m_nGold = 0;
-	m_nPhase = PHASE_MANAGE;
-	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage, m_pUpgrade, &m_nGold);
-	m_bSet = true;
 	m_pCastle = new CCastle(500, 500);							// 후에는 이전의 상태가 저장
 	m_pCastle->Init();
+	m_pUpgrade = new CUpgrade;
+	m_nStage = 1;
+	m_nGold = 10000;
+	m_nPhase = PHASE_MANAGE;
+	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage, m_pUpgrade, &m_nGold, m_pCastle);
+	m_bSet = true;
 }
 
 void CInGame::MouseMove(const LPARAM & lParam)
@@ -151,7 +151,19 @@ void CInGame::Update()
 		if (m_nPhase == PHASE_BATTLE) {
 			if (m_pBattlePhase) {
 				m_pBattlePhase->UpdatePhase();
-				if (m_pBattlePhase->IsBattleEnd()) {
+				if (m_pBattlePhase->IsGameOver()) {
+					
+					if (m_pBattlePhase)
+						delete m_pBattlePhase;
+					m_pBattlePhase = nullptr;
+					//return INGAME_EXIT;
+					if(m_pManagePhase)
+						delete m_pManagePhase;
+					m_pManagePhase = nullptr;
+					m_bGameOver = true;
+					// 게임 종료
+				}
+				else if (m_pBattlePhase->IsBattleEnd()) {
 					SetManagePhase();
 				}
 			}
@@ -175,7 +187,12 @@ void CInGame::SetManagePhase()
 	delete m_pArrow;
 	m_pArrow = nullptr;
 
-	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage, m_pUpgrade, &m_nGold);
+	for (int i = 0;i < m_nNumArcher;++i)
+		delete m_pArcher[i];
+	delete m_pArcher;
+	m_pArcher = nullptr;
+
+	m_pManagePhase = new CManage(m_pSoundManager, &m_nStage, m_pUpgrade, &m_nGold, m_pCastle);
 }
 
 void CInGame::SetBattlePhase()
@@ -186,5 +203,16 @@ void CInGame::SetBattlePhase()
 	m_pManagePhase = nullptr;
 	m_pArrow = new CPlayerArrowManager(m_pSoundManager);
 	dynamic_cast<CMainCharacter*>(m_pPlayer)->SetArrowManager(m_pArrow);
+	dynamic_cast<CMainCharacter*>(m_pPlayer)->SetUpgrade(m_pUpgrade);
+
+	m_nNumArcher = m_pUpgrade->ReturnUpgradeLevel(UPGRADE_ARCHER_ADD);
+	if (m_nNumArcher > 0) {
+		m_pArcher = new CObject*[m_nNumArcher];
+		for (int i = 0;i < m_nNumArcher;++i) {
+			m_pArcher[i] = new CPlayerArcher(m_pSoundManager, m_pArrow, m_pUpgrade);
+			m_pArcher[i]->Init();
+		}
+	}
+
 	m_pBattlePhase = new CBattle(m_nStage, m_nGold, m_pCastle, m_pSoundManager, m_pUpgrade, m_pArcher, m_nNumArcher, m_pPlayer, m_pArrow);
 }

@@ -17,7 +17,7 @@ class CBattle {
 	// 시스템 변수
 	bool m_bPause{ false };
 	bool m_bBattleEnd{ false };
-
+	bool m_bGameOver{ false };
 	// 사운드 매니저
 	CSoundManager* m_pSoundManager;
 
@@ -27,7 +27,6 @@ class CBattle {
 
 	// 적군이 생성되는 시간을 재는 변수
 	UINT m_nTimer;
-	// 적 오브젝트들
 	// 매니저로 관리할 것
 	CEnemyManager* m_pEnemyManager;
 	CPlayerArrowManager* m_pArrowManager;
@@ -38,7 +37,8 @@ class CBattle {
 	CItem* m_pCastle;
 	CObject* m_pPlayer;
 
-
+	UINT m_nGetGold{ 0 };
+	int* m_pGold{ nullptr };
 public:
 	CBattle(const UINT& nStage, int& nGold, CItem* castle,CSoundManager* sound, CUpgrade* upgrade, CObject** pArcher, const int& nNumArcher, CObject* player, CPlayerArrowManager* arrowManager);
 	~CBattle();
@@ -50,4 +50,8 @@ public:
 	void LButtonDown(const LPARAM& lParam);
 	void MouseMove(const LPARAM& lParam);
 	bool IsBattleEnd() const;
+	bool IsGameOver() const
+	{
+		return m_bGameOver;
+	}
 };

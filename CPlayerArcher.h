@@ -12,9 +12,7 @@ protected:
 	CObject* m_pTarget{ nullptr };
 	CPlayerArrowManager* m_pArrow{ nullptr };
 public:
-	CPlayerArcher(CSoundManager* sound, CPlayerArrowManager* arrow, CUpgrade* upgrade) : CObject(sound) {
-		m_pArrow = arrow;
-	}
+	CPlayerArcher(CSoundManager* sound, CPlayerArrowManager* arrow, CUpgrade* upgrade);
 	virtual void Init() override final;
 	void SetPosition() override final;
 	void DrawObject(HDC hdc, bool bIntro = false)override final;

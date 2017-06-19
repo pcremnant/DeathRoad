@@ -1,6 +1,7 @@
 #pragma once
 #include"CObject.h"
 #include"CPlayerArrowManager.h"
+#include"CUpgrade.h"
 
 #define MAXZ 1.4
 #define MINZ 1.0
@@ -34,5 +35,9 @@ public:
 	void SetArrowManager(CPlayerArrowManager* pArrow)
 	{
 		m_pArrow = pArrow;
+	}
+	void SetUpgrade(CUpgrade* upgrade)
+	{
+		m_nAttack = 30 + upgrade->ReturnUpgradeLevel(UPGRADE_PLAYER_ATTACK) * 8;
 	}
 };

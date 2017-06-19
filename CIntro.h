@@ -38,6 +38,16 @@ public:
 	void Update();
 	void DrawIntro(HDC hdc);
 	//const bool& IsFixed();
+	bool IsFixed() const
+	{
+		return m_bFixed;
+	}
+	void SetFixed()
+	{
+		m_rcTitle.top = CLIENT_HEIGHT / 2 - 200;
+		m_rcTitle.bottom = CLIENT_HEIGHT / 2 - 200 + m_nTitleHeight;
+		m_bFixed = true;
+	}
 private:
 	void SetTitle();
 };

@@ -11,8 +11,11 @@ class CGameSystem {
 
 	// 인트로 이미지 -> 후에 인트로 클래스로 바꿀 것
 	CIntro* m_pIntro{ nullptr };
+
 	bool m_bIntro;					// 인트로를 보는 중인가
 	bool m_bFixed;					// 인트로에서 타이틀이 고정되었는가
+	bool m_bGameOver{ false };		// 게임오버 화면인가
+	CImage m_imgGameOver;
 
 	// 메인메뉴 백그라운드 이미지
 	CSprite m_spBg;

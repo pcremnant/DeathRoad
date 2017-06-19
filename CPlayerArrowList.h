@@ -137,7 +137,7 @@ public:
 			return;
 		CPlayerArrowNode* p = m_pHead->m_pNext;
 		while (p != m_pTail) {
-			if (p->m_pData->GetPositionVt().GetZ() == enemy->ReturnZ()) {
+			if (abs(p->m_pData->GetPositionVt().GetZ() - enemy->ReturnZ()) <= 0.05 || p->m_pData->IsPlayer()) {
 				if (p->m_pData->ColisionCheck(enemy->ReturnPosition())) {
 					enemy->GetDamage(p->m_pData->ReturnValue());
 					p->m_pData->SetTarget(enemy);

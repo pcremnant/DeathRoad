@@ -6,6 +6,8 @@ CPlayerArrow::CPlayerArrow(const CVector3D & vtPosition, const int & nAttack, co
 	m_vtCoord = vtPosition;
 	m_fGravity = 0.3f;
 
+	m_bPlayer = bPlayer;
+
 	if (!bPlayer) {
 		int nTmpWidth = abs(vtPosition.GetX() - vtTarget.GetX());
 		int nTmpHeight = abs(vtPosition.GetY() - vtTarget.GetY());
@@ -52,7 +54,7 @@ void CPlayerArrow::Move()
 	if (m_pTarget && m_pTarget->IsDead())
 		m_pTarget = nullptr;
 
-	if (!m_bDelete && (m_vtCoord.GetX() < 0 || m_vtCoord.GetY() > CFunc::FloorFromY(m_vtCoord.GetZ()))) {
+	if (!m_bDelete && (m_vtCoord.GetX() < 0 || m_vtCoord.GetY() > CFunc::FloorFromY(m_vtCoord.GetZ(),m_bPlayer))) {
 		m_bColision = true;
 	}
 	else if (!m_bColision && !m_bDelete) {

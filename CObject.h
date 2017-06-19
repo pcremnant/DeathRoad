@@ -52,22 +52,11 @@ public:
 	RECT ReturnPosition() const { return m_rcPosition; }		// 사각형 리턴
 	const bool& IsDelete() const { return m_bDead; }			// 죽었는지 체크하여 보냄 -> Manager에서 확인
 	
-	void GetDamage(const int& nDamage)
-	{
-		m_nHp -= nDamage;
-	}
+	void GetDamage(const int& nDamage);
 
-	void GetTarget()
-	{
-		m_nTargeted++;
-	}
+	void GetTarget();
 
-	const bool IsDead() const { 
-		if (m_nFrameType == TYPE_DEAD)
-			return true; 
-		else 
-			return false;
-	}
+	const bool IsDead() const;
 	const bool& InRange() const { return m_bInRange; }			// 공격 사거리 안에 있는지
 	
 	virtual int GetKey(const WPARAM& wParam) { return 0; }		// 키보드 받는 함수
@@ -76,12 +65,7 @@ public:
 	virtual int LButtonUp(const LPARAM& lParam) { return 0; }
 
 	// enemy 전용 세팅
-	virtual void SetTarget(const CVector3D& vtPosition, const int& nWidth)
-	{
-		if (vtPosition.GetX() - nWidth <= m_vtCoord.GetX() + m_nAttackRange)
-			m_bInRange = true;
-		else m_bInRange = false;
-	}
+	virtual void SetTarget(const CVector3D& vtPosition, const int& nWidth);
 	int ReturnTargeted() const { return m_nTargeted; }			// 현재 얼마나 타게팅 되어있나
 private:
 

@@ -23,7 +23,7 @@ void CKnight::Init()
 
 	m_vtCoord = { static_cast<float>(rand() % 40),250 + static_cast<float>((5 - nTmp) * 40),fTmp };
 
-	m_nSpeed = 4;
+	m_nSpeed = 3;
 	m_nHeight = 45;
 	m_nWidth = 100;
 	SetPosition();

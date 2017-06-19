@@ -22,6 +22,10 @@ public:
 	{
 		return m_bColision;
 	}
+	const bool& IsPlayer() const
+	{
+		return m_bPlayer;
+	}
 	void SetColision()
 	{
 		m_bColision = true;

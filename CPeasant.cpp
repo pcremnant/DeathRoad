@@ -23,7 +23,7 @@ void CPeasant::Init()
 
 	m_vtCoord = { static_cast<float>(rand() % 40),250 + static_cast<float>((5 - nTmp) * 40),fTmp };
 
-	m_nSpeed = 2;
+	m_nSpeed = 1;
 	m_nHeight = 35;
 	m_nWidth = 40;
 	SetPosition();

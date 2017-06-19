@@ -8,14 +8,17 @@ void CMainCharacter::Init() {
 	m_bAttackCharge = false;
 	m_nFrame = 0;
 	m_nFrameType = TYPE_WALK;
-	nTmp = 4;
+	int nTmp = 4;
 	float fTmp = static_cast<float>(nTmp) / 10.f + 1;
-	m_vtCoord = { static_cast<float>(960),250 + static_cast<float>((5 - nTmp) * 40),fTmp };
+	m_vtCoord = { static_cast<float>(960),180 + static_cast<float>((5 - nTmp) * 30),fTmp };
 	m_nHeight = 57;
 	m_nWidth = 62;
 	SetPosition();
-	m_nAttack = 100;
+
+	m_nAttack = 30;
+
 	m_nAttackFrame = 4 * 4;
+	m_nPower = 15;
 };
 
 void CMainCharacter::SetPosition() {
@@ -40,8 +43,26 @@ int CMainCharacter::Attack() {
 
 	if (m_nFrame == m_nAttackFrame) {
 		m_pSoundManager->PlayEffect(EFFECT_ARCHER_ATTACK_00);
-		CVector3D  vtTmp = m_vtMouse;
-		m_pArrow->CreateArrow(new CPlayerArrow(vtTmp, m_nAttack, m_vtDirect, true));
+		
+		float fRange = sqrt(pow((m_vtMouse.GetX() - m_vtCoord.GetX()), 2) + pow((m_vtMouse.GetY() - m_vtCoord.GetY()), 2));
+		
+		if (m_nPower < fRange) {
+			m_vtDirect.SetX(-abs(m_nPower*cos(m_fAngle)));
+			if(m_vtMouse.GetY()>m_vtCoord.GetY())
+				m_vtDirect.SetY(m_nPower*sin(m_fAngle));
+			else
+				m_vtDirect.SetY(-m_nPower*sin(m_fAngle));
+		}
+		else {
+			m_vtDirect.SetX(-abs(fRange*cos(m_fAngle)));
+			if (m_vtMouse.GetY()>m_vtCoord.GetY())
+				m_vtDirect.SetY(fRange*sin(m_fAngle));
+			else
+				m_vtDirect.SetY(-fRange*sin(m_fAngle));
+		}
+		m_vtDirect.SetZ(m_vtCoord.GetZ());
+	
+		m_pArrow->CreateArrow(new CPlayerArrow(m_vtCoord, m_nAttack, m_vtDirect, true));
 	}
 
 
@@ -107,9 +128,15 @@ int CMainCharacter::GetKey(const WPARAM&wParam) {
 	return m_vtCoord.GetZ();
 }
 void CMainCharacter::MouseMove(const LPARAM&lParam) {
-	m_vtMouse.SetX(LOWORD(lParam));
-	m_vtMouse.SetY(HIWORD(lParam));
-	Ready();
+	m_vtMouse = {
+		static_cast<float>(LOWORD(lParam)),
+		static_cast<float>(HIWORD(lParam)),
+		m_vtCoord.GetZ()
+	};
+	CVector3D vtTmp;
+	vtTmp = m_vtMouse;
+	vtTmp -= m_vtCoord;
+	m_fAngle = acos(vtTmp.GetX() / sqrt(vtTmp.GetX()*vtTmp.GetX() + vtTmp.GetY()*vtTmp.GetY()));
 }
 void CMainCharacter::LButtonDown(const LPARAM&lParam) {
 	SetFrameType(TYPE_ATTACK);
@@ -119,21 +146,13 @@ void CMainCharacter::LButtonDown(const LPARAM&lParam) {
 		static_cast<float>(HIWORD(lParam)),
 		m_vtCoord.GetZ()
 	};
-	Ready();
+	CVector3D vtTmp;
+	vtTmp = m_vtMouse;
+	vtTmp -= m_vtCoord;
+	m_fAngle = acos(vtTmp.GetX() / sqrt(vtTmp.GetX()*vtTmp.GetX() + vtTmp.GetY()*vtTmp.GetY()));
 }
 int CMainCharacter::LButtonUp(const LPARAM&lParam) {
-	Shot();
 	m_bClick = false;
 	return m_nAttack;
 }
-void CMainCharacter::Ready() {
-	m_fAngle = atan2f((static_cast<float>(m_vtMouse.GetY()) -m_vtCoord.GetY()) ,-( static_cast<float>(m_vtMouse.GetX()) - m_vtCoord.GetX())) * 180 / 3.1415f;
-	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
-	m_vtDirect.SetY(m_nPower*sin(m_fAngle));
-	m_vtDirect.SetZ(0);
-}
-void CMainCharacter::Shot() {
-	m_vtDirect.SetX(m_nPower*cos(m_fAngle));
-	m_vtDirect.SetY(-m_nPower*sin(m_fAngle));
-	m_vtDirect.Move(0, -m_fGravity);
-}
+

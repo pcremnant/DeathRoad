@@ -2,7 +2,7 @@
 #include"CObject.h"
 #include"CPlayerArrowManager.h"
 
-#define MAXZ 1.4
+#define MAXZ 1.3
 #define MINZ 1.0
 class CMainCharacter :public CObject {
 	bool m_bClick{ false };
@@ -15,6 +15,8 @@ class CMainCharacter :public CObject {
 	CPlayerArrowManager* m_pArrow{ nullptr };
 	CObject* m_pTarget{ nullptr };
 	CVector3D m_vtDirect{ 0,0,0 };
+	int nTmp;
+	float fTmp;
 public:
 	CMainCharacter(CSoundManager* sound, CPlayerArrowManager* arrow) : CObject(sound) {
 		m_pArrow = arrow;
